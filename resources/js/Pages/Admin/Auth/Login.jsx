@@ -23,13 +23,12 @@ export default function Login({ status, canResetPassword }) {
 
     const submit = (e) => {
         e.preventDefault();
-
-        post(route('login'));
+        post(route('adminlogin'));
     };
 
     return (
         <GuestLayout>
-            <Head title="User Log in" />
+            <Head title="Admin Log in" />
 
             {status && <div className="mb-4 font-medium text-sm text-green-600">{status}</div>}
             <form onSubmit={submit}>

@@ -4,8 +4,6 @@ import Sidebar from '@/Components/Dashboard/Sidebar';
 import { useState } from 'react';
 
 export default function Authenticated({ user, header, children }) {
-    const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
-
     return (
         <div className="bg-gray-50 dark:bg-slate-900">
             <Sidebar />

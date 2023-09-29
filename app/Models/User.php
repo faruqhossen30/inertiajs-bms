@@ -18,9 +18,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+        'name', 'username', 'email', 'mobile', 'balance', 'password','club_id','sponser_id', 'is_admin', 'is_club', 'is_user', 'club_owner', 'club_mobile', 'club_address', 'club_commission', 'status'
     ];
 
     /**
@@ -40,6 +38,12 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'password' => 'hashed',
+        'otp_verified_at' => 'datetime',
+        'name_updated_at' => 'datetime'
     ];
+
+    public function club()
+    {
+        return $this->belongsTo(User::class, 'club_id');
+    }
 }
