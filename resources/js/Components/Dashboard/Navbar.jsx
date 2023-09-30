@@ -22,7 +22,7 @@ export default function Navbar() {
                 {/* <!-- ========== HEADER ========== --> */}
                 <nav className="max-w-7xl flex basis-full items-center w-full mx-auto" aria-label="Global">
                     <div className="mr-5 md:mr-8">
-                        <Link href="/" className="flex-none text-xl font-semibold dark:text-white"  aria-label="Brand">Brand</Link>
+                        <Link href={route('dashboard')} className="flex-none text-xl font-semibold dark:text-white"  aria-label="Brand">Brand</Link>
                     </div>
 
                     <div className="w-full flex items-center justify-end ml-auto sm:justify-between sm:gap-x-3 sm:order-3">
@@ -94,7 +94,7 @@ export default function Navbar() {
                                             </svg>
                                             Downloads
                                         </Link>
-                                        <Link href={route('logout')} method="post"
+                                        <Link href={route('logout')} method="post" as="button"
                                          className="flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-4 h-6">
                                                 <path strokeLinecap="round" strokeLinejoin="round" d="M5.636 5.636a9 9 0 1012.728 0M12 3v9" />
