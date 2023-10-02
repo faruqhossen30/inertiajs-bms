@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Admin\GameController;
 use App\Http\Controllers\Admin\TeamController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
@@ -17,4 +18,5 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','admin']], function (
     // Users
     Route::resource('user', UserController::class);
     Route::resource('team', TeamController::class);
+    Route::resource('game', GameController::class);
 });

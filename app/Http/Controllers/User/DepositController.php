@@ -1,23 +1,24 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\Models\Game;
+use App\Models\Deposit;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
-class GameController extends Controller
+class DepositController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $games = Game::paginate();
-        return Inertia::render('Admin/Game/Index',['games'=>$games]);
+        // $diposits = Deposit::where('user_id', $request->user()->id)->get();
+
+        return Inertia::render('Deposit');
     }
 
     /**
@@ -38,6 +39,35 @@ class GameController extends Controller
      */
     public function store(Request $request)
     {
+        // return $request->all();
+        $request->validate([
+            'method'=> 'required',
+            'amount'=> 'required',
+            'from_account'=> 'required',
+            'to_account'=> 'required',
+            'transaction_id'=> 'required',
+        ]);
+
+        $data = [
+            'user_id'=> $request->user()->id,
+            'method'=> $request->method,
+            'amount'=> $request->amount,
+            'from_account'=> $request->from_account,
+            'to_account'=> $request->to_account,
+            'transaction_id'=> $request->transaction_id
+        ];
+
+
+        $diposit = Deposit::create($data);
+
+        return response()->json([
+            'success' => true,
+            'code' => 200,
+            'data' => $diposit
+        ]);
+
+
+
         //
     }
 
