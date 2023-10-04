@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\User\DepositController;
+use App\Models\Game;
+use App\Models\Matche;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -18,11 +20,14 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function () {
+    $games = Game::get();
+    $matches = Matche::with('questions')->with('questions.options')->orderBy('id','desc')->get();
+
     return Inertia::render('HomePage', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
+        'games' => $games,
+        'matches' => $matches,
     ]);
 })->name('homepage');
 
@@ -31,6 +36,27 @@ Route::get('/', function () {
 Route::middleware('auth')->group(function () {
     Route::get('/deposits', [DepositController::class, 'index']);
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+});
+
+Route::get('routes', function () {
+    $routeCollection = Route::getRoutes();
+
+    echo "<table style='width:100%'>";
+    echo "<tr>";
+    echo "<td width='10%'><h4>HTTP Method</h4></td>";
+    echo "<td width='10%'><h4>Route</h4></td>";
+    echo "<td width='10%'><h4>Name</h4></td>";
+    echo "<td width='70%'><h4>Corresponding Action</h4></td>";
+    echo "</tr>";
+    foreach ($routeCollection as $value) {
+        echo "<tr>";
+        echo "<td>" . $value->methods()[0] . "</td>";
+        echo "<td>" . $value->uri() . "</td>";
+        echo "<td>" . $value->getName() . "</td>";
+        echo "<td>" . $value->getActionName() . "</td>";
+        echo "</tr>";
+    }
+    echo "</table>";
 });
 
 require __DIR__.'/auth.php';

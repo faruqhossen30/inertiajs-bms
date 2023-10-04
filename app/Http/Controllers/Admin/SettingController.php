@@ -4,12 +4,15 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class SettingController extends Controller
 {
     public function settingPage()
     {
-        return view('admin.settings.setting');
+        // return view('admin.settings.setting');
+        $header_notice = option('header_notice');
+        return Inertia::render('Admin/Setting/Settings',['headerNotice'=>$header_notice]);
     }
 
     public function websiteName(Request $request)
@@ -18,7 +21,8 @@ class SettingController extends Controller
             'website_title'=>'required'
         ]);
         option(['website_title' => $request->website_title]);
-        return redirect()->route('admin.settings');
+
+
     }
 
     public function daimondCommission(Request $request)
@@ -68,7 +72,7 @@ class SettingController extends Controller
             'header_notice'=>'required'
         ]);
         option(['header_notice' => $request->header_notice]);
-        return redirect()->route('admin.settings');
+        return to_route('dashboard');
     }
 
     public function footerNotice(Request $request)

@@ -1,7 +1,10 @@
 <?php
 
 use App\Http\Controllers\Admin\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Admin\AutooptionController;
+use App\Http\Controllers\Admin\AutoquestionController;
 use App\Http\Controllers\Admin\GameController;
+use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\TeamController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
@@ -15,8 +18,14 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','admin']], function (
         return Inertia::render('Admin/Dashboard');
     })->name('dashboard');
 
+    Route::resource('autoquestion', AutoquestionController::class);
+    Route::resource('autooption', AutooptionController::class);
     // Users
     Route::resource('user', UserController::class);
     Route::resource('team', TeamController::class);
     Route::resource('game', GameController::class);
+
+   // Settings
+   Route::get('/settings', [SettingController::class, 'settingPage'])->name('admin.settings');
+   Route::post('/setting/header-notice', [SettingController::class, 'headerNotice'])->name('admin.setting.headernotice');
 });

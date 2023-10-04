@@ -5,11 +5,15 @@ import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { Head, Link, useForm } from '@inertiajs/react';
+import SelectInput from '@/Components/SelectInput';
 
 export default function Register() {
     const { data, setData, post, processing, errors, reset } = useForm({
         name: '',
+        username: '',
         email: '',
+        mobile: '',
+        club_id: '',
         password: '',
         password_confirmation: '',
     });
@@ -22,35 +26,28 @@ export default function Register() {
 
     const submit = (e) => {
         e.preventDefault();
-
+        console.log(data);
         post(route('register'));
     };
 
     return (
         <GuestLayout>
             <Head title="Register" />
-
             <form onSubmit={submit}>
                 <div>
                     <InputLabel htmlFor="name" value="Name" />
-
-                    <TextInput
-                        id="name"
-                        name="name"
-                        value={data.name}
-                        className="mt-1 block w-full"
-                        autoComplete="name"
-                        isFocused={true}
-                        onChange={(e) => setData('name', e.target.value)}
-                        required
-                    />
-
+                    <TextInput id="name" name="name" value={data.name} className="mt-1 block w-full" autoComplete="name" isFocused={true} onChange={(e) => setData('name', e.target.value)} required />
                     <InputError message={errors.name} className="mt-2" />
+                </div>
+
+                <div className='mt-4'>
+                    <InputLabel htmlFor="username" value="username" />
+                    <TextInput id="username" name="username" value={data.username} className="mt-1 block w-full" autoComplete="username" isFocused={true} onChange={(e) => setData('username', e.target.value)} />
+                    <InputError message={errors.username} className="mt-2" />
                 </div>
 
                 <div className="mt-4">
                     <InputLabel htmlFor="email" value="Email" />
-
                     <TextInput
                         id="email"
                         type="email"
@@ -63,6 +60,17 @@ export default function Register() {
                     />
 
                     <InputError message={errors.email} className="mt-2" />
+                </div>
+                <div className='mt-4'>
+                    <InputLabel htmlFor="mobile" value="mobile" />
+                    <TextInput id="mobile" name="mobile" value={data.mobile} className="mt-1 block w-full" autoComplete="mobile" isFocused={true} onChange={(e) => setData('mobile', e.target.value)} />
+                    <InputError message={errors.mobile} className="mt-2" />
+                </div>
+
+                <div className='mt-4'>
+                    <InputLabel htmlFor="club_id" value="club_id" />
+                    <SelectInput id="club_id" type="text" name="club_id" value={data.club_id} className="mt-1 block w-full" autoComplete="club_id" isFocused={true} onChange={(e) => setData('club_id', e.target.value)} />
+                    <InputError message={errors.club_id} className="mt-2" />
                 </div>
 
                 <div className="mt-4">

@@ -7,6 +7,7 @@ use App\Models\AutoOption;
 use App\Models\AutoQuestion;
 use App\Models\Game;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class AutoquestionController extends Controller
 {
@@ -17,8 +18,9 @@ class AutoquestionController extends Controller
      */
     public function index()
     {
-        $questions = AutoQuestion::orderBy('id','desc')->paginate();
-        return view('admin.autoquestion.index', compact('questions'));
+        $questions = AutoQuestion::orderBy('id','desc')->paginate(50);
+
+        return Inertia::render('Admin/Autoquestion/Index',['questions'=>$questions]);
     }
 
     /**
@@ -29,7 +31,7 @@ class AutoquestionController extends Controller
     public function create()
     {
         $games = Game::get();
-        return view('admin.autoquestion.create', compact('games'));
+        return Inertia::render('Admin/Autoquestion/Create',['games'=>$games]);
     }
 
     /**
@@ -45,9 +47,6 @@ class AutoquestionController extends Controller
             'title' => 'required',
             'game_id' => 'required',
             'status' => 'required',
-
-            'option.*.name' => 'required',
-            'option.*.bet_rate' => 'required'
         ]);
 
         $game = Game::firstWhere('id', $request->game_id);
@@ -59,16 +58,9 @@ class AutoquestionController extends Controller
             'status' => $request->status,
         ]);
 
-        foreach ($request->option as $key => $value) {
-            AutoOption::create([
-                'auto_question_id' => $question->id,
-                'title' => $value['name'],
-                'bet_rate' => $value['bet_rate'],
-                'status' => $value['status']
-            ]);
-        }
 
-        return redirect()->route('autoquestion.index');
+
+        return to_route('dashboard');
     }
 
     /**
@@ -82,7 +74,7 @@ class AutoquestionController extends Controller
         //
         $question = AutoQuestion::with('options')->firstWhere('id',$id);
         // return $question;
-        return view('admin.autoquestion.show', compact('question'));
+        return Inertia::render('Admin/Autoquestion/Show',['question'=>$question]);
     }
 
     /**

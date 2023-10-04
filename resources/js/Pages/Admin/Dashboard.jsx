@@ -12,7 +12,7 @@ export default function Dashboard({ auth }) {
             <Head title="Dashboard" />
             <Breadcum/>
             <div className="bg-white dark:bg-gray-800 dark:text-slate-400 p-2 m-2">
-                <div class="grid sm:grid-cols-2 lg:grid-cols-3 items-center gap-6 md:gap-10">
+                <div className="grid sm:grid-cols-2 lg:grid-cols-3 items-center gap-6 md:gap-10">
                 <CardDashboard/>
                 </div>
             </div>

@@ -26,8 +26,8 @@ export default function Header() {
                         :
                         <>
                             <span><Switcher /></span>
-                            <Link to='/register' className=' font-normal text-sm bg-purple-800 rounded-sm text-white px-3 py-1'>Register</Link>
-                            <Link to='/login' className=' font-normal text-sm bg-purple-800 rounded-md text-white px-3 py-1'>Login</Link>
+                            <Link href='/register' className=' font-normal text-sm bg-purple-800 rounded-sm text-white px-3 py-1'>Register</Link>
+                            <Link href='/login' className=' font-normal text-sm bg-purple-800 rounded-md text-white px-3 py-1'>Login</Link>
                         </>
 
                     }
