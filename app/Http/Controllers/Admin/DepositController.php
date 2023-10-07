@@ -7,6 +7,7 @@ use App\Models\Deposit;
 use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class DepositController extends Controller
 {
@@ -17,8 +18,8 @@ class DepositController extends Controller
      */
     public function index()
     {
-        $deposits = Deposit::latest()->paginate(25);
-        return view('admin.deposit.index', compact('deposits'));
+        $deposits = Deposit::with('user')->latest()->paginate(25);
+        return Inertia::render('Admin/Deposit/Index',['deposits'=>$deposits]);
     }
 
     /**
@@ -50,7 +51,8 @@ class DepositController extends Controller
      */
     public function show($id)
     {
-        //
+        $deposit = Deposit::with('user')->firstWhere('id', $id);
+        return Inertia::render('Admin/Deposit/Show',['deposit'=>$deposit]);
     }
 
     /**
@@ -74,7 +76,7 @@ class DepositController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // return $request->all();
+        $request->validate(['amount'=>'required']);
         $deposit = Deposit::firstWhere('id', $id);
 
 
@@ -82,10 +84,6 @@ class DepositController extends Controller
             'amount' => $request->amount,
             'status' => true,
         ]);
-        // $update = Deposit::firstWhere('id',$id)->update([
-        //     'amount'=>$request->amount,
-        //     'status'=>true,
-        // ]);
 
 
         if ($update) {

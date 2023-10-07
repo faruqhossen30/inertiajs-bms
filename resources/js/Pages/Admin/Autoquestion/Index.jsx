@@ -41,7 +41,7 @@ export default function Index({ auth, questions }) {
                                             <div className="hs-dropdown relative inline-block [--placement:bottom-right]">
 
 
-                                                <Link  href={route('autoquestion.create')} className="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border border-gray-300  font-semibold bg-white text-gray-700 align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800">
+                                                <Link href={route('autoquestion.create')} className="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border border-gray-300  font-semibold bg-white text-gray-700 align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800">
                                                     <svg className="w-3 h-3" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                                                         <path d="M2.63452 7.50001L13.6345 7.5M8.13452 13V2" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
                                                     </svg>
@@ -112,7 +112,7 @@ export default function Index({ auth, questions }) {
                                                 return <tr key={index}>
                                                     <td className="h-px w-px whitespace-nowrap">
                                                         <div className="px-6 py-2">
-                                                            <span className="text-sm text-gray-600 dark:text-gray-400">{index+1}</span>
+                                                            <span className="text-sm text-gray-600 dark:text-gray-400">{index + 1}</span>
                                                         </div>
                                                     </td>
                                                     <td className="h-px w-px whitespace-nowrap">
@@ -122,7 +122,7 @@ export default function Index({ auth, questions }) {
                                                     </td>
                                                     <td className="h-px w-px whitespace-nowrap">
                                                         <div className="px-6 py-2">
-                                                        <span className="text-sm text-gray-600 dark:text-gray-400">{item.game_name}</span>
+                                                            <span className="text-sm text-gray-600 dark:text-gray-400">{item.game_name}</span>
                                                         </div>
                                                     </td>
 
@@ -137,14 +137,13 @@ export default function Index({ auth, questions }) {
                                                         </div>
                                                     </td>
                                                     <td className="h-px w-px whitespace-nowrap">
-                                                            <div className="px-6 py-1.5 flex space-x-1">
-                                                                <Link href={route('autoquestion.show',item.id)}>
+                                                        <div className="px-6 py-1.5 flex space-x-1">
+                                                            <Link href={route('autoquestion.show', item.id)}>
                                                                 <EyeIcon className="h-6 hover:bg-gray-200 hover:dark:bg-gray-50 text-gray-500 dark:text-gray-400 border border-gray-600 dark:border-gray-400 rounded-sm shadow-sm p-1" />
-                                                                </Link>
-                                                                <PencilIcon className="h-6 hover:bg-gray-200 hover:dark:bg-gray-50 text-gray-500 dark:text-gray-400 border border-gray-600 dark:border-gray-400 rounded-sm shadow-sm p-1" />
-                                                                <TrashIcon className="h-6 hover:bg-gray-200 hover:dark:bg-gray-50 text-gray-500 dark:text-gray-400 border border-gray-600 dark:border-gray-400 rounded-sm shadow-sm p-1" />
-                                                            </div>
-
+                                                            </Link>
+                                                            <PencilIcon className="h-6 hover:bg-gray-200 hover:dark:bg-gray-50 text-gray-500 dark:text-gray-400 border border-gray-600 dark:border-gray-400 rounded-sm shadow-sm p-1" />
+                                                            <TrashIcon className="h-6 hover:bg-gray-200 hover:dark:bg-gray-50 text-gray-500 dark:text-gray-400 border border-gray-600 dark:border-gray-400 rounded-sm shadow-sm p-1" />
+                                                        </div>
                                                     </td>
                                                 </tr>
                                             })

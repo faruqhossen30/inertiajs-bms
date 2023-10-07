@@ -3,9 +3,11 @@
 use App\Http\Controllers\Admin\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Admin\AutooptionController;
 use App\Http\Controllers\Admin\AutoquestionController;
+use App\Http\Controllers\Admin\DepositController;
 use App\Http\Controllers\Admin\GameController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\TeamController;
+use App\Http\Controllers\Admin\TransactionController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -17,6 +19,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','admin']], function (
     Route::get('/dashboard', function () {
         return Inertia::render('Admin/Dashboard');
     })->name('dashboard');
+
+
+    // Admin
+    Route::resource('deposit', DepositController::class);
+    Route::resource('transaction', TransactionController::class);
 
     Route::resource('autoquestion', AutoquestionController::class);
     Route::resource('autooption', AutooptionController::class);

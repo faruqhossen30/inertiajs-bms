@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\User\DepositController;
+use App\Http\Controllers\User\ProfileController;
+use App\Http\Controllers\User\StatementController;
 use App\Models\Game;
 use App\Models\Matche;
 use Illuminate\Foundation\Application;
@@ -34,8 +35,10 @@ Route::get('/', function () {
 
 
 Route::middleware('auth')->group(function () {
-    Route::get('/deposits', [DepositController::class, 'index']);
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::get('deposit', [DepositController::class, 'index'])->name('depositform');
+    Route::post('deposit/store', [DepositController::class, 'store'])->name('depositform.store');
+    Route::get('profile', [ProfileController::class, 'index'])->name('profile');
+    Route::get('statement', [StatementController::class, 'index'])->name('statement');
 });
 
 Route::get('routes', function () {

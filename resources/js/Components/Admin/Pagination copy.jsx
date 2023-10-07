@@ -1,7 +1,7 @@
 import { Link } from '@inertiajs/react';
 import React from 'react'
 
-export default function Pagination({ links }) {
+export default function PaginationCopy({ links }) {
     console.log(links);
     return (
         <nav className="flex items-center space-x-2 py-2">

@@ -8,7 +8,6 @@ export default function AppLayout({ children }) {
     return (
         <>
             <Header />
-            <Marquee/>
             {children}
             <Footer />
         </>

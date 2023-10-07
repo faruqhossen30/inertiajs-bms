@@ -45,7 +45,7 @@ class DepositController extends Controller
             'amount'=> 'required',
             'from_account'=> 'required',
             'to_account'=> 'required',
-            'transaction_id'=> 'required',
+            // 'transaction_id'=> 'required',
         ]);
 
         $data = [
@@ -60,11 +60,7 @@ class DepositController extends Controller
 
         $diposit = Deposit::create($data);
 
-        return response()->json([
-            'success' => true,
-            'code' => 200,
-            'data' => $diposit
-        ]);
+        return to_route('profile');
 
 
 

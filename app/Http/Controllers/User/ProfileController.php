@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\API\User;
+namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
@@ -9,9 +9,15 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Image;
+use Inertia\Inertia;
 
 class ProfileController extends Controller
 {
+    public function index(Request $request)
+    {
+        return Inertia::render('Profile');
+    }
+
     public function avatar(Request $request)
     {
         $user = $request->user();
