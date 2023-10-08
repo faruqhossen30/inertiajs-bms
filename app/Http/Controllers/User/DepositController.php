@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\Deposit;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class DepositController extends Controller
@@ -110,5 +111,10 @@ class DepositController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function depositList()
+    {
+        $deposits = Deposit::with('user')->where('user_id', Auth::user()->id)->latest()->paginate(25);
+        return Inertia::render('User/Deposit/DepositList',['deposits'=>$deposits]);
     }
 }

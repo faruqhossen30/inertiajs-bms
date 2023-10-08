@@ -3,6 +3,7 @@
 use App\Http\Controllers\User\DepositController;
 use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\User\StatementController;
+use App\Http\Controllers\User\TransactionController;
 use App\Models\Game;
 use App\Models\Matche;
 use Illuminate\Foundation\Application;
@@ -35,8 +36,12 @@ Route::get('/', function () {
 
 
 Route::middleware('auth')->group(function () {
+    Route::get('deposit/list', [DepositController::class, 'depositList'])->name('depositlist');
     Route::get('deposit', [DepositController::class, 'index'])->name('depositform');
     Route::post('deposit/store', [DepositController::class, 'store'])->name('depositform.store');
+
+    Route::get('transaction', [TransactionController::class, 'index'])->name('transactionlist');
+
     Route::get('profile', [ProfileController::class, 'index'])->name('profile');
     Route::get('statement', [StatementController::class, 'index'])->name('statement');
 });
