@@ -9,6 +9,7 @@ use App\Models\MatcheQuestion;
 use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BetController extends Controller
 {
@@ -25,7 +26,7 @@ class BetController extends Controller
 
     public function store(Request $request)
     {
-        $user = User::firstWhere('id', $request->user()->id);
+        $user = Auth::user();
 
         $request->validate([
             'matche_id' => 'required',
@@ -37,11 +38,6 @@ class BetController extends Controller
             'bet_amount.min' => 'Minimu bet amount 20 TK.'
         ]);
 
-        if (intval($request->bet_amount) > intval($user->balance)) {
-            return response()->json([
-                'message' => "Insufficent balance! You can use maximum {$user->balance}"
-            ], 422);
-        }
 
 
         $checkQuestion = MatcheQuestion::where([
@@ -71,9 +67,6 @@ class BetController extends Controller
 
             if ($bet) {
                 $user->decrement('balance', $request->bet_amount);
-
-
-
                 Transaction::create([
                     'user_id' => $user->id,
                     'debit' => $request->bet_amount,
@@ -83,6 +76,7 @@ class BetController extends Controller
                 ]);
 
                 $club = User::firstWhere('id', $user->club_id);
+
                 $clubCommission = ($club->club_commission / 100) * $request->bet_amount;
                 $addBalanceToClub = $club->increment('balance', $clubCommission);
                 $club->save();
@@ -97,18 +91,14 @@ class BetController extends Controller
                     'balance' =>  $club->balance,
                 ]);
             }
-            return response()->json([
-                'message' => 'Bet successfully submited !'
-            ]);
+            return to_route('matche.index');
         } else {
-            return response()->json([
-                'message' => 'This bet Not available now !'
-            ]);
+            return to_route('matche.index');
         }
 
 
 
 
-        return $request->all();
+        // return $request->all();
     }
 }

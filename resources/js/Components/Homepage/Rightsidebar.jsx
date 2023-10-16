@@ -1,3 +1,4 @@
+import { Disclosure } from '@headlessui/react'
 import React from 'react'
 
 export default function Rightsidebar({matches}) {
@@ -7,7 +8,7 @@ export default function Rightsidebar({matches}) {
                 <h4 className="text-white font-bold p-1 text-center">Upcomming Match</h4>
             </div>
 
-            {
+            {/* {
                     matches.map((match, index) => {
                         return match.status=='upcoming' && <Disclosure as='div' className='shadow-md mb-1 border border-purple-300 text-sm' key={index}>
                             <Disclosure.Button as='div' className="cursor-pointer p-2">
@@ -62,7 +63,7 @@ export default function Rightsidebar({matches}) {
 
                         </Disclosure>
                     })
-                }
+                } */}
         </div>
   )
 }

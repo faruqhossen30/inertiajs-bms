@@ -11,7 +11,7 @@ export default function Header() {
                 <Link href={route('homepage')}><img src="/logo.png" alt="" className='h-6' /></Link>
             </div>
             <div className=' space-x-1'>
-                {auth.user ?
+                {auth.user && auth.user.is_user ?
                     <>
                         <div className='hidden lg:block space-x-2'>
                             <Link href={route('profile')} className=' font-normal text-sm border rounded-sm text-purple-800 dark:text-gray-200 px-3 py-1'>Profile</Link>
@@ -28,12 +28,17 @@ export default function Header() {
                         <span className='lg:hidden' ><Switcher /></span>
                         <span className='lg:hidden text-purple-800 px-2 font-bold dark:text-gray-200'>৳{auth.user.balance}</span>
                     </>
-                    :
-                    <>
-                        <span><Switcher /></span>
-                        <Link href={route('register')} className=' font-normal text-sm bg-purple-800 rounded-sm text-white px-3 py-1'>Register</Link>
-                        <Link href='/login' className=' font-normal text-sm bg-purple-800 rounded-md text-white px-3 py-1'>Login</Link>
-                    </>
+                    :auth.user && auth.user.is_admin
+                        ?
+                        <>
+                            <Link href={route('dashboard')} className=' font-normal text-sm border rounded-sm text-purple-800 dark:text-gray-200 px-3 py-1'>Admin Dashboard</Link>
+                        </>
+                        :
+                        <>
+                            <span><Switcher /></span>
+                            <Link href={route('register')} className='border font-normal text-sm bg-purple-800 dark:bg-gray-700 rounded-sm text-white px-3 py-1 '>Register</Link>
+                            <Link href='/login' className='border font-normal text-sm bg-purple-800 dark:bg-gray-700 rounded-md text-white px-3 py-1'>Login</Link>
+                        </>
 
                 }
             </div>

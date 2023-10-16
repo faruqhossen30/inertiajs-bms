@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\User\BetController;
 use App\Http\Controllers\User\DepositController;
 use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\User\StatementController;
@@ -39,6 +40,8 @@ Route::middleware('auth')->group(function () {
     Route::get('deposit/list', [DepositController::class, 'depositList'])->name('depositlist');
     Route::get('deposit', [DepositController::class, 'index'])->name('depositform');
     Route::post('deposit/store', [DepositController::class, 'store'])->name('depositform.store');
+
+    Route::post('bet', [BetController::class, 'store'])->name('betstore');
 
     Route::get('transaction', [TransactionController::class, 'index'])->name('transactionlist');
 

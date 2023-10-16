@@ -11,6 +11,7 @@ use App\Models\MatcheQuestion;
 use App\Models\QuestionOption;
 use App\Models\Team;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class MatcheController extends Controller
 {
@@ -25,9 +26,10 @@ class MatcheController extends Controller
             ->with(['questions.options', 'questions.questionbet'])
             ->with(['questions.options.optionbet'])
             ->orderBy('created_at', 'desc')
-            ->paginate();
+            ->get();
         // return $matches;
-        return view('admin.matche.index', compact('matches'));
+        // return view('admin.matche.index', compact('matches'));
+        return Inertia::render('Admin/Matche/Index',['matches'=>$matches]);
     }
 
     /**
@@ -39,8 +41,7 @@ class MatcheController extends Controller
     {
         $countries = Team::get();
         $games = Game::get();
-        // return $countries;
-        return view('admin.matche.create', compact('countries', 'games'));
+        return Inertia::render('Admin/Matche/Create',['countries'=>$countries,'games'=>$games]);
     }
 
     /**
@@ -75,6 +76,7 @@ class MatcheController extends Controller
         $matche = Matche::create($data);
 
         if ($request->auto_question == 1) {
+
             $matchequestions = AutoQuestion::where('game_id', $request->game_id)->get();
 
             foreach ($matchequestions as $question) {
@@ -88,10 +90,19 @@ class MatcheController extends Controller
                 $options = AutoOption::where('auto_question_id', $question->id)->get();
 
                 foreach ($options as $option) {
+                    $title = $option['title'];
+
+                    if ($option['title'] == '#team-1#') {
+                        $title = $request->team_one;
+                    } elseif ($option['title'] == '#team-2#') {
+                        $title = $request->team_two;
+                    }
+
+
                     QuestionOption::create([
                         'matche_id' => $matche->id,
                         'matche_question_id' => $mq->id,
-                        'title' => $option['title'],
+                        'title' => $title,
                         'bet_rate' => $option['bet_rate'],
                         'is_hide' => false,
                         'is_win' => false,
@@ -134,8 +145,9 @@ class MatcheController extends Controller
         $games = Game::get();
         // return $countries;
 
-        $match = Matche::firstWhere('id', $id);
-        return view('admin.matche.edit', compact('match', 'countries', 'games'));
+        $matche = Matche::firstWhere('id', $id);
+        // return view('admin.matche.edit', compact('match', 'countries', 'games'));
+        return Inertia::render('Admin/Matche/Edit',['countries'=>$countries,'games'=>$games,'matche'=>$matche]);
     }
 
     /**
@@ -153,7 +165,6 @@ class MatcheController extends Controller
             'statement' => 'required',
             'date_time' => 'required',
             'game_id' => 'required',
-            'auto_question' => 'required',
             'status' => 'required',
         ]);
 
@@ -168,8 +179,8 @@ class MatcheController extends Controller
             'note' => $request->note,
             'status' => $request->status,
         ];
-        Matche::create($data);
-        return redirect()->route('matche.index');
+        Matche::firstWhere('id',$id)->update($data);
+        return to_route('matche.index');
     }
 
     /**
@@ -181,7 +192,9 @@ class MatcheController extends Controller
     public function destroy($id)
     {
         Matche::firstWhere('id', $id)->delete();
-        return redirect()->route('matche.index');
+        MatcheQuestion::where('matche_id', $id)->delete();
+        QuestionOption::where('matche_id', $id)->delete();
+        return to_route('matche.index');
     }
 
     public function changeStatus($id)

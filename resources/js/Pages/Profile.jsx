@@ -1,5 +1,5 @@
 import AppLayout from '@/Layouts/AppLayout'
-import { CheckIcon, DevicePhoneMobileIcon, HomeIcon, InboxIcon, PuzzlePieceIcon, UserCircleIcon, UserGroupIcon, UsersIcon, WalletIcon } from '@heroicons/react/24/outline'
+import { CheckIcon, CurrencyBangladeshiIcon, DevicePhoneMobileIcon, HomeIcon, InboxIcon, PuzzlePieceIcon, UserCircleIcon, UserGroupIcon, UsersIcon, WalletIcon } from '@heroicons/react/24/outline'
 import { CheckBadgeIcon, UserIcon } from '@heroicons/react/24/solid'
 import { Head } from '@inertiajs/react'
 import React from 'react'
@@ -15,7 +15,7 @@ export default function Profile({auth}) {
                         <span>Balance</span>
                     </div>
                     <div>
-                        <span className='text-3xl'><WalletIcon className="h-4 w-4" /></span>
+                        <span className='text-3xl'><CurrencyBangladeshiIcon className="h-4 w-4" /></span>
                     </div>
                 </div>
                 <div className='flex justify-between border p-2 my-1 items-center shadow dark:border-gray-400 dark:shadow-gray-700 dark:bg-gray-700'>
