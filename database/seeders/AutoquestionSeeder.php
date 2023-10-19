@@ -17,8 +17,9 @@ class AutoquestionSeeder extends Seeder
     public function run()
     {
         $auto_questions = array(
+            array('title' => 'Who will be win?','game_id' => '1','game_name' => 'Cricket','status' => '1'),
             array('title' => '⏱️Half Time Result⏱️','game_id' => '2','game_name' => 'Football','status' => '1'),
-            array('title' => 'Full Time Total Goal','game_id' => '2','game_name' => 'Football','status' => '1')
+            array('title' => 'Full Time Result','game_id' => '2','game_name' => 'Football','status' => '1')
           );
 
         foreach ($auto_questions as $question) {
@@ -30,11 +31,13 @@ class AutoquestionSeeder extends Seeder
         }
 
         $auto_options = array(
-            array('auto_question_id' => '1', 'title' => 'Team-1', 'bet_rate' => '1.00'),
-            array('auto_question_id' => '1', 'title' => 'Team-2', 'bet_rate' => '2.00'),
-            array('auto_question_id' => '2', 'title' => 'even', 'bet_rate' => '1.00'),
-            array('auto_question_id' => '2', 'title' => 'odd', 'bet_rate' => '2.00'),
-            array('auto_question_id' => '2', 'title' => 'no goal', 'bet_rate' => '3.00')
+            array('auto_question_id' => '1', 'title' => '#team-1#', 'bet_rate' => '1.00'),
+            array('auto_question_id' => '1', 'title' => '#team-2#', 'bet_rate' => '2.00'),
+            array('auto_question_id' => '2', 'title' => '#team-1#', 'bet_rate' => '1.00'),
+            array('auto_question_id' => '2', 'title' => '#team-2#', 'bet_rate' => '2.00'),
+            array('auto_question_id' => '3', 'title' => 'even', 'bet_rate' => '1.00'),
+            array('auto_question_id' => '3', 'title' => 'odd', 'bet_rate' => '2.00'),
+            array('auto_question_id' => '3', 'title' => 'no goal', 'bet_rate' => '3.00')
         );
 
         foreach ($auto_options as $option) {

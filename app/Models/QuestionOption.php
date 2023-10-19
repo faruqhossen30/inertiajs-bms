@@ -13,5 +13,8 @@ class QuestionOption extends Model
     public function optionbet(){
         return $this->hasMany(Bet::class,'option_id', 'id');
     }
+    public function question(){
+        return $this->belongsTo(MatcheQuestion::class,'matche_question_id');
+    }
 
 }

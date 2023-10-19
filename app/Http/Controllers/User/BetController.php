@@ -10,18 +10,15 @@ use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
 
 class BetController extends Controller
 {
 
     public function index(Request $request)
     {
-        $bets = Bet::where('user_id', $request->user()->id)->get();
-        return response()->json([
-            'success' => true,
-            'code' => 200,
-            'data' => $bets
-        ]);
+        $bets = Bet::where('user_id', $request->user()->id)->latest()->paginate(25);
+        return Inertia::render('User/Bet/BetList',['bets'=>$bets]);
     }
 
     public function store(Request $request)
@@ -29,13 +26,14 @@ class BetController extends Controller
         $user = Auth::user();
 
         $request->validate([
-            'matche_id' => 'required',
-            'question_id' => 'required',
-            'option_id' => 'required',
-            'bet_rate' => 'required',
-            'bet_amount' => 'required|numeric|min:20',
+            "matche_id" => "required",
+            "question_id" => "required",
+            "option_id" => "required",
+            "bet_rate" => "required",
+            "bet_amount" => "required|numeric|min:20|max:{$user->balance}",
         ], [
-            'bet_amount.min' => 'Minimu bet amount 20 TK.'
+            "bet_amount.min" => "Minimu bet amount 20 TK.",
+            "bet_amount.max" => "Insufficent balance! You can use maximum {$user->balance} TK",
         ]);
 
 

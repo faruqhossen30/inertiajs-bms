@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\AutoQuestion;
 use App\Models\PaymentGateway;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -24,6 +25,7 @@ class UserSeeder extends Seeder
             'mobile' => '234234',
             'is_admin' => false,
             'is_user' => true,
+            'club_id' => 3,
             'password' => Hash::make('123')
         ]);
 
@@ -35,8 +37,17 @@ class UserSeeder extends Seeder
             'is_admin' => false,
             'is_user' => false,
             'is_club' => true,
+            'club_commission' => 2,
             'password' => Hash::make('123')
         ]);
+
+        // AutoQuestion::create([
+        //     'title' => 'Who will be win?',
+        //     'game_id' => 1,
+        //     'game_name' => "Cricket",
+        //     'status' => 1
+        // ]);
+
 
         PaymentGateway::create([
             'bank' => 'Bkash',

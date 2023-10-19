@@ -42,6 +42,7 @@ Route::middleware('auth')->group(function () {
     Route::post('deposit/store', [DepositController::class, 'store'])->name('depositform.store');
 
     Route::post('bet', [BetController::class, 'store'])->name('betstore');
+    Route::get('bet/list', [BetController::class, 'index'])->name('betlist');
 
     Route::get('transaction', [TransactionController::class, 'index'])->name('transactionlist');
 

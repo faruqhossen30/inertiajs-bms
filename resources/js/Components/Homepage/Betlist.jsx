@@ -64,7 +64,7 @@ export default function Betlist({ matches }) {
                                                                 <span className="font-normal p-1 dark:text-slate-100">{option.title}</span>
                                                                 <span className="bg-gray-300 dark:bg-gray-700 font-bold p-1 px-4 dark:text-slate-100">{option.bet_rate}</span>
                                                             </div>
-                                                            <BetModal match={match}  question={question} option={option} />
+                                                            <BetModal matche={match}  question={question} option={option} />
                                                         </React.Fragment>
                                                     );
                                                 })

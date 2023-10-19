@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Bet;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class BetController extends Controller
 {
@@ -15,14 +16,8 @@ class BetController extends Controller
      */
     public function index()
     {
-        // $option = null;
-        // if (isset($_GET['option'])) {
-        //     $count = $_GET['option'];
-        // }
-
        $bets = Bet::with('user')->paginate();
-    //    return $bets;
-       return view('admin.bet.index', compact('bets'));
+       return Inertia::render('Admin/Bet/Index',['bets'=>$bets]);
     }
 
     /**

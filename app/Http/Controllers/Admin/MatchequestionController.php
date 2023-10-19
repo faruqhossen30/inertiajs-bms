@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Matche;
 use App\Models\MatcheQuestion;
 use App\Models\QuestionOption;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class MatchequestionController extends Controller
 {
@@ -26,8 +28,9 @@ class MatchequestionController extends Controller
      */
     public function create(Request $request, $id)
     {
-        $matche_id =  $request->id;
-        return view('admin.matchequestion.create', compact('matche_id'));
+        $matche =  Matche::firstWhere('id', $id);
+        return Inertia::render('Admin/Question/Create', ["matche" => $matche]);
+        // return view('admin.matchequestion.create', compact('matche_id'));
     }
 
     /**
@@ -45,22 +48,12 @@ class MatchequestionController extends Controller
             'title' => 'required',
             'status' => 'required',
         ]);
-       $question = MatcheQuestion::create([
+        $question = MatcheQuestion::create([
             'matche_id' => $request->matche_id,
             'title' => $request->title,
             'is_hide' => 0,
             'status' => $request->status,
         ]);
-
-        // foreach ($request->option as $key => $value) {
-        //     QuestionOption::create([
-        //         'matche_id' => $question->matche_id,
-        //         'matche_question_id' => $question->id,
-        //         'title' => $value['name'],
-        //         'bet_rate' => $value['bet_rate'],
-        //         'status' => $value['status']
-        //     ]);
-        // }
 
         return redirect()->route('matche.index');
     }
@@ -84,7 +77,9 @@ class MatchequestionController extends Controller
      */
     public function edit($id)
     {
-        return view('admin.matchequestion.create', compact('matche_id'));
+        $matchequestion = MatcheQuestion::firstWhere('id', $id);
+        $matche = Matche::firstWhere('id', $matchequestion->matche_id);
+        return Inertia::render('Admin/Question/Edit', ["matchequestion" => $matchequestion,"matche"=>$matche]);
     }
 
     /**
@@ -97,13 +92,13 @@ class MatchequestionController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'title'=>'required'
+            'title' => 'required'
         ]);
 
-        MatcheQuestion::firstWhere('id',$id)->update([
-            'title'=>$request->title
+        MatcheQuestion::firstWhere('id', $id)->update([
+            'title' => $request->title
         ]);
-        return redirect()->back();
+        return to_route('matche.index');
     }
 
     /**
@@ -114,7 +109,7 @@ class MatchequestionController extends Controller
      */
     public function destroy($id)
     {
-        MatcheQuestion::firstWhere('id',$id)->delete();
+        MatcheQuestion::firstWhere('id', $id)->delete();
         return redirect()->route('matche.index');
         // return 'matchequestion.destroy';
     }
@@ -123,10 +118,10 @@ class MatchequestionController extends Controller
         $matchQuestion = MatcheQuestion::firstWhere('id', $id);
         //    $check =  $match->status;
 
-            $update = $matchQuestion->update([
-                'is_hide' =>!$matchQuestion->is_hide,
-            ]);
+        $update = $matchQuestion->update([
+            'is_hide' => !$matchQuestion->is_hide,
+        ]);
 
-            return redirect()->route('matche.index');
+        return redirect()->route('matche.index');
     }
 }

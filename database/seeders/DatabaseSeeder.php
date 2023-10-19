@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-use AutoquestionSeeder;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -28,7 +27,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             GameSeeder::class,
             TeamSeeder::class,
-            // AutoquestionSeeder::class,
+            AutoquestionSeeder::class,
         ]);
     }
 }

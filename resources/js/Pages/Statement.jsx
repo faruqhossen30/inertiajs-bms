@@ -13,7 +13,7 @@ export default function Statement() {
                 <div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
                     {/* Grid */}
                     <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
-                        <Link>
+                        <Link href={route('betlist')}>
                             <StatementCard title="All Bets" icon={<HomeIcon className="h-8 w-8 text-white dark:text-gray-400" />} />
                         </Link>
                         <Link href={route('depositlist')}>

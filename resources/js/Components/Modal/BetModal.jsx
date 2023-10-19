@@ -1,28 +1,34 @@
-import { CloudArrowDownIcon, CurrencyBangladeshiIcon, XCircleIcon } from '@heroicons/react/24/outline'
+import { CalendarIcon, ClockIcon, CloudArrowDownIcon, CurrencyBangladeshiIcon, XCircleIcon } from '@heroicons/react/24/outline'
 import { useForm } from '@inertiajs/react';
 import React from 'react'
 import SubmitButton from '../Form/SubmitButton';
+import moment from 'moment';
 
-export default function BetModal({ match, question, option }) {
+export default function BetModal({ matche, question, option }) {
     const { data, setData, post, processing, errors, reset } = useForm({
-        matche_id: '1',
-        question_id: '1',
-        option_id: '1',
-        bet_rate: '1',
+        matche_id: matche.id,
+        question_id: question.id,
+        option_id: option.id,
+        bet_rate: option.bet_rate,
         bet_amount: '',
-        match_title: 'match_title',
-        question_title: 'question_title',
-        option_title: 'option_title'
+        match_title: 'matche.title',
+        question_title: question.title,
+        option_title: option.title
     });
+
+    function onClieAmount(val) {
+        setData('bet_amount', val);
+    }
+
 
     function submit(e) {
         e.preventDefault()
         console.log(data);
-        post(route('betstore'),{
-            onStart: ()=>{
+        post(route('betstore'), {
+            onStart: () => {
                 console.log('onStart');
             },
-            onSuccess: ()=>{
+            onSuccess: () => {
                 console.log('success');
             }
         });
@@ -34,7 +40,7 @@ export default function BetModal({ match, question, option }) {
                 <div className="flex flex-col bg-white border shadow-sm rounded-xl dark:bg-gray-800 dark:border-gray-700 dark:shadow-slate-700/[.7]">
                     <div className="flex justify-between items-center py-2 px-4 rounded-t-xl border-b bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
                         <h3 className="font-bold text-gray-800 dark:text-gray-200">
-                            <p> Bangladesh vs India</p>
+                            <p>{matche.team_one} vs {matche.team_two}</p>
                         </h3>
                         <button type="button" className="hs-dropdown-toggle inline-flex flex-shrink-0 justify-center items-center h-8 w-8 rounded-md text-gray-500 hover:text-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 focus:ring-offset-white transition-all text-sm dark:focus:ring-gray-700 dark:focus:ring-offset-gray-800" data-hs-overlay={`#hs-small-modal-${option.id}`}>
                             <span className="sr-only">Close</span>
@@ -45,41 +51,42 @@ export default function BetModal({ match, question, option }) {
                         <div className="mt-2">
 
                             <ul className="mt-3 flex flex-col">
-
-
                                 <li className="inline-flex items-center gap-x-2 py-3 px-4 text-sm border text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg dark:border-gray-700 dark:text-gray-200">
                                     <div className="flex items-center justify-between w-full">
                                         <span>Question</span>
-                                        <span>Full Time Result</span>
+                                        <span>{question.title}</span>
                                     </div>
                                 </li>
                                 <li className="inline-flex items-center gap-x-2 py-3 px-4 text-sm border text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg dark:border-gray-700 dark:text-gray-200">
                                     <div className="flex items-center justify-between w-full">
                                         <span>Time</span>
-                                        <span>September 9, 2023 1:16 AM</span>
+                                        <div className='text-center py-1 flex justify-center font-normal dark:text-slate-200'>
+                                            <span className='px-1'>{matche.title}</span>
+                                            <span className='flex items-center text-sm space-x-1'> <CalendarIcon className="h-4 w-4" /> <span> {moment(matche.date_time).format('LL')}</span> <ClockIcon className="w-4 h-4" /> {moment(matche.date_time).format('LT')}</span>
+                                        </div>
                                     </div>
                                 </li>
                                 <li className="inline-flex items-center gap-x-2 py-3 px-4 text-sm border text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg dark:border-gray-700 dark:text-gray-200">
                                     <div className="flex items-center justify-between w-full">
-                                        <span>#team-1#</span>
-                                        <span>Rate : $316.8</span>
+                                        <span>{option.title}</span>
+                                        <span>Rate : {option.bet_rate}</span>
                                     </div>
                                 </li>
                                 <li className="inline-flex items-center gap-x-2 py-3 px-4 text-sm font-semibold bg-gray-50 border text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg dark:bg-slate-800 dark:border-gray-700 dark:text-gray-200">
                                     <div className="flex items-center justify-between w-full">
                                         <span>Possible To Win</span>
-                                        <span> $316.8</span>
+                                        <span>${data.bet_rate * data.bet_amount}</span>
                                     </div>
                                 </li>
                             </ul>
 
 
                             <div className=" p-4 flex justify-center items-center flex-wrap space-x-1">
-                                <span className="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-purple-100 bg-purple-600 rounded-full drop-shadow-md cursor-pointer"  >100</span>
-                                <span className="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-purple-100 bg-purple-600 rounded-full drop-shadow-md cursor-pointer"  >500</span>
-                                <span className="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-purple-100 bg-purple-600 rounded-full drop-shadow-md cursor-pointer"  >1000</span>
-                                <span className="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-purple-100 bg-purple-600 rounded-full drop-shadow-md cursor-pointer"  >3000</span>
-                                <span className="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-purple-100 bg-purple-600 rounded-full drop-shadow-md cursor-pointer"  >5000</span>
+                                <span className="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-purple-100 bg-purple-600 rounded-full drop-shadow-md cursor-pointer" onClick={() => onClieAmount(100)}  >100</span>
+                                <span className="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-purple-100 bg-purple-600 rounded-full drop-shadow-md cursor-pointer" onClick={() => onClieAmount(500)} >500</span>
+                                <span className="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-purple-100 bg-purple-600 rounded-full drop-shadow-md cursor-pointer" onClick={() => onClieAmount(1000)} >1000</span>
+                                <span className="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-purple-100 bg-purple-600 rounded-full drop-shadow-md cursor-pointer" onClick={() => onClieAmount(3000)} >3000</span>
+                                <span className="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-purple-100 bg-purple-600 rounded-full drop-shadow-md cursor-pointer" onClick={() => onClieAmount(5000)} >5000</span>
                             </div>
                             <form onSubmit={submit}>
                                 <div>

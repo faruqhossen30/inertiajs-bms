@@ -1,6 +1,7 @@
 import CardDashboard from '@/Components/Admin/CardDashboard';
 import Pagination from '@/Components/Admin/Pagination';
 import Breadcum from '@/Components/Dashboard/Breadcum';
+import OptionModal from '@/Components/Modal/OptionModal';
 import TBody from '@/Components/Table/TBody';
 import TH from '@/Components/Table/TH';
 import THead from '@/Components/Table/THead';
@@ -8,11 +9,20 @@ import Table from '@/Components/Table/Table';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { CalendarIcon, ClockIcon, PlusIcon, PlusSmallIcon, Square2StackIcon, Squares2X2Icon, SquaresPlusIcon } from '@heroicons/react/24/outline';
 import { EyeDropperIcon, EyeIcon, HomeIcon, PencilIcon, TrashIcon } from '@heroicons/react/24/solid';
-import { Head, Link } from '@inertiajs/react';
+import { Head, Link, useForm } from '@inertiajs/react';
 import moment from 'moment';
+import { useState } from 'react';
 
 export default function Index({ auth, matches }) {
+    const {post} = useForm();
+
     console.log(matches);
+    let [isOpen, setIsOpen] = useState(false)
+
+    function openModal() {
+        setIsOpen(true);
+    }
+
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -24,6 +34,7 @@ export default function Index({ auth, matches }) {
                     <PlusSmallIcon className="w-4 h-4" />
                 </Link>
             </div>
+
 
             <div className="max-w-[85rem] px-2 py-1 sm:px-6 lg:px-2 mx-auto">
                 {/* <!-- Card --> */}
@@ -40,7 +51,15 @@ export default function Index({ auth, matches }) {
                                                         <Squares2X2Icon className="h-8 w-8 text-gray-600 dark:text-gray-400" />
                                                     </div>
                                                     <div className="flex flex-col">
-                                                        <span className="text-sm text-gray-600 dark:text-gray-400">{matche.team_one} Vs {matche.team_two} ||  {matche.statement} || Bet: 1 || TK: 50</span>
+                                                        <span className="text-sm text-gray-600 dark:text-gray-400">{matche.team_one} Vs {matche.team_two} ||  {matche.statement} || Bet:
+                                                            {matche.matchbets.length}
+
+                                                            {/* {
+                                                                matche.matchbets.reduce((accumulator, object) => {
+                                                                    return accumulator + object.bet_amount;
+                                                                }, 0)
+                                                            } */}
+                                                        </span>
                                                         <span className="text-sm text-gray-600 dark:text-gray-400 flex space-x-3">
                                                             <CalendarIcon className="h-4 w-4" />  {moment(matche.date_time).format('LL')} <ClockIcon className="w-4 h-4" /> {moment(matche.date_time).format('LT')}
                                                         </span>
@@ -52,9 +71,9 @@ export default function Index({ auth, matches }) {
                                                     <Link href={route('matche.edit', matche.id)} className="py-1 px-2 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
                                                         Action
                                                     </Link>
-                                                    <button type="button" className="py-1 px-2 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
+                                                    <Link href={route('matchequestion.create', matche.id)} className="py-1 px-2 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
                                                         Add Question
-                                                    </button>
+                                                    </Link>
                                                     <button type="button" className="py-1 px-2 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
                                                         Show Question
                                                     </button>
@@ -76,8 +95,34 @@ export default function Index({ auth, matches }) {
                                                     matche.questions.map((question, index) => {
                                                         return <div key={index} id="hs-basic-no-arrow-collapse-one" className="hs-accordion-content w-full overflow-auto transition-[height] duration-300" aria-labelledby="hs-basic-no-arrow-heading-one">
                                                             <div className="m-2 border border-gray-100">
-                                                                <div className="bg-gray-100 dark:bg-gray-800 p-2">
+                                                                <div className="flex items-center bg-gray-100 dark:bg-gray-800 p-2 space-x-1">
                                                                     <h6>{question.title}</h6>
+                                                                    <div className="space-x-1">
+                                                                        <Link href='#' className="py-0.5 px-2 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-purple-500 text-white hover:bg-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
+                                                                            Action
+                                                                        </Link>
+                                                                        <Link href='#' className="py-0.5 px-2 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-purple-500 text-white hover:bg-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
+                                                                            Stop
+                                                                        </Link>
+                                                                        <Link href='#' className="py-0.5 px-2 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-purple-500 text-white hover:bg-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
+                                                                            Hide
+                                                                        </Link>
+                                                                        <Link href='#' className="py-0.5 px-2 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-purple-500 text-white hover:bg-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
+                                                                            Hide Are
+                                                                        </Link>
+                                                                        <button onClick={() => openModal()} className="py-0.5 px-2 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-purple-500 text-white hover:bg-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
+                                                                            Plus
+
+                                                                            <OptionModal isOpen={isOpen} setIsOpen={setIsOpen} />
+                                                                        </button>
+                                                                        <Link href='#' className="py-0.5 px-2 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-purple-500 text-white hover:bg-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
+                                                                            Delete
+                                                                        </Link>
+                                                                        <Link href='#' className="py-0.5 px-2 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-purple-500 text-white hover:bg-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
+                                                                            Bids
+                                                                        </Link>
+                                                                        <span>TK: 1200</span>
+                                                                    </div>
                                                                 </div>
                                                                 <div>
                                                                     <Table>
@@ -112,20 +157,32 @@ export default function Index({ auth, matches }) {
                                                                                         </td>
                                                                                         <td className="h-px w-px whitespace-nowrap">
                                                                                             <div className="px-6 py-2">
-                                                                                                <span className="text-sm text-gray-600 dark:text-gray-400">100</span>
+                                                                                                <span className="text-sm text-gray-600 dark:text-gray-400">{option.optionbet.length}</span>
                                                                                             </div>
                                                                                         </td>
                                                                                         <td className="h-px w-px whitespace-nowrap">
                                                                                             <div className="px-6 py-2">
                                                                                                 <div className="flex items-center gap-x-2">
-                                                                                                    <span className="text-sm text-gray-600 dark:text-gray-400">sdf</span>
+                                                                                                    <span className="text-sm text-gray-600 dark:text-gray-400">
+                                                                                                        {
+                                                                                                            option.optionbet.reduce((accumulator, object) => {
+                                                                                                                return accumulator + object.bet_amount;
+                                                                                                            }, 0)
+                                                                                                        }
+                                                                                                    </span>
                                                                                                 </div>
                                                                                             </div>
                                                                                         </td>
                                                                                         <td className="h-px w-px whitespace-nowrap">
                                                                                             <div className="px-6 py-2">
                                                                                                 <div className="flex items-center gap-x-2">
-                                                                                                    <span className="text-sm text-gray-600 dark:text-gray-400">sdf</span>
+                                                                                                    <span className="text-sm text-gray-600 dark:text-gray-400">
+                                                                                                        {
+                                                                                                            option.optionbet.reduce((accumulator, object) => {
+                                                                                                                return accumulator + object.return_amount;
+                                                                                                            }, 0)
+                                                                                                        }
+                                                                                                    </span>
                                                                                                 </div>
                                                                                             </div>
                                                                                         </td>
@@ -137,16 +194,21 @@ export default function Index({ auth, matches }) {
                                                                                         </td>
 
                                                                                         <td className="space-x-1">
-                                                                                            <span className="items-center py-1 px-2 rounded-full text-xs font-medium bg-blue-500 text-white">Win</span>
-                                                                                            <span className="items-center py-1 px-2 rounded-full text-xs font-medium bg-indigo-500 text-white">Bet</span>
+                                                                                            {
+                                                                                                option.is_win ?
+                                                                                                    <span className="items-center py-1 px-2 rounded-full text-xs font-medium bg-green-500 text-white">Wined</span>
+                                                                                                    : option.is_loss ?
+                                                                                                    <span className="items-center py-1 px-2 rounded-full text-xs font-medium bg-red-500 text-white">Loss</span>
+                                                                                                    :
+                                                                                                    <Link  href={route('admin.betwin', option.id)} method="post" as="button" className="items-center py-1 px-2 rounded-full text-xs font-medium bg-blue-500 text-white">Win</Link>
+                                                                                            }
+
+
+                                                                                            <Link href={route('admin.betlist', option.id)} className="items-center py-1 px-2 rounded-full text-xs font-medium bg-indigo-500 text-white">Bet</Link>
                                                                                             <span className="items-center py-1 px-2 rounded-full text-xs font-medium bg-indigo-500 text-white">Stop</span>
                                                                                             <span className="items-center py-1 px-2 rounded-full text-xs font-medium bg-indigo-500 text-white">Hide</span>
                                                                                             <span className="items-center py-1 px-2 rounded-full text-xs font-medium bg-indigo-500 text-white">Close</span>
-
                                                                                         </td>
-
-
-
                                                                                     </tr>
                                                                                 })
                                                                             }
@@ -160,20 +222,32 @@ export default function Index({ auth, matches }) {
                                                                                 </td>
                                                                                 <td className="h-px w-px whitespace-nowrap">
                                                                                     <div className="px-6 py-2">
-                                                                                        <span className="text-sm text-gray-600 dark:text-gray-400">Total: 5</span>
+                                                                                        <span className="text-sm text-gray-600 dark:text-gray-400">Total: {question.questionbet.length}</span>
                                                                                     </div>
                                                                                 </td>
                                                                                 <td className="h-px w-px whitespace-nowrap">
                                                                                     <div className="px-6 py-2">
                                                                                         <div className="flex items-center gap-x-2">
-                                                                                            <span className="text-sm text-gray-600 dark:text-gray-400">TK:500</span>
+                                                                                            <span className="text-sm text-gray-600 dark:text-gray-400">TK:
+                                                                                                {
+                                                                                                    question.questionbet.reduce((accumulator, object) => {
+                                                                                                        return accumulator + object.bet_amount;
+                                                                                                    }, 0)
+                                                                                                }
+                                                                                            </span>
                                                                                         </div>
                                                                                     </div>
                                                                                 </td>
                                                                                 <td className="h-px w-px whitespace-nowrap">
                                                                                     <div className="px-6 py-2">
                                                                                         <div className="flex items-center gap-x-2">
-                                                                                            <span className="text-sm text-gray-600 dark:text-gray-400">TK:100</span>
+                                                                                            <span className="text-sm text-gray-600 dark:text-gray-400">TK:
+                                                                                                {
+                                                                                                    question.questionbet.reduce((accumulator, object) => {
+                                                                                                        return accumulator + object.return_amount;
+                                                                                                    }, 0)
+                                                                                                }
+                                                                                            </span>
                                                                                         </div>
                                                                                     </div>
                                                                                 </td>

@@ -32,7 +32,7 @@ return new class extends Migration
             $table->string('club_owner')->nullable();
             $table->string('club_mobile')->nullable();
             $table->string('club_address')->nullable();
-            $table->integer('club_commission')->nullable();
+            $table->float('club_commission')->nullable();
 
             $table->boolean('status')->default(true);
             $table->timestamps();
