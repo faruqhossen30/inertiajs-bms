@@ -37,18 +37,19 @@ class QuestionoptionController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'option'=>'required',
-            'rate'=>'required',
+            'title'=>'required',
+            'bet_rate'=>'required',
+            'status'=>'required',
         ]);
 
         QuestionOption::create([
             'matche_id' => $request->matche_id,
-            'matche_question_id' => $request->question_id,
-            'title' => $request->option,
-            'bet_rate' => $request->rate,
-            'status' => 1
+            'matche_question_id' => $request->matche_question_id,
+            'title' => $request->title,
+            'bet_rate' => $request->bet_rate,
+            'status' => $request->status
         ]);
-        return redirect()->back();
+        return to_route('matche.index');
     }
 
     /**

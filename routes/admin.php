@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\DepositController;
 use App\Http\Controllers\Admin\GameController;
 use App\Http\Controllers\Admin\MatcheController;
 use App\Http\Controllers\Admin\MatchequestionController;
+use App\Http\Controllers\Admin\QuestionoptionController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\TeamController;
 use App\Http\Controllers\Admin\TransactionController;
@@ -33,6 +34,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','admin']], function (
 
     Route::resource('autoquestion', AutoquestionController::class);
     Route::resource('autooption', AutooptionController::class);
+    Route::resource('option', QuestionoptionController::class);
     // Users
     Route::resource('user', UserController::class);
     Route::resource('team', TeamController::class);

@@ -1,92 +1,155 @@
 import { Dialog, Transition } from '@headlessui/react'
-import React, { Fragment } from 'react'
+import { CalendarIcon, ClockIcon, XCircleIcon } from '@heroicons/react/24/outline';
+import { useForm } from '@inertiajs/react';
+import moment from 'moment';
+import React, { Fragment, useState } from 'react'
+import SubmitButton from '../Form/SubmitButton';
+import InputLabel from '../Form/InputLabel';
+import Input from '../Form/Input';
 
-export default function BetNowModal({isOpen, setIsOpen}) {
+export default function BetNowModal({ matche, question, option }) {
+    const { data, setData, post, processing, errors, reset } = useForm({
+        matche_id: matche.id,
+        question_id: question.id,
+        option_id: option.id,
+        bet_rate: option.bet_rate,
+        bet_amount: '',
+        match_title: matche.title,
+        question_title: question.title,
+        option_title: option.title
+    });
+
+    let [isOpen, setIsOpen] = useState(false)
+    function openModal() {
+        setIsOpen(true);
+    }
+    function closeModal() {
+        setIsOpen(false)
+    }
+
+    function onClieAmount(val) {
+        setData('bet_amount', val);
+    }
+
+    function submit(e) {
+        e.preventDefault()
+        console.log(data);
+        post(route('betstore'), {
+            onStart: () => {
+                console.log('onStart');
+            },
+            onSuccess: () => {
+                closeModal();
+            }
+        });
+    }
+
     return (
-        <Transition appear show={isOpen} as={Fragment}>
-            <Dialog as="div" className="relative z-10" open={isOpen} onClose={() => setIsOpen(!isOpen)} >
-                <Transition.Child as={Fragment} enter="ease-out duration-300" enterFrom="opacity-0" enterTo="opacity-100" leave="ease-in duration-200" leaveFrom="opacity-100" leaveTo="opacity-0">
-                    <div className="fixed inset-0 bg-black bg-opacity-25" />
-                </Transition.Child>
+        <React.Fragment>
+            <div onClick={() => openModal()} className="col-span-2 border cursor-pointer dark:border-gray-700 flex justify-between m-1" data-hs-overlay={`#hs-small-modal-${option.id}`} >
+                <span className="font-normal p-1 dark:text-slate-100">{option.title}</span>
+                <span className="bg-gray-300 dark:bg-gray-700 font-bold p-1 px-4 dark:text-slate-100">{option.bet_rate}</span>
+            </div>
+            <Transition show={isOpen} as={Fragment}>
+                <Dialog as="div" className="relative z-10" onClose={closeModal}>
+                    <Transition.Child
+                        as={Fragment}
+                        enter="ease-out duration-300"
+                        enterFrom="opacity-0"
+                        enterTo="opacity-100"
+                        leave="ease-in duration-200"
+                        leaveFrom="opacity-100"
+                        leaveTo="opacity-0"
+                    >
+                        <div className="fixed inset-0 bg-black bg-opacity-25" />
+                    </Transition.Child>
 
-                <div className="fixed inset-0 overflow-y-auto">
-                    <div className="flex min-h-full items-center justify-center p-4 text-center">
-                        <Transition.Child as={Fragment} enter="ease-out duration-300" enterFrom="opacity-0 scale-95" enterTo="opacity-100 scale-100" leave="ease-in duration-200" leaveFrom="opacity-100 scale-100" leaveTo="opacity-0 scale-95">
-                            <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
-                                {/* <form onSubmit={handleSubmit(onSubmit)} >
-                                    <input type="hidden" name="matche_id" ref={matche_id} defaultValue={matchData.id} />
-                                    <input type="hidden" name="question_id" ref={question_id} defaultValue={questionData.id} />
-                                    <input type="hidden" name="option_id" ref={option_id} defaultValue={optionData.id} />
-                                    <input type="hidden" name="bet_rate" ref={bet_rate} defaultValue={optionData.bet_rate} />
+                    <div className="fixed inset-0 overflow-y-auto">
+                        <div className="flex min-h-full items-center justify-center p-4 text-center">
+                            <Transition.Child
+                                as={Fragment}
+                                enter="ease-out duration-300"
+                                enterFrom="opacity-0 scale-95"
+                                enterTo="opacity-100 scale-100"
+                                leave="ease-in duration-200"
+                                leaveFrom="opacity-100 scale-100"
+                                leaveTo="opacity-0 scale-95"
+                            >
+                                <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-lg bg-white border shadow-sm  dark:bg-gray-800 dark:border-gray-700 dark:shadow-slate-700/[.7] text-left align-middle transition-all">
+                                    <div className="flex justify-between items-center p-2 px-4 rounded-t-sm border-b bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
+                                        <h3 className="font-bold text-gray-800 dark:text-gray-200">
+                                            <p>{matche.team_one} vs {matche.team_two}</p>
+                                        </h3>
+                                        <button onClick={() => closeModal()} type="button" className="hs-dropdown-toggle inline-flex flex-shrink-0 justify-center items-center h-8 w-8 rounded-md text-gray-500 hover:text-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 focus:ring-offset-white transition-all text-sm dark:focus:ring-gray-700 dark:focus:ring-offset-gray-800" data-hs-overlay={`#hs-small-modal-${option.id}`}>
+                                            <span className="sr-only">Close</span>
+                                            <XCircleIcon className="h-4 w-4" />
+                                        </button>
+                                    </div>
+                                    <div className="p-3">
+                                        <ul className="mt-3 flex flex-col">
+                                            <li className="inline-flex items-center gap-x-2 py-3 px-4 text-sm border text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg dark:border-gray-700 dark:text-gray-200">
+                                                <div className="flex items-center justify-between w-full">
+                                                    <span>Question</span>
+                                                    <span>{question.title}</span>
+                                                </div>
+                                            </li>
+                                            <li className="inline-flex items-center gap-x-2 py-3 px-4 text-sm border text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg dark:border-gray-700 dark:text-gray-200">
+                                                <div className="flex items-center justify-between w-full">
+                                                    <span>Time</span>
+                                                    <div className='text-center py-1 flex justify-center font-normal dark:text-slate-200'>
+                                                        <span className='px-1'>{matche.title}</span>
+                                                        <span className='flex items-center text-sm space-x-1'> <CalendarIcon className="h-4 w-4" /> <span> {moment(matche.date_time).format('LL')}</span> <ClockIcon className="w-4 h-4" /> {moment(matche.date_time).format('LT')}</span>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li className="inline-flex items-center gap-x-2 py-3 px-4 text-sm border text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg dark:border-gray-700 dark:text-gray-200">
+                                                <div className="flex items-center justify-between w-full">
+                                                    <span>{option.title}</span>
+                                                    <span>Rate : {option.bet_rate}</span>
+                                                </div>
+                                            </li>
+                                            <li className="inline-flex items-center gap-x-2 py-3 px-4 text-sm font-semibold bg-gray-50 border text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg dark:bg-slate-800 dark:border-gray-700 dark:text-gray-200">
+                                                <div className="flex items-center justify-between w-full">
+                                                    <span>Possible To Win</span>
+                                                    <span>${data.bet_rate * data.bet_amount}</span>
+                                                </div>
+                                            </li>
+                                        </ul>
 
-
-                                    <input type="hidden" name="match_title" ref={match_title} defaultValue={matchData.statement} />
-                                    <input type="hidden" name="question_title" ref={question_title} defaultValue={questionData.title} />
-                                    <input type="hidden" name="option_title" ref={option_title} defaultValue={optionData.title} />
-
-
-
-                                    <Dialog.Title as="h4" className="text-lg font-medium leading-6 text-gray-900" >
-                                        <p> Place Your Bet </p>
-                                    </Dialog.Title>
-                                    <div className="mt-2">
-                                        <p className='text-left'>{matchData.team_one} VS {matchData.team_two}</p>
-                                        <p className='text-center'>
-                                            <span className='flex items-center text-sm space-x-1'> <FaRegCalendarAlt /> <span> {moment(matchData.date_time).format('LL')}</span> <FaRegClock /> {moment(matchData.date_time).format('LT')}</span>
-                                        </p>
-                                        <p>{questionData.title}</p>
-                                        <p>{optionData.title} - Rete: {optionData.bet_rate}</p>
-
-                                        <div className="bg-white p-4 flex justify-center items-center flex-wrap space-x-1">
-                                            <span className="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-purple-100 bg-purple-600 rounded-full drop-shadow-md cursor-pointer" onClick={() => onClieAmount(100)}>100</span>
-                                            <span className="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-purple-100 bg-purple-600 rounded-full drop-shadow-md cursor-pointer" onClick={() => onClieAmount(500)}>500</span>
-                                            <span className="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-purple-100 bg-purple-600 rounded-full drop-shadow-md cursor-pointer" onClick={() => onClieAmount(1000)}>1000</span>
-                                            <span className="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-purple-100 bg-purple-600 rounded-full drop-shadow-md cursor-pointer" onClick={() => onClieAmount(3000)}>3000</span>
-                                            <span className="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-purple-100 bg-purple-600 rounded-full drop-shadow-md cursor-pointer" onClick={() => onClieAmount(5000)}>5000</span>
+                                        <div className="py-2 overflow-y-auto">
+                                            <div className=" p-4 flex justify-center items-center flex-wrap space-x-1">
+                                                <span className="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-purple-100 bg-purple-600 rounded-full drop-shadow-md cursor-pointer" onClick={() => onClieAmount(100)}  >100</span>
+                                                <span className="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-purple-100 bg-purple-600 rounded-full drop-shadow-md cursor-pointer" onClick={() => onClieAmount(500)} >500</span>
+                                                <span className="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-purple-100 bg-purple-600 rounded-full drop-shadow-md cursor-pointer" onClick={() => onClieAmount(1000)} >1000</span>
+                                                <span className="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-purple-100 bg-purple-600 rounded-full drop-shadow-md cursor-pointer" onClick={() => onClieAmount(3000)} >3000</span>
+                                                <span className="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-purple-100 bg-purple-600 rounded-full drop-shadow-md cursor-pointer" onClick={() => onClieAmount(5000)} >5000</span>
+                                            </div>
+                                            <form onSubmit={submit}>
+                                                <div>
+                                                    <div className="relative">
+                                                        <input
+                                                            name="bet_amount"
+                                                            value={data.bet_amount} onChange={e => setData('bet_amount', e.target.value)}
+                                                            type="number" id="hs-input-with-leading-and-trailing-icon" className="py-2 px-4 pl-9 pr-16 block w-full border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400" placeholder="0.00" />
+                                                        <div className="absolute inset-y-0 left-0 flex items-center pointer-events-none z-20 pl-4">
+                                                            <span className="text-gray-500 text-2xl">৳</span>
+                                                        </div>
+                                                        <div className="absolute inset-y-0 right-0 flex items-center pointer-events-none z-20 pr-4">
+                                                            <span className="text-gray-500">BDT</span>
+                                                        </div>
+                                                    </div>
+                                                    <p className="text-sm text-red-600 mt-2">{errors.bet_amount}</p>
+                                                </div>
+                                                <SubmitButton title="BET NOW !" />
+                                            </form>
                                         </div>
-                                        <input type="number" name='bet_amount' ref={bet_amount} id="name" placeholder="500"
-                                            className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" onChange={betAmountChange} />
-                                        <span className='text-red-600 text-sm'>{errors.bet_amount?.message}</span> <br />
-                                        <span className='text-red-600 text-sm'>{errorMessage && errorMessage}</span>
                                     </div>
-                                    <div>
-                                        <div className="border cursor-pointer rounded-lg border-purple-300 flex justify-between my-2">
-                                            <span className="font-normal p-1 text-purple-600 text-md">Possible To Win</span>
-                                            <span className="font-bold p-1 px-4 text-purple-800">৳{betAmount * optionData.bet_rate}</span>
-                                        </div>
-                                    </div>
-
-                                    <div className="mt-4 flex justify-between">
-                                        {isLoading ?
-                                            <button type="button" className="bg-purple-600 flex rounded-md items-center px-2" disabled>
-                                                <svg className="mr-3 h-5 w-5 animate-spin text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                                                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                                                </svg>
-                                                <span className='text-white'> Bet pleacing...</span>
-                                            </button>
-
-                                            :
-                                            <>
-                                                <button type="submit" className="inline-flex justify-center rounded-sm border border-transparent bg-blue-100 px-3 py-1 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
-                                                    Submit
-                                                </button>
-
-
-                                                <button type="button" className="inline-flex justify-center rounded-sm border border-transparent bg-blue-100 px-3 py-1 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2" onClick={() => setIsOpen(!isOpen)} >
-                                                    Cancel
-                                                </button>
-                                            </>
-                                        }
-
-
-                                    </div>
-                                </form> */}
-                            </Dialog.Panel>
-                        </Transition.Child>
+                                </Dialog.Panel>
+                            </Transition.Child>
+                        </div>
                     </div>
-                </div>
-            </Dialog>
-        </Transition>
+                </Dialog>
+            </Transition>
+        </React.Fragment>
     )
 }

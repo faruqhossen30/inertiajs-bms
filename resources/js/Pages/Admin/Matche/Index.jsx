@@ -18,9 +18,12 @@ export default function Index({ auth, matches }) {
 
     console.log(matches);
     let [isOpen, setIsOpen] = useState(false)
+    let [qdata, setQdata] = useState({})
 
-    function openModal() {
+    function openModal(questionData){
+        setQdata(questionData);
         setIsOpen(true);
+        // console.log(question);
     }
 
     return (
@@ -34,6 +37,8 @@ export default function Index({ auth, matches }) {
                     <PlusSmallIcon className="w-4 h-4" />
                 </Link>
             </div>
+
+            {/* <OptionModal isOpen={isOpen} setIsOpen={setIsOpen} question={qdata} /> */}
 
 
             <div className="max-w-[85rem] px-2 py-1 sm:px-6 lg:px-2 mx-auto">
@@ -110,11 +115,10 @@ export default function Index({ auth, matches }) {
                                                                         <Link href='#' className="py-0.5 px-2 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-purple-500 text-white hover:bg-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
                                                                             Hide Are
                                                                         </Link>
-                                                                        <button onClick={() => openModal()} className="py-0.5 px-2 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-purple-500 text-white hover:bg-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
+                                                                        {/* <button onClick={() => openModal(question)} className="py-0.5 px-2 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-purple-500 text-white hover:bg-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
                                                                             Plus
-
-                                                                            <OptionModal isOpen={isOpen} setIsOpen={setIsOpen} />
-                                                                        </button>
+                                                                        </button> */}
+                                                                        <OptionModal question={question}/>
                                                                         <Link href='#' className="py-0.5 px-2 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-purple-500 text-white hover:bg-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
                                                                             Delete
                                                                         </Link>
