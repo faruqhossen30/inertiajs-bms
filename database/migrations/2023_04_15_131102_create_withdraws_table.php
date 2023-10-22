@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('type');
             $table->string('account');
             $table->integer('amount');
-            $table->string('status')->default('pending');
+            $table->enum('status',['pending','complete','cancle'])->default('pending');
             $table->timestamps();
         });
     }

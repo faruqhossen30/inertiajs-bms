@@ -5,6 +5,7 @@ use App\Http\Controllers\User\DepositController;
 use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\User\StatementController;
 use App\Http\Controllers\User\TransactionController;
+use App\Http\Controllers\User\WithdrawController;
 use App\Models\Game;
 use App\Models\Matche;
 use Illuminate\Foundation\Application;
@@ -40,6 +41,9 @@ Route::middleware('auth')->group(function () {
     Route::get('deposit/list', [DepositController::class, 'depositList'])->name('depositlist');
     Route::get('deposit', [DepositController::class, 'index'])->name('depositform');
     Route::post('deposit/store', [DepositController::class, 'store'])->name('depositform.store');
+    Route::get('withdraw/list', [WithdrawController::class, 'index'])->name('withdrawlist');
+    Route::get('withdraw', [WithdrawController::class, 'withdrawForm'])->name('witdrawform');
+    Route::post('withdraw', [WithdrawController::class, 'store'])->name('witdrawform.store');
 
     Route::post('bet', [BetController::class, 'store'])->name('betstore');
     Route::get('bet/list', [BetController::class, 'index'])->name('betlist');

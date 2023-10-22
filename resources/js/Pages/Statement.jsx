@@ -19,8 +19,9 @@ export default function Statement() {
                         <Link href={route('depositlist')}>
                             <StatementCard title="Deposits" icon={<CurrencyDollarIcon className="h-8 w-8 text-white dark:text-gray-400" />} />
                         </Link>
-
-                        <StatementCard title="Withdraws" icon={<BanknotesIcon className="h-8 w-8 text-white dark:text-gray-400" />} />
+                        <Link href={route('withdrawlist')}>
+                            <StatementCard title="Withdraws" icon={<BanknotesIcon className="h-8 w-8 text-white dark:text-gray-400" />} />
+                        </Link>
                         <Link href={route('transactionlist')}>
                             <StatementCard title="Transctions" icon={<ListBulletIcon className="h-8 w-8 text-white dark:text-gray-400" />} />
                         </Link>

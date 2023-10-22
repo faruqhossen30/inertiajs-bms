@@ -17,8 +17,7 @@ export default function Header() {
                             <Link href={route('profile')} className=' font-normal text-sm border rounded-sm text-purple-800 dark:text-gray-200 px-3 py-1'>Profile</Link>
                             <Link href={route('statement')} className=' font-normal text-sm border rounded-sm text-purple-800 dark:text-gray-200 px-3 py-1'>Statement</Link>
                             <Link href={route('depositform')} className=' font-normal text-sm border rounded-sm text-purple-800 dark:text-gray-200 px-3 py-1'>Deposit</Link>
-                            <Link className=' font-normal text-sm border rounded-sm text-purple-800 dark:text-gray-200 px-3 py-1'>Widthdray</Link>
-                            <Link className=' font-normal text-sm border rounded-sm text-purple-800 dark:text-gray-200 px-3 py-1'>Widthdray</Link>
+                            <Link href={route('witdrawform')} className=' font-normal text-sm border rounded-sm text-purple-800 dark:text-gray-200 px-3 py-1'>Widthdray</Link>
                             {/* <Link href={route('logout')} method="post" as="button" className=' font-normal text-sm border rounded-md text-purple-800 px-3 py-1' >Logout</Link> */}
                             <button type="button" className=' font-normal text-sm border rounded-md text-purple-800 px-3 py-1' data-hs-overlay="#hs-sign-out-alert">Logout</button>
 

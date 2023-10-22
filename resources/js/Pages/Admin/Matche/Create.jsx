@@ -15,9 +15,9 @@ export default function Create({ games,countries }) {
         team_one_flag: '',
         team_two_flag: '',
         date_time: '',
-        game_id: '',
+        game_id: 1,
         note: '',
-        auto_question: '1',
+        auto_question: 1,
         status: 'live'
     });
 

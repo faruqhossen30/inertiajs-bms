@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\API\User;
+namespace App\Http\Controllers\User;
 
 use App\Enum\WithdrawEnum;
 use App\Http\Controllers\Controller;
@@ -8,17 +8,18 @@ use App\Models\Transaction;
 use App\Models\User;
 use App\Models\Withdraw;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
+use Inertia\Response;
 
 class WithdrawController extends Controller
 {
-    public function index(Request $request){
-        $withdraws = Withdraw::get();
-
-        return response()->json([
-            'success' => true,
-            'code' => 200,
-            'data' => $withdraws
-        ]);
+    public function index(Request $request):Response{
+        $withdraws = Withdraw::with('user')->where('user_id', Auth::user()->id)->latest()->paginate(25);
+        return Inertia::render('User/Withdraw/WithdrawList',['withdraws'=>$withdraws]);
+    }
+    public function withdrawForm(Request $request){
+        return Inertia::render('Withdraw');
     }
     public function store(Request $request)
     {
@@ -28,16 +29,11 @@ class WithdrawController extends Controller
             'method' => 'required',
             'type' => 'required',
             'account' => 'required',
-            // 'password' => 'required',
-            'amount' => "required|numeric|max:{$user->balance}",
+            'amount' => "required|numeric|min:50|max:{$user->balance}",
+        ],[
+            "amount.min" => "Minimu withdraw amount 50 TK.",
+            "amount.max" => "Insufficent balance! You can use maximum {$user->balance} TK",
         ]);
-
-        // if (Hash::check($request->password, $request->user()->password)) {
-        //     // passwords match
-        // } else {
-        //     // passwords do not match
-        // }
-
 
         $withdraw = Withdraw::create([
             'user_id' => $user->id,
@@ -59,15 +55,7 @@ class WithdrawController extends Controller
             ]);
         }
 
-        return response()->json([
-            'success' => true,
-            'code' => 200,
-            'message' => "Your withdraw is pending."
-        ]);
-
-
-
-
+        return to_route('profile');
 
     }
 }

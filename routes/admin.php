@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\TeamController;
 use App\Http\Controllers\Admin\TransactionController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\WithdrawController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -30,6 +31,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','admin']], function (
 
     // Admin
     Route::resource('deposit', DepositController::class);
+    Route::resource('withdraw', WithdrawController::class);
     Route::resource('transaction', TransactionController::class);
 
     Route::resource('autoquestion', AutoquestionController::class);

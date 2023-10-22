@@ -9,7 +9,8 @@ use App\Models\User;
 use App\Models\Withdraw;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-
+use Inertia\Inertia;
+use Inertia\Response;
 
 class WithdrawController extends Controller
 {
@@ -18,11 +19,12 @@ class WithdrawController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index():Response
     {
-        $withdraws = Withdraw::paginate();
-        return view('admin.withdraw.index', compact('withdraws'));
+        $withdraws = Withdraw::with('user')->latest()->paginate(25);
+        return Inertia::render('Admin/Withdraw/Index',['withdraws'=>$withdraws]);
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -99,7 +101,8 @@ class WithdrawController extends Controller
      */
     public function show($id)
     {
-        //
+        $withdraw = Withdraw::with('user')->firstWhere('id',$id);
+        return Inertia::render('Admin/Withdraw/Show',['withdraw'=>$withdraw]);
     }
 
     /**

@@ -14,7 +14,7 @@ export default function BetNowModal({ matche, question, option }) {
         option_id: option.id,
         bet_rate: option.bet_rate,
         bet_amount: '',
-        match_title: matche.title,
+        match_title: `${matche.team_one} vs ${matche.team_two}`,
         question_title: question.title,
         option_title: option.title
     });

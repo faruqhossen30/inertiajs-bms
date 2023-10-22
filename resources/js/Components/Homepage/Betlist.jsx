@@ -6,13 +6,6 @@ import BetNowModal from '../Modal/BetNowModal';
 import BetModal from '../Modal/BetModal';
 
 export default function Betlist({ matches }) {
-    // console.log(matches);
-    const [isOpen, setIsOpen] = useState(false);
-
-    function openModal(matchData, questionData, optionData) {
-        setIsOpen(true);
-    }
-
     return (
         <div className='col-span-12 lg:col-span-7 px-1'>
             <div className="bg-purple-800 dark:bg-gray-700 dark:text-slate-100">
