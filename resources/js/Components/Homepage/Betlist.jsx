@@ -53,12 +53,7 @@ export default function Betlist({ matches }) {
                                                 question.options.map((option, index) => {
                                                     return (
                                                         <React.Fragment key={index}>
-                                                            {/* <div className="col-span-2 border cursor-pointer dark:border-gray-700 flex justify-between m-1" data-hs-overlay={`#hs-small-modal-${option.id}`} >
-                                                                <span className="font-normal p-1 dark:text-slate-100">{option.title}</span>
-                                                                <span className="bg-gray-300 dark:bg-gray-700 font-bold p-1 px-4 dark:text-slate-100">{option.bet_rate}</span>
-                                                            </div> */}
-                                                            {/* <BetModal matche={match}  question={question} option={option} /> */}
-                                                            <BetNowModal matche={match} question={question} option={option}/>
+                                                            {option.is_hide=='0' && <BetNowModal matche={match} question={question} option={option}/>}
                                                         </React.Fragment>
                                                     );
                                                 })

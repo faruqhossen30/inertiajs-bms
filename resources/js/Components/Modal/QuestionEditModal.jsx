@@ -6,15 +6,10 @@ import Input from '../Form/Input'
 import { useForm } from '@inertiajs/react'
 import SubmitButton from '../Form/SubmitButton'
 import { useEffect } from 'react'
-import { PlusCircleIcon } from '@heroicons/react/24/outline'
 
-export default function OptionModal({ question }) {
-    const { data, setData, post, processing, errors, reset } = useForm({
-        matche_id: question.matche_id,
-        matche_question_id: question.id,
-        title: '',
-        bet_rate: '',
-        status: 1
+export default function QuestionEditModal({question}) {
+    const { data, setData, put, processing, errors, reset } = useForm({
+        "title":question.title
     });
 
     let [isOpen, setIsOpen] = useState(false)
@@ -28,7 +23,7 @@ export default function OptionModal({ question }) {
     function submit(e) {
         e.preventDefault()
         console.log('data', data);
-        post(route('option.store'), {
+        put(route('matchequestion.update', question.id), {
             onSuccess: () => {
                 closeModal();
             }
@@ -38,7 +33,7 @@ export default function OptionModal({ question }) {
     return (
         <React.Fragment>
             <button onClick={() => openModal()} className="py-0.5 px-2 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-purple-500 text-white hover:bg-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
-                +
+                Action
             </button>
 
             <Transition show={isOpen} as={Fragment}>
@@ -71,46 +66,18 @@ export default function OptionModal({ question }) {
                                         as="h3"
                                         className="text-lg font-medium leading-6 text-gray-900"
                                     >
-                                        {question.title} {question.matche_id}
+                                        {/* {question.title} {question.matche_id} */}
                                     </Dialog.Title>
                                     <div className="py-2 overflow-y-auto">
                                         <form onSubmit={submit}>
                                             <div>
-                                                <InputLabel labelFor="option" />
-                                                <Input id="option" type="text" name="title" value={data.title} autoComplete="title" placeholder="Enter Option" onChange={(e) => setData('title', e.target.value)} />
+                                                <InputLabel labelFor="title" isRequired={true}/>
+                                                <Input id="title" type="text" name="title" value={data.title} autoComplete="title" placeholder="Enter title" onChange={(e) => setData('title', e.target.value)} />
                                                 <p className="text-sm text-red-600 mt-2">{errors.title}</p>
                                             </div>
-
-                                            <div>
-                                                <InputLabel labelFor="Bet Rate" isRequired={true} />
-                                                <Input id="Bet Rate" type="number" name="bet_rate" value={data.bet_rate} autoComplete="bet_rate" placeholder="Enter Option" onChange={(e) => setData('bet_rate', e.target.value)} />
-                                                <p className="text-sm text-red-600 mt-2">{errors.bet_rate}</p>
-                                            </div>
-
-                                            <div>
-                                                <InputLabel labelFor="status" />
-                                                <select id="status" name="status" className="py-3 px-4 pr-9 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
-                                                    onChange={(e) => setData('status', e.target.value)}>
-                                                    <option value="1">Yes</option>
-                                                    <option value="0">No</option>
-                                                </select>
-                                                <p className="text-sm text-red-600 mt-2">{errors.status}</p>
-                                            </div>
-
-
-                                            <SubmitButton />
+                                            <SubmitButton title="Update" />
                                         </form>
                                     </div>
-
-                                    {/* <div className="mt-4">
-                                        <button
-                                            type="button"
-                                            className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                                            onClick={closeModal}
-                                        >
-                                            Got it, thanks!
-                                        </button>
-                                    </div> */}
                                 </Dialog.Panel>
                             </Transition.Child>
                         </div>

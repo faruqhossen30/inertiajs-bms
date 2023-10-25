@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('title');
             $table->float('bet_rate');
             $table->boolean('is_hide')->default(false);
+            $table->boolean('active')->default(true);
             $table->boolean('is_win')->default(false);
             $table->boolean('is_loss')->default(false);
             $table->boolean('status')->default(true);

@@ -25,7 +25,7 @@ use Inertia\Inertia;
 
 Route::get('/', function () {
     $games = Game::get();
-    $matches = Matche::with('questions')->with('questions.options')->orderBy('id','desc')->get();
+    $matches = Matche::with('questions')->with('questions.options')->where('is_hide',1)->orderBy('id','desc')->get();
 
     return Inertia::render('HomePage', [
         'canLogin' => Route::has('login'),

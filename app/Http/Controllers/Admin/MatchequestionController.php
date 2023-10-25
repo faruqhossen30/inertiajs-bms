@@ -124,4 +124,31 @@ class MatchequestionController extends Controller
 
         return redirect()->route('matche.index');
     }
+    public function hideToggle($id)
+    {
+        $matchQuestion = MatcheQuestion::firstWhere('id', $id);
+        $update = $matchQuestion->update([
+            'is_hide' => !$matchQuestion->is_hide,
+        ]);
+
+        return to_route('matche.index');
+    }
+    public function activeToggle($id)
+    {
+        $matchQuestion = MatcheQuestion::firstWhere('id', $id);
+        $update = $matchQuestion->update([
+            'active' => !$matchQuestion->active,
+        ]);
+
+        return to_route('matche.index');
+    }
+    public function areaHideToggle($id)
+    {
+        $matchQuestion = MatcheQuestion::firstWhere('id', $id);
+        $update = $matchQuestion->update([
+            'area_hide' => !$matchQuestion->area_hide,
+        ]);
+
+        return to_route('matche.index');
+    }
 }

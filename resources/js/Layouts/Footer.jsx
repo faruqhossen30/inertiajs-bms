@@ -1,5 +1,6 @@
 import { Menu } from '@headlessui/react'
-import { BanknotesIcon, ClipboardIcon, HomeIcon, UserIcon, WalletIcon } from '@heroicons/react/24/solid'
+import { HomeModernIcon, ListBulletIcon, UserCircleIcon } from '@heroicons/react/24/outline'
+import { BanknotesIcon, ClipboardIcon, HomeIcon, UserIcon, UsersIcon, WalletIcon } from '@heroicons/react/24/solid'
 import { Link, usePage } from '@inertiajs/react'
 import React from 'react'
 
@@ -8,19 +9,19 @@ export default function Footer() {
     return (
         <footer className='md:hidden grid grid-cols-5 border-t-2 border-black dark:border-gray-600 text-xs text-white dark:text-gray-200 bg-purple-800 dark:bg-gray-700 inset-x-0 bottom-0 fixed pt-1'>
             <Link href={route('homepage')} className='col-span-1 flex flex-col items-center'>
-                <HomeIcon className="h-4 hover:bg-gray-200 hover:dark:bg-gray-50 text-white dark:text-gray-400" />
+                <HomeModernIcon className="h-4 hover:bg-gray-200 hover:dark:bg-gray-50 text-white dark:text-gray-400" />
                 <span>Home</span>
             </Link>
             <Link href='/profile' className='col-span-1 flex flex-col items-center'>
-                <WalletIcon className="h-4 hover:bg-gray-200 hover:dark:bg-gray-50 text-white dark:text-gray-400" />
-                <span>Wallet</span>
+                <UserIcon className="h-4 hover:bg-gray-200 hover:dark:bg-gray-50 text-white dark:text-gray-400" />
+                <span>Profile</span>
             </Link>
             <Link href='/deposit' className='col-span-1 flex flex-col items-center'>
                 <BanknotesIcon className="h-4 hover:bg-gray-200 hover:dark:bg-gray-50 text-white dark:text-gray-400" />
                 <span>Deposite</span>
             </Link>
             <Link href={route('statement')} className='col-span-1 flex flex-col items-center'>
-                <ClipboardIcon className="h-4 hover:bg-gray-200 hover:dark:bg-gray-50 text-white dark:text-gray-400" />
+                <WalletIcon className="h-4 hover:bg-gray-200 hover:dark:bg-gray-50 text-white dark:text-gray-400" />
                 <span>Statement</span>
             </Link>
             {/* <Link href='/statement' className='col-span-1 flex flex-col items-center'>
@@ -31,7 +32,7 @@ export default function Footer() {
             <div className="hs-dropdown relative inline-flex">
 
                 <button id="hs-dropdown-with-icons" type="button" className="hs-dropdown-toggle pl-2 inline-flex justify-center items-center  align-middle  transition-all col-span-1 flex-col">
-                    <UserIcon className="h-4 hover:bg-gray-200 hover:dark:bg-gray-50 text-white dark:text-gray-400" />
+                    <UserCircleIcon className="h-4 hover:bg-gray-200 hover:dark:bg-gray-50 text-white dark:text-gray-400" />
                     <span>Account</span>
                 </button>
 

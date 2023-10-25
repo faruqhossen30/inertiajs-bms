@@ -10,7 +10,9 @@ export default function AppLayout({ children }) {
         <>
             <Header />
             <LogoutModal/>
+            <div className="mb-12 md:mb-0">
             {children}
+            </div>
             <Footer />
         </>
     );

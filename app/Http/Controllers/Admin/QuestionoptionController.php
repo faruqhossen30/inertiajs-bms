@@ -104,4 +104,26 @@ class QuestionoptionController extends Controller
         QuestionOption::firstWhere('id',$id)->delete();
         return redirect()->back();
     }
+
+    public function activeToggle($id)
+    {
+        $questionOption = QuestionOption::firstWhere('id', $id);
+
+        $update = $questionOption->update([
+            'active' => !$questionOption->active,
+        ]);
+
+        return to_route('matche.index');
+    }
+
+    public function hideToggle($id)
+    {
+        $questionOption = QuestionOption::firstWhere('id', $id);
+
+        $update = $questionOption->update([
+            'is_hide' => !$questionOption->is_hide,
+        ]);
+
+        return to_route('matche.index');
+    }
 }

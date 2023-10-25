@@ -71,7 +71,7 @@ class MatcheController extends Controller
             'date_time' => $request->date_time,
             'game_id' => $request->game_id,
             'note' => $request->note,
-            'status' => $request->status,
+            'status' => $request->status
         ];
         $matche = Matche::create($data);
 
@@ -206,5 +206,33 @@ class MatcheController extends Controller
             'status' => !$match->status,
         ]);
         return redirect()->back();
+    }
+    public function isHideToggle($id)
+    {
+        $match = Matche::firstWhere('id', $id);
+
+        $update = $match->update([
+            'is_hide' => !$match->is_hide,
+        ]);
+        return to_route('matche.index');
+    }
+
+    public function areHideToggle($id)
+    {
+        $match = Matche::firstWhere('id', $id);
+
+        $update = $match->update([
+            'area_hide' => !$match->area_hide,
+        ]);
+        return to_route('matche.index');
+    }
+    public function activeToggle($id)
+    {
+        $match = Matche::firstWhere('id', $id);
+
+        $update = $match->update([
+            'active' => !$match->active,
+        ]);
+        return to_route('matche.index');
     }
 }

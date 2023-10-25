@@ -36,7 +36,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','admin']], function (
 
     Route::resource('autoquestion', AutoquestionController::class);
     Route::resource('autooption', AutooptionController::class);
+    // Matche Option
     Route::resource('option', QuestionoptionController::class);
+    Route::get('option/activetoggle/{id}', [QuestionoptionController::class, 'activeToggle'])->name('option.activetoggle');
+    Route::get('option/hidetoggle/{id}', [QuestionoptionController::class, 'hideToggle'])->name('option.hidetoggle');
     // Users
     Route::resource('user', UserController::class);
     Route::resource('team', TeamController::class);
@@ -45,6 +48,14 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','admin']], function (
 
     // Matche
     Route::resource('matche', MatcheController::class);
+    Route::get('matche/ishide/{id}', [MatcheController::class, 'isHideToggle'])->name('matchehidetoggle');
+    Route::get('matche/areahide/{id}', [MatcheController::class, 'areHideToggle'])->name('matchearehidetoggle');
+    Route::get('matche/activetoggle/{id}', [MatcheController::class, 'activeToggle'])->name('matcheactivetoggle');
+
+
+
+
+
     Route::resource('bet', BetController::class);
     Route::get('bet/betlist/option/{id}', [BetlistController::class, 'index'])->name('admin.betlist');
 
@@ -59,6 +70,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','admin']], function (
 
     Route::get('/matchequestion/{id}/edit', [MatchequestionController::class, 'edit'])->name('matchequestion.edit');
     Route::put('/matchequestion/{id}/edit', [MatchequestionController::class, 'update'])->name('matchequestion.update');
+    Route::get('/matchequestion/hidetoggle/{id}', [MatchequestionController::class, 'hideToggle'])->name('matchequestion.hidetoggle');
+    Route::get('/matchequestion/activetoggle/{id}', [MatchequestionController::class, 'activeToggle'])->name('matchequestion.activetoggle');
+    Route::get('/matchequestion/areahidetoggle/{id}', [MatchequestionController::class, 'areaHideToggle'])->name('matchequestion.areahidetoggle');
 
    // Settings
    Route::get('/settings', [SettingController::class, 'settingPage'])->name('admin.settings');

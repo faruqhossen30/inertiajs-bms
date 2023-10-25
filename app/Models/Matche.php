@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Matche extends Model
 {
     use HasFactory;
-    protected $fillable = ['team_one', 'team_two', 'team_one_flag', 'team_two_flag', 'statement', 'game_id', 'date_time', 'note','is_hide','active','status'];
+    protected $fillable = ['team_one', 'team_two', 'team_one_flag', 'team_two_flag', 'statement', 'game_id', 'date_time', 'note','is_hide','area_hide','active','status'];
 
     protected $casts = [
         'date_time' => 'datetime'

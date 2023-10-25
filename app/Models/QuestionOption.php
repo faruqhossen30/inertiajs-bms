@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class QuestionOption extends Model
 {
     use HasFactory;
-    protected $fillable = ['matche_id', 'matche_question_id', 'title', 'bet_rate', 'is_hide', 'is_win', 'is_loss', 'status'];
+    protected $fillable = ['matche_id', 'matche_question_id', 'title', 'bet_rate', 'is_hide','active', 'is_win', 'is_loss', 'status'];
 
     public function optionbet(){
         return $this->hasMany(Bet::class,'option_id', 'id');

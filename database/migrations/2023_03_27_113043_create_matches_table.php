@@ -24,6 +24,7 @@ return new class extends Migration
             $table->timestamp('date_time');
             $table->string('note')->nullable();
             $table->boolean('is_hide')->default(false);
+            $table->boolean('area_hide')->default(false);
             $table->boolean('active')->default(false);
             $table->enum('status',['live','upcoming','close'])->default('upcoming');
             $table->timestamps();

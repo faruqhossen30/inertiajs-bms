@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class MatcheQuestion extends Model
 {
     use HasFactory;
-    protected $fillable = ['title', 'matche_id', 'is_hide', 'status'];
+    protected $fillable = ['title', 'matche_id', 'is_hide','area_hide','active', 'status'];
 
     public function options()
     {
