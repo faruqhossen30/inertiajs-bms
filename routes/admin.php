@@ -24,7 +24,7 @@ use Inertia\Inertia;
 Route::get('admin/login', [AuthenticatedSessionController::class, 'create'])->name('adminlogin');
 Route::post('admin/login', [AuthenticatedSessionController::class, 'store']);
 
-Route::group(['prefix' => 'admin', 'middleware' => ['auth','admin']], function () {
+Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function () {
     Route::get('/dashboard', function () {
         return Inertia::render('Admin/Dashboard');
     })->name('dashboard');
@@ -36,10 +36,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','admin']], function (
 
     Route::resource('autoquestion', AutoquestionController::class);
     Route::resource('autooption', AutooptionController::class);
-    // Matche Option
-    Route::resource('option', QuestionoptionController::class);
-    Route::get('option/activetoggle/{id}', [QuestionoptionController::class, 'activeToggle'])->name('option.activetoggle');
-    Route::get('option/hidetoggle/{id}', [QuestionoptionController::class, 'hideToggle'])->name('option.hidetoggle');
+
     // Users
     Route::resource('user', UserController::class);
     Route::resource('team', TeamController::class);
@@ -52,7 +49,19 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','admin']], function (
     Route::get('matche/areahide/{id}', [MatcheController::class, 'areHideToggle'])->name('matchearehidetoggle');
     Route::get('matche/activetoggle/{id}', [MatcheController::class, 'activeToggle'])->name('matcheactivetoggle');
 
+    // Matche Question
+    Route::get('matche/{id}/matchequestion/create', [MatchequestionController::class, 'create'])->name('matchequestion.create');
+    Route::post('matche/{id}/matchequestion/create', [MatchequestionController::class, 'store'])->name('matchequestion.store');
+    Route::get('/matchequestion/{id}/edit', [MatchequestionController::class, 'edit'])->name('matchequestion.edit');
+    Route::put('/matchequestion/{id}/edit', [MatchequestionController::class, 'update'])->name('matchequestion.update');
+    Route::get('/matchequestion/hidetoggle/{id}', [MatchequestionController::class, 'hideToggle'])->name('matchequestion.hidetoggle');
+    Route::get('/matchequestion/activetoggle/{id}', [MatchequestionController::class, 'activeToggle'])->name('matchequestion.activetoggle');
+    Route::get('/matchequestion/areahidetoggle/{id}', [MatchequestionController::class, 'areaHideToggle'])->name('matchequestion.areahidetoggle');
 
+    // Matche Option
+    Route::resource('option', QuestionoptionController::class);
+    Route::get('option/activetoggle/{id}', [QuestionoptionController::class, 'activeToggle'])->name('option.activetoggle');
+    Route::get('option/hidetoggle/{id}', [QuestionoptionController::class, 'hideToggle'])->name('option.hidetoggle');
 
 
 
@@ -64,17 +73,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','admin']], function (
     // Route::post('bet/option/start/{id}', [BetwinController::class, 'betStart'])->name('admin.betstart');
 
 
-    // Matche Question
-    Route::get('matche/{id}/matchequestion/create', [MatchequestionController::class, 'create'])->name('matchequestion.create');
-    Route::post('matche/{id}/matchequestion/create', [MatchequestionController::class, 'store'])->name('matchequestion.store');
 
-    Route::get('/matchequestion/{id}/edit', [MatchequestionController::class, 'edit'])->name('matchequestion.edit');
-    Route::put('/matchequestion/{id}/edit', [MatchequestionController::class, 'update'])->name('matchequestion.update');
-    Route::get('/matchequestion/hidetoggle/{id}', [MatchequestionController::class, 'hideToggle'])->name('matchequestion.hidetoggle');
-    Route::get('/matchequestion/activetoggle/{id}', [MatchequestionController::class, 'activeToggle'])->name('matchequestion.activetoggle');
-    Route::get('/matchequestion/areahidetoggle/{id}', [MatchequestionController::class, 'areaHideToggle'])->name('matchequestion.areahidetoggle');
 
-   // Settings
-   Route::get('/settings', [SettingController::class, 'settingPage'])->name('admin.settings');
-   Route::post('/setting/header-notice', [SettingController::class, 'headerNotice'])->name('admin.setting.headernotice');
+    // Settings
+    Route::get('/settings', [SettingController::class, 'settingPage'])->name('admin.settings');
+    Route::post('/setting/header-notice', [SettingController::class, 'headerNotice'])->name('admin.setting.headernotice');
 });

@@ -1,8 +1,10 @@
 
 import { Link } from '@inertiajs/react';
 import Switcher from '../Common/Switcher'
+import { useRef } from 'react';
 
 export default function Navbar() {
+
     return (
         <div className="sticky top-0 inset-x-0 z-20 bg-white border-y px-4 sm:px-6 md:px-8 dark:bg-gray-800 dark:border-gray-700">
             <div className="flex items-center py-2">
@@ -22,8 +24,15 @@ export default function Navbar() {
                 {/* <!-- ========== HEADER ========== --> */}
                 <nav className="max-w-7xl flex basis-full items-center w-full mx-auto" aria-label="Global">
                     <div className="mr-5 md:mr-8">
-                        <Link href={route('dashboard')} className="flex-none text-xl font-semibold dark:text-white"  aria-label="Brand">Brand</Link>
+                        <Link href={route('dashboard')} className="flex-none text-xl font-semibold dark:text-white" aria-label="Brand">Brand</Link>
                     </div>
+
+                    {/* <button ref={closebutton} type="button" className="w-8 h-8 inline-flex justify-center items-center gap-2 rounded-md border border-gray-200 text-gray-600 hover:text-gray-400 transition dark:border-gray-700" data-hs-overlay="#application-sidebar" aria-controls="application-sidebar" aria-label="Toggle navigation">
+                        <span className="sr-only">Close Sidebar</span>
+                        <svg className="w-3 h-3" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
+                        </svg>
+                    </button> */}
 
                     <div className="w-full flex items-center justify-end ml-auto sm:justify-between sm:gap-x-3 sm:order-3">
                         <div className="sm:hidden">
@@ -95,7 +104,7 @@ export default function Navbar() {
                                             Downloads
                                         </Link>
                                         <Link href={route('logout')} method="post" as="button"
-                                         className="flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300">
+                                            className="flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-4 h-6">
                                                 <path strokeLinecap="round" strokeLinejoin="round" d="M5.636 5.636a9 9 0 1012.728 0M12 3v9" />
                                             </svg>

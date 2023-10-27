@@ -130,6 +130,7 @@ class MatchequestionController extends Controller
         $update = $matchQuestion->update([
             'is_hide' => !$matchQuestion->is_hide,
         ]);
+        QuestionOption::where('matche_question_id',$id)->update(['is_hide'=>$matchQuestion->is_hide]);
 
         return to_route('matche.index');
     }
@@ -139,6 +140,7 @@ class MatchequestionController extends Controller
         $update = $matchQuestion->update([
             'active' => !$matchQuestion->active,
         ]);
+        QuestionOption::where('matche_question_id',$id)->update(['active'=>$matchQuestion->active]);
 
         return to_route('matche.index');
     }

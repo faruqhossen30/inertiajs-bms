@@ -40,7 +40,7 @@ class BetController extends Controller
 
         $checkQuestion = MatcheQuestion::where([
             'id' => $request->question_id,
-            'status' => 1
+            'active' => 1
         ])->first();
 
         if ($checkQuestion) {
@@ -89,9 +89,9 @@ class BetController extends Controller
                     'balance' =>  $club->balance,
                 ]);
             }
-            return to_route('matche.index');
+            return to_route('homepage');
         } else {
-            return to_route('matche.index');
+            return to_route('homepage');
         }
 
 

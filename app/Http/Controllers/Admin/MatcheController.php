@@ -27,8 +27,6 @@ class MatcheController extends Controller
             ->with(['questions.options.optionbet'])
             ->orderBy('created_at', 'desc')
             ->get();
-        // return $matches;
-        // return view('admin.matche.index', compact('matches'));
         return Inertia::render('Admin/Matche/Index',['matches'=>$matches]);
     }
 
@@ -214,6 +212,9 @@ class MatcheController extends Controller
         $update = $match->update([
             'is_hide' => !$match->is_hide,
         ]);
+
+        MatcheQuestion::where('matche_id', $id)->update(['is_hide'=>$match->is_hide]);
+        QuestionOption::where('matche_id', $id)->update(['is_hide'=>$match->is_hide]);
         return to_route('matche.index');
     }
 
@@ -233,6 +234,8 @@ class MatcheController extends Controller
         $update = $match->update([
             'active' => !$match->active,
         ]);
+        MatcheQuestion::where('matche_id', $id)->update(['active'=>$match->active]);
+        QuestionOption::where('matche_id', $id)->update(['active'=>$match->active]);
         return to_route('matche.index');
     }
 }

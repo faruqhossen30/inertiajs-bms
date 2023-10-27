@@ -1,5 +1,5 @@
 import { Disclosure } from '@headlessui/react';
-import { CalculatorIcon, CalendarIcon, ClockIcon, CloudArrowDownIcon } from '@heroicons/react/24/outline';
+import { CalculatorIcon, CalendarIcon, ClockIcon, CloudArrowDownIcon, LockClosedIcon } from '@heroicons/react/24/outline';
 import moment from 'moment';
 import React, { useState } from 'react'
 import BetNowModal from '../Modal/BetNowModal';
@@ -53,7 +53,16 @@ export default function Betlist({ matches }) {
                                                 question.options.map((option, index) => {
                                                     return (
                                                         <React.Fragment key={index}>
-                                                            {option.is_hide=='0' && <BetNowModal matche={match} question={question} option={option}/>}
+                                                            {(option.is_hide == '0' && option.active == '1') && <BetNowModal matche={match} question={question} option={option} />}
+                                                            {(option.is_hide == '0' && option.active == '0') &&
+                                                                <button type="button" className="col-span-2 border cursor-pointer dark:border-gray-700 flex justify-between m-1" data-hs-overlay="#hs-bet-lock-modal" >
+                                                                    <span className="flex font-normal p-1 dark:text-slate-100">
+                                                                        {option.active == '0' && <LockClosedIcon className="h-4 w-4" />}
+                                                                        {option.title}
+                                                                    </span>
+                                                                    <span className="bg-gray-300 dark:bg-gray-700 font-bold p-1 px-4 dark:text-slate-100">{option.bet_rate}</span>
+                                                                </button>
+                                                            }
                                                         </React.Fragment>
                                                     );
                                                 })

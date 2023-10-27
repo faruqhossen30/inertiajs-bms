@@ -1,5 +1,5 @@
 import { Dialog, Transition } from '@headlessui/react'
-import { CalendarIcon, ClockIcon, XCircleIcon } from '@heroicons/react/24/outline';
+import { CalendarIcon, ClockIcon, LockClosedIcon, XCircleIcon } from '@heroicons/react/24/outline';
 import { useForm } from '@inertiajs/react';
 import moment from 'moment';
 import React, { Fragment, useState } from 'react'
@@ -47,7 +47,10 @@ export default function BetNowModal({ matche, question, option }) {
     return (
         <React.Fragment>
             <div onClick={() => openModal()} className="col-span-2 border cursor-pointer dark:border-gray-700 flex justify-between m-1" data-hs-overlay={`#hs-small-modal-${option.id}`} >
-                <span className="font-normal p-1 dark:text-slate-100">{option.title}</span>
+                <span className="flex font-normal p-1 dark:text-slate-100">
+                    {option.active=='0' && <LockClosedIcon className="h-4 w-4"/>}
+                    {option.title}
+                    </span>
                 <span className="bg-gray-300 dark:bg-gray-700 font-bold p-1 px-4 dark:text-slate-100">{option.bet_rate}</span>
             </div>
             <Transition show={isOpen} as={Fragment}>
@@ -104,7 +107,7 @@ export default function BetNowModal({ matche, question, option }) {
                                             </li>
                                             <li className="inline-flex items-center gap-x-2 py-3 px-4 text-sm border text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg dark:border-gray-700 dark:text-gray-200">
                                                 <div className="flex items-center justify-between w-full">
-                                                    <span>{option.title}</span>
+                                                    <span> {option.title}</span>
                                                     <span>Rate : {option.bet_rate}</span>
                                                 </div>
                                             </li>
