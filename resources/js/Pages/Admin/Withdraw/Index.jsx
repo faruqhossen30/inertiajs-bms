@@ -1,6 +1,5 @@
-import CardDashboard from '@/Components/Admin/CardDashboard';
-import Pagination from '@/Components/Admin/Pagination';
 import Breadcum from '@/Components/Dashboard/Breadcum';
+import Pagination from '@/Components/Table/Pagination';
 import Table from '@/Components/Table/Table';
 import TBody from '@/Components/Table/TBody';
 import TH from '@/Components/Table/TH';
@@ -168,7 +167,7 @@ export default function Index({ auth, withdraws }) {
                                     </TBody>
                                 </Table>
                                 <hr />
-                                <Pagination links={withdraws.links} />
+                                <Pagination pagination={withdraws} links={withdraws.links} />
                             </div>
                         </div>
                     </div>

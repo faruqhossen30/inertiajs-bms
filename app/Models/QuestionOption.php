@@ -10,7 +10,7 @@ class QuestionOption extends Model
     use HasFactory;
     protected $fillable = ['matche_id', 'matche_question_id', 'title', 'bet_rate', 'is_hide','active', 'is_win', 'is_loss', 'status'];
 
-    public function optionbet(){
+    public function bets(){
         return $this->hasMany(Bet::class,'option_id', 'id');
     }
     public function question(){

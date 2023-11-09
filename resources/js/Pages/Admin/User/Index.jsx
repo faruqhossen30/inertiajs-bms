@@ -1,5 +1,6 @@
 import CardDashboard from '@/Components/Admin/CardDashboard';
 import Breadcum from '@/Components/Dashboard/Breadcum';
+import Pagination from '@/Components/Table/Pagination';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
 
@@ -164,18 +165,7 @@ export default function Index({ auth, users }) {
                                                     <td className="h-px w-px whitespace-nowrap">
                                                         <div className="px-6 py-2">
                                                             <div className="flex items-center gap-x-2">
-                                                                <svg className="w-5 h-5" width="400" height="248" viewBox="0 0 400 248" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                    <g clipPath="url(#clip05asd)">
-                                                                        <path d="M254 220.8H146V26.4H254V220.8Z" fill="#FF5F00" />
-                                                                        <path d="M152.8 123.6C152.8 84.2 171.2 49 200 26.4C178.2 9.2 151.4 0 123.6 0C55.4 0 0 =55.4 0 123.6C0 191.8 55.4 247.2 123.6 247.2C151.4 247.2 178.2 238 200 220.8C171.2 198.2 152.8 163 152.8 123.6Z" fill="#EB001B" />
-                                                                        <path d="M400 123.6C400 191.8 344.6 247.2 276.4 247.2C248.6 247.2 221.8 238 200 220.8C228.8 198.2 247.2 163 247.2 123.6C247.2 84.2 228.8 49 200 26.4C221.8 9.2 248.6 0 276.4 0C344.6 0 400 55.4 400 123.6Z" fill="#F79E1B" />
-                                                                    </g>
-                                                                    <defs>
-                                                                        <clipPath id="clip05asd">
-                                                                            <rect width="400" height="247.2" fill="white" />
-                                                                        </clipPath>
-                                                                    </defs>
-                                                                </svg>
+
                                                                 <span className="text-sm text-gray-600 dark:text-gray-400">017xxxxxxxx</span>
                                                             </div>
                                                         </div>
@@ -405,35 +395,8 @@ export default function Index({ auth, users }) {
                                 {/* <!-- End Table --> */}
 
                                 {/* <!-- Footer --> */}
-                                <div className="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-t border-gray-200 dark:border-gray-700">
-                                    <div className="max-w-sm space-y-3">
-                                        <select className="py-2 px-3 pr-9 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400">
-                                            <option>1</option>
-                                            <option>2</option>
-                                            <option>3</option>
-                                            <option>4</option>
-                                            <option>9</option>
-                                            <option>20</option>
-                                        </select>
-                                    </div>
-
-                                    <div>
-                                        <div className="inline-flex gap-x-2">
-                                            <button type="button" className="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800">
-                                                <svg className="w-3 h-3" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                                                    <path fillRule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
-                                                </svg>
-                                                Prev
-                                            </button>
-
-                                            <button type="button" className="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800">
-                                                Next
-                                                <svg className="w-3 h-3" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                                                    <path fillRule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
-                                                </svg>
-                                            </button>
-                                        </div>
-                                    </div>
+                                <div className="px-6 py-2 border-t border-gray-200 dark:border-gray-700">
+                                    <Pagination pagination={users} links={users.links} />
                                 </div>
                                 {/* <!-- End Footer --> */}
                             </div>

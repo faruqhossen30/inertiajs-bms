@@ -19,7 +19,7 @@ class Matche extends Model
     {
         return $this->hasMany(MatcheQuestion::class,'matche_id');
     }
-    public function matchbets()
+    public function bets()
     {
         return $this->hasMany(Bet::class,'matche_id', 'id');
     }

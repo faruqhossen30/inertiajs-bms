@@ -22,9 +22,9 @@ class MatcheController extends Controller
      */
     public function index()
     {
-        $matches = Matche::with(['questions', 'matchbets'])
-            ->with(['questions.options', 'questions.questionbet'])
-            ->with(['questions.options.optionbet'])
+        $matches = Matche::with(['questions', 'bets'])
+            ->with(['questions.options', 'questions.bets'])
+            ->with(['questions.options.bets'])
             ->orderBy('created_at', 'desc')
             ->get();
         return Inertia::render('Admin/Matche/Index',['matches'=>$matches]);

@@ -16,7 +16,7 @@ class MatcheQuestion extends Model
         return $this->hasMany(QuestionOption::class,'matche_question_id');
     }
 
-    public function questionbet(){
+    public function bets(){
         return $this->hasMany(Bet::class,'question_id', 'id');
     }
 

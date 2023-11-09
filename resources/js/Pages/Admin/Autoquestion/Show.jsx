@@ -1,5 +1,3 @@
-import CardDashboard from '@/Components/Admin/CardDashboard';
-import Pagination from '@/Components/Admin/Pagination';
 import Breadcum from '@/Components/Dashboard/Breadcum';
 import Input from '@/Components/Form/Input';
 import InputLabel from '@/Components/Form/InputLabel';

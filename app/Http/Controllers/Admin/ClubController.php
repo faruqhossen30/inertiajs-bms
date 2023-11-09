@@ -6,13 +6,13 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-
+use Inertia\Inertia;
 class ClubController extends Controller
 {
     public function index()
     {
         $clubs = User::where('is_club', true)->orderBy('balance', 'DESC')->paginate(15);
-        return view('admin.club.index', compact('clubs'));
+        return Inertia::render('Admin/Club/Index',['clubs'=>$clubs]);
     }
 
     /**
@@ -22,7 +22,7 @@ class ClubController extends Controller
      */
     public function create()
     {
-        return view('admin.club.create');
+        return Inertia::render('Admin/Club/Create');
     }
 
     /**
@@ -47,6 +47,8 @@ class ClubController extends Controller
             'name' => $request->name,
             'username' => $request->username,
             'password' => $request->password,
+            'mobile' => $request->mobile,
+            'email' => $request->email,
             'is_admin' => false,
             'is_club' => true,
             'is_user' => true,
@@ -55,11 +57,12 @@ class ClubController extends Controller
             'club_address' => $request->club_address,
             'club_commission' => $request->club_commission,
             'password' => Hash::make($request->password),
+            'is_super' => false,
             'status' => $request->status,
         ];
 
         User::create($data);
-        return redirect()->route('club.index');
+        return to_route('club.index');
     }
 
     /**
@@ -70,11 +73,8 @@ class ClubController extends Controller
      */
     public function show($id)
     {
-        //
         $club = User::firstWhere('id', $id);
-        $totalusers = User::where('club_id', $club->id)->count();
-        // return $club;
-        return view('admin.club.show', compact('club','totalusers'));
+        return Inertia::render('Admin/Club/Show',['club'=>$club]);
     }
 
     /**
@@ -86,7 +86,7 @@ class ClubController extends Controller
     public function edit($id)
     {
         $club = User::firstWhere('id', $id);
-        return view('admin.club.edit', compact('club'));
+        return Inertia::render('Admin/Club/Edit',['club'=>$club]);
     }
 
     /**
@@ -130,5 +130,7 @@ class ClubController extends Controller
      */
     public function destroy($id)
     {
+        $club = User::firstWhere('id', $id)->delete();
+        return to_route('club.index');
     }
 }

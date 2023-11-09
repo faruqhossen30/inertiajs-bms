@@ -1,6 +1,5 @@
-import CardDashboard from '@/Components/Admin/CardDashboard';
-import Pagination from '@/Components/Admin/Pagination';
 import Breadcum from '@/Components/Dashboard/Breadcum';
+import Pagination from '@/Components/Table/Pagination';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { EyeDropperIcon, EyeIcon, HomeIcon, PencilIcon, TrashIcon } from '@heroicons/react/24/solid';
 import { Head } from '@inertiajs/react';
@@ -171,13 +170,8 @@ export default function Index({ auth, teams }) {
 
                                     </tbody>
                                 </table>
-                                {/* <!-- End Table --> */}
-
-                                {/* <!-- Footer --> */}
-                                <hr />
-                                <Pagination links={teams.links} />
-                                {/* <!-- End Footer --> */}
                             </div>
+                            <Pagination pagination={teams} links={teams.links} />
                         </div>
                     </div>
                 </div>

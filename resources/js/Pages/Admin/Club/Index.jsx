@@ -1,24 +1,22 @@
+import CardDashboard from '@/Components/Admin/CardDashboard';
 import Breadcum from '@/Components/Dashboard/Breadcum';
 import Pagination from '@/Components/Table/Pagination';
-import Table from '@/Components/Table/Table';
 import TBody from '@/Components/Table/TBody';
 import TH from '@/Components/Table/TH';
 import THead from '@/Components/Table/THead';
+import Table from '@/Components/Table/Table';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { CheckBadgeIcon, CheckIcon, EyeIcon, FunnelIcon, PencilIcon, TrashIcon, XCircleIcon } from '@heroicons/react/24/outline';
+import { CheckBadgeIcon, EyeIcon, PencilIcon, TrashIcon } from '@heroicons/react/24/outline';
 import { Head, Link } from '@inertiajs/react';
-import moment from 'moment/moment';
 
-export default function Index({ auth, deposits }) {
-    console.log(deposits);
+export default function Index({ auth, clubs }) {
     return (
         <AuthenticatedLayout
             user={auth.user}
         >
             <Head title="User List" />
-            <Breadcum page="deposits" />
+            <Breadcum page="clubs" />
             {/* <!-- Table Section --> */}
-
             <div className="max-w-[85rem] px-2 py-1 sm:px-6 lg:px-2 mx-auto">
                 {/* <!-- Card --> */}
                 <div className="flex flex-col">
@@ -43,35 +41,19 @@ export default function Index({ auth, deposits }) {
 
                                     <div className="sm:col-span-2 md:grow">
                                         <div className="flex justify-end gap-x-2">
-                                            <div className="hs-dropdown relative inline-block [--placement:bottom-right]" data-hs-dropdown-auto-close="inside">
-                                                <button id="hs-as-table-table-filter-dropdown" type="button" className="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800">
-                                                    <FunnelIcon className="h-4 w-4" />
-                                                    Filter
-                                                    <span className="pl-2 text-xs font-semibold text-blue-600 border-l border-gray-200 dark:border-gray-700 dark:text-blue-500">
-                                                        1
-                                                    </span>
-                                                </button>
-                                                <div className="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden divide-y divide-gray-200 min-w-[12rem] z-10 bg-white shadow-md rounded-lg mt-2 dark:divide-gray-700 dark:bg-gray-800 dark:border dark:border-gray-700" aria-labelledby="hs-as-table-table-filter-dropdown">
-                                                    <div className="divide-y divide-gray-200 dark:divide-gray-700">
-                                                        <label htmlFor="hs-as-filters-dropdown-all" className="flex py-2.5 px-3">
-                                                            <input type="checkbox" className="shrink-0 mt-0.5 border-gray-200 rounded text-blue-600 pointer-events-none focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" id="hs-as-filters-dropdown-all" />
-                                                            <span className="ml-3 text-sm text-gray-800 dark:text-gray-200">All</span>
-                                                        </label>
-                                                        <label htmlFor="hs-as-filters-dropdown-paid" className="flex py-2.5 px-3">
-                                                            <input type="checkbox" className="shrink-0 mt-0.5 border-gray-200 rounded text-blue-600 pointer-events-none focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" id="hs-as-filters-dropdown-paid" />
-                                                            <span className="ml-3 text-sm text-gray-800 dark:text-gray-200">Paid</span>
-                                                        </label>
-                                                        <label htmlFor="hs-as-filters-dropdown-pending" className="flex py-2.5 px-3">
-                                                            <input type="checkbox" className="shrink-0 mt-0.5 border-gray-200 rounded text-blue-600 pointer-events-none focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" id="hs-as-filters-dropdown-pending" />
-                                                            <span className="ml-3 text-sm text-gray-800 dark:text-gray-200">Pending</span>
-                                                        </label>
-                                                        <label htmlFor="hs-as-filters-dropdown-declined" className="flex py-2.5 px-3">
-                                                            <input type="checkbox" className="shrink-0 mt-0.5 border-gray-200 rounded text-blue-600 pointer-events-none focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" id="hs-as-filters-dropdown-declined" />
-                                                            <span className="ml-3 text-sm text-gray-800 dark:text-gray-200">Declined</span>
-                                                        </label>
-                                                    </div>
-                                                </div>
+                                            <div className="hs-dropdown relative inline-block [--placement:bottom-right]">
+
+
+                                                <Link href={route('club.create')} className="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border border-gray-300  font-semibold bg-white text-gray-700 align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800">
+                                                    <svg className="w-3 h-3" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                                        <path d="M2.63452 7.50001L13.6345 7.5M8.13452 13V2" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                                                    </svg>
+                                                   Add Clubs
+                                                </Link>
+
                                             </div>
+
+
                                         </div>
                                     </div>
                                 </div>
@@ -82,17 +64,15 @@ export default function Index({ auth, deposits }) {
                                     <THead>
                                         <TH title="S.N" />
                                         <TH title="Name" />
-                                        <TH title="Amount" />
-                                        <TH title="Method" />
-                                        <TH title="From" />
-                                        <TH title="To" />
+                                        <TH title="Username" />
+                                        <TH title="Mobile" />
+                                        <TH title="Balance" />
                                         <TH title="Status" />
-                                        <TH title="Time" />
                                         <TH title="Action" />
                                     </THead>
                                     <TBody>
                                         {
-                                            deposits.data.map((item, index) => {
+                                            clubs.data.map((item, index) => {
                                                 return <tr key={index}>
                                                     <td className="h-px w-px whitespace-nowrap">
                                                         <div className="px-6 py-2">
@@ -101,32 +81,27 @@ export default function Index({ auth, deposits }) {
                                                     </td>
                                                     <td className="h-px w-px whitespace-nowrap">
                                                         <div className="px-6 py-2">
-                                                            <span className="text-sm text-gray-600 dark:text-gray-400">{item.user.name}</span>
+                                                            <span className="text-sm text-gray-600 dark:text-gray-400">{item.name}</span>
                                                         </div>
                                                     </td>
                                                     <td className="h-px w-px whitespace-nowrap">
                                                         <div className="px-6 py-2">
-                                                            <span className="text-sm text-gray-600 dark:text-gray-400">{item.amount}</span>
+                                                            <span className="text-sm text-gray-600 dark:text-gray-400">{item.username}</span>
                                                         </div>
                                                     </td>
                                                     <td className="h-px w-px whitespace-nowrap">
                                                         <div className="px-6 py-2">
-                                                            <span className="text-sm text-gray-600 dark:text-gray-400">{item.amount}</span>
+                                                            <span className="text-sm text-gray-600 dark:text-gray-400">{item.mobile}</span>
                                                         </div>
                                                     </td>
                                                     <td className="h-px w-px whitespace-nowrap">
                                                         <div className="px-6 py-2">
                                                             <div className="flex items-center gap-x-2">
-                                                                <span className="text-sm text-gray-600 dark:text-gray-400">{item.amount}</span>
+                                                                <span className="text-sm text-gray-600 dark:text-gray-400">{item.balance}</span>
                                                             </div>
                                                         </div>
                                                     </td>
 
-                                                    <td className="h-px w-px whitespace-nowrap">
-                                                        <div className="px-6 py-2">
-                                                            <span className="text-sm text-gray-600 dark:text-gray-400">{item.amount}</span>
-                                                        </div>
-                                                    </td>
 
                                                     <td className="h-px w-px whitespace-nowrap">
                                                         {
@@ -148,17 +123,14 @@ export default function Index({ auth, deposits }) {
 
                                                     </td>
                                                     <td className="h-px w-px whitespace-nowrap">
-                                                        <div className="px-6 py-2">
-                                                            <span className="text-sm text-gray-600 dark:text-gray-400">{moment(item.created_at).calendar()}</span>
-                                                        </div>
-                                                    </td>
-                                                    <td className="h-px w-px whitespace-nowrap">
                                                         <div className="px-6 py-1.5 flex space-x-1">
-                                                            <Link href={route('deposit.show', item.id)}>
+                                                            <Link href={route('club.show', item.id)}>
                                                                 <EyeIcon className="h-6 hover:bg-gray-200 hover:dark:bg-gray-50 text-gray-500 dark:text-gray-400 border border-gray-600 dark:border-gray-400 rounded-sm shadow-sm p-1" />
                                                             </Link>
+                                                            <Link href={route('club.edit', item.id)}>
                                                             <PencilIcon className="h-6 hover:bg-gray-200 hover:dark:bg-gray-50 text-gray-500 dark:text-gray-400 border border-gray-600 dark:border-gray-400 rounded-sm shadow-sm p-1" />
-                                                            <TrashIcon className="h-6 hover:bg-gray-200 hover:dark:bg-gray-50 text-gray-500 dark:text-gray-400 border border-gray-600 dark:border-gray-400 rounded-sm shadow-sm p-1" />
+                                                            </Link>
+
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -167,7 +139,7 @@ export default function Index({ auth, deposits }) {
                                     </TBody>
                                 </Table>
                                 <hr />
-                                <Pagination pagination={deposits} links={deposits.links} />
+                                <Pagination pagination={clubs} links={clubs.links} />
                             </div>
                         </div>
                     </div>

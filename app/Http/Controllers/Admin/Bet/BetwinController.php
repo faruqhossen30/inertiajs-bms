@@ -16,8 +16,8 @@ class BetwinController extends Controller
         $option->update(['is_win' => 1]);
         $question = $option->question;
 
-        // return $option->optionbet;
-        foreach ($option->optionbet as $key => $bet) {
+        // return $option->bets;
+        foreach ($option->bets as $key => $bet) {
             $bet->update(['status' => BetstatusEnum::WIN]);
             $user = $bet->user;
             $addBalance = $user->increment('balance', $bet->return_amount);
@@ -41,8 +41,8 @@ class BetwinController extends Controller
         }
 
 
-        if (!empty($question->questionbet) &&  $question->questionbet->count()) {
-            foreach ($question->questionbet as $key => $bet) {
+        if (!empty($question->bets) &&  $question->bets->count()) {
+            foreach ($question->bets as $key => $bet) {
                 if ($bet->status == 'pending') {
                     $bet->update(['status' => 'loss']);
                 }

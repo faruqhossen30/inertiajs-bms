@@ -12,6 +12,6 @@ class BetlistController extends Controller
     public function index($id)
     {
         $bets = Bet::with('user')->where('option_id', $id)->paginate();
-        return Inertia::render('Admin/Bet/OptionBetlist',['bets'=>$bets]);
+        return Inertia::render('Admin/Bet/betslist',['bets'=>$bets]);
     }
 }

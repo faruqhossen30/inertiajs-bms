@@ -18,6 +18,7 @@ class TeamController extends Controller
     {
         $teams = Team::paginate(10);
         // return view('admin.team.index', compact('teams'));
+        // return $teams;
         return Inertia::render('Admin/Team/Index',['teams'=>$teams]);
         //
     }
