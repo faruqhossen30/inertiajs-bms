@@ -1,5 +1,6 @@
-import Pagination from '@/Components/Admin/Pagination';
+
 import Breadcum from '@/Components/Dashboard/Breadcum';
+import Pagination from '@/Components/Table/Pagination';
 import TBody from '@/Components/Table/TBody';
 import TH from '@/Components/Table/TH';
 import THead from '@/Components/Table/THead';
@@ -98,7 +99,7 @@ export default function DepositList({deposits}) {
                                     </TBody>
                                 </Table>
                                 <hr />
-                                <Pagination links={deposits.links} />
+                                <Pagination pagination={deposits} links={deposits.links} />
                             </div>
                         </div>
                     </div>

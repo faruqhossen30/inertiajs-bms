@@ -1,5 +1,5 @@
 import { Menu } from '@headlessui/react'
-import { HomeModernIcon, ListBulletIcon, UserCircleIcon } from '@heroicons/react/24/outline'
+import { HomeModernIcon, ListBulletIcon, PowerIcon, UserCircleIcon } from '@heroicons/react/24/outline'
 import { BanknotesIcon, ClipboardIcon, HomeIcon, UserIcon, UsersIcon, WalletIcon } from '@heroicons/react/24/solid'
 import { Link, usePage } from '@inertiajs/react'
 import React from 'react'
@@ -14,7 +14,7 @@ export default function Footer() {
             </Link>
             <Link href='/profile' className='col-span-1 flex flex-col items-center'>
                 <UserIcon className="h-4 hover:bg-gray-200 hover:dark:bg-gray-50 text-white dark:text-gray-400" />
-                <span>Profile</span>
+                <span>Wallate</span>
             </Link>
             <Link href='/deposit' className='col-span-1 flex flex-col items-center'>
                 <BanknotesIcon className="h-4 hover:bg-gray-200 hover:dark:bg-gray-50 text-white dark:text-gray-400" />
@@ -24,10 +24,6 @@ export default function Footer() {
                 <WalletIcon className="h-4 hover:bg-gray-200 hover:dark:bg-gray-50 text-white dark:text-gray-400" />
                 <span>Statement</span>
             </Link>
-            {/* <Link href='/statement' className='col-span-1 flex flex-col items-center'>
-                <UserIcon className="h-4 hover:bg-gray-200 hover:dark:bg-gray-50 text-white dark:text-gray-400" />
-                <span>Account</span>
-            </Link> */}
 
             <div className="hs-dropdown relative inline-flex">
 
@@ -40,8 +36,13 @@ export default function Footer() {
                     <div className="py-2 first:pt-0 last:pb-0">
                         {auth.user ?
                             <>
-                                <button className="flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300"  data-hs-overlay="#hs-sign-out-alert">
+
+                                <Link href='/profile' className="flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300" >
                                     <UserIcon className="h-4 text-gray-800 hover:dark:bg-gray-50  dark:text-gray-400" />
+                                    Profile
+                                </Link>
+                                <button className="flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300" data-hs-overlay="#hs-sign-out-alert">
+                                    <PowerIcon className="h-4 text-gray-800 hover:dark:bg-gray-50  dark:text-gray-400" />
                                     Logout
                                 </button>
                             </>

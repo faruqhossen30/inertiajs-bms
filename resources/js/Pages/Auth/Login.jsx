@@ -35,7 +35,7 @@ export default function Login({ status, canResetPassword }) {
             <main className="w-full max-w-lg mx-auto p-6">
                 <div className="mt-7 bg-white border border-gray-200 rounded-xl shadow-sm dark:bg-gray-800 dark:border-gray-700">
                     <div className="p-4 sm:p-7">
-                        <div className="flex justify-center">
+                        <div className="flex justify-center items-center">
                             <div>
                                 <Link href={route('homepage')}><img src="/logo.png" alt="" className='h-6 mx-auto' /></Link>
                             </div>

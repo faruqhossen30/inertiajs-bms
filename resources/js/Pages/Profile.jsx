@@ -41,23 +41,23 @@ export default function Profile({auth}) {
                 <div className='divide-y divide-gray-200 border dark:border-gray-400 dark:shadow-gray-700 dark:bg-gray-700'>
                     <div className='flex items-center justify-start space-x-2 p-2'>
                         <UserCircleIcon className="h-4 w-4" />
-                        <span>Name: Jamal</span>
+                        <span>Name: {auth.user.name}</span>
                     </div>
                     <div className='flex items-center justify-start space-x-2 p-2'>
                         <UsersIcon className="h-4 w-4" />
-                        <span>Username: user1</span>
+                        <span>Username: {auth.user.username}</span>
                     </div>
                     <div className='flex items-center justify-start space-x-2 p-2'>
                         <InboxIcon className="h-4 w-4" />
-                        <span>Email: email@gmial.com</span>
+                        <span>Email: {auth.user.email}</span>
                     </div>
                     <div className='flex items-center justify-start space-x-2 p-2'>
                         <DevicePhoneMobileIcon className="h-4 w-4" />
-                        <span>Mobile: 545454</span>
+                        <span>Mobile: {auth.user.mobile}</span>
                     </div>
                     <div className='flex items-center justify-start space-x-2 p-2'>
                         <UserGroupIcon className="h-4 w-4" />
-                        <span>CLub: 23234</span>
+                        <span>CLub: club</span>
                     </div>
                     <div className='flex items-center justify-start space-x-2 p-2'>
                         <UserGroupIcon className="h-4 w-4" />

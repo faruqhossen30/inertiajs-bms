@@ -1,5 +1,5 @@
-import Pagination from '@/Components/Admin/Pagination';
 import Breadcum from '@/Components/Dashboard/Breadcum';
+import Pagination from '@/Components/Table/Pagination';
 import TBody from '@/Components/Table/TBody';
 import TH from '@/Components/Table/TH';
 import THead from '@/Components/Table/THead';
@@ -97,7 +97,8 @@ export default function WithdrawList({ withdraws }) {
                                     </TBody>
                                 </Table>
                                 <hr />
-                                <Pagination links={withdraws.links} />
+                                {/* <Pagination links={withdraws.links} /> */}
+                                <Pagination pagination={withdraws} links={withdraws.links} />
                             </div>
                         </div>
                     </div>

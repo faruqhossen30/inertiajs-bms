@@ -2,9 +2,15 @@ import Breadcum from '@/Components/Dashboard/Breadcum';
 import Input from '@/Components/Form/Input';
 import InputLabel from '@/Components/Form/InputLabel';
 import SubmitButton from '@/Components/Form/SubmitButton';
+import TBody from '@/Components/Table/TBody';
+import TH from '@/Components/Table/TH';
+import THead from '@/Components/Table/THead';
+import Table from '@/Components/Table/Table';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+import { PlusIcon, QuestionMarkCircleIcon, ShieldCheckIcon } from '@heroicons/react/24/outline';
 import { EyeDropperIcon, EyeIcon, HomeIcon, PencilIcon, TrashIcon } from '@heroicons/react/24/solid';
 import { Head, Link, useForm } from '@inertiajs/react';
+import AutoquestionOptionEditModal from './AutoquestionOptionEditModal';
 
 export default function Show({ auth, question }) {
     console.log(question);
@@ -18,7 +24,15 @@ export default function Show({ auth, question }) {
     function submit(e) {
         e.preventDefault()
         console.log(data);
-        post(route('autooption.store'));
+        post(route('autooption.store'), {
+            onSuccess: () => {
+                var hoverElement = document.getElementsByClassName('hs-overlay-backdrop');
+                if (hoverElement.length > 0) {
+                    hoverElement[0].remove();
+                }
+            }
+        });
+
     }
 
     return (
@@ -26,34 +40,32 @@ export default function Show({ auth, question }) {
             user={auth.user}
         >
             <Head title="Autoquestion show" />
-            <Breadcum page="Auto Question" />
+            <Breadcum page="Auto Question" subpage="Show" />
             {/* <!-- Table Section --> */}
             <div className="bg-white dark:bg-gray-800 dark:text-slate-400 p-2 m-2">
                 <div className="bg-gray-50 divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
-                    <ul className="py-3 flex flex-col">
+                    <ul className="my-3 flex flex-col">
                         <li className="inline-flex items-center gap-x-3.5 py-3 px-4 text-sm font-medium bg-white border text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg dark:bg-gray-800 dark:border-gray-700 dark:text-white">
-                            <svg className="flex-none" width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-                                <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z" />
-                            </svg>
+                            <QuestionMarkCircleIcon className="h-4 w-4" />
                             Question : {question.title}
                         </li>
                         <li className="inline-flex items-center gap-x-3.5 py-3 px-4 text-sm font-medium bg-white border text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg dark:bg-gray-800 dark:border-gray-700 dark:text-white">
-                            <svg className="flex-none" width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-                                <path fillRule="evenodd" d="M7.646 10.854a.5.5 0 0 0 .708 0l2-2a.5.5 0 0 0-.708-.708L8.5 9.293V5.5a.5.5 0 0 0-1 0v3.793L6.354 8.146a.5.5 0 1 0-.708.708l2 2z" />
-                                <path d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773 16 11.569 14.502 13 12.687 13H3.781C1.708 13 0 11.366 0 9.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383zm.653.757c-.757.653-1.153 1.44-1.153 2.056v.448l-.445.049C2.064 6.805 1 7.952 1 9.318 1 10.785 2.23 12 3.781 12h8.906C13.98 12 15 10.988 15 9.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 4.825 10.328 3 8 3a4.53 4.53 0 0 0-2.941 1.1z" />
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-controller" viewBox="0 0 16 16">
+                                <path d="M11.5 6.027a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zm-1.5 1.5a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1zm2.5-.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zm-1.5 1.5a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1zm-6.5-3h1v1h1v1h-1v1h-1v-1h-1v-1h1v-1z" />
+                                <path d="M3.051 3.26a.5.5 0 0 1 .354-.613l1.932-.518a.5.5 0 0 1 .62.39c.655-.079 1.35-.117 2.043-.117.72 0 1.443.041 2.12.126a.5.5 0 0 1 .622-.399l1.932.518a.5.5 0 0 1 .306.729c.14.09.266.19.373.297.408.408.78 1.05 1.095 1.772.32.733.599 1.591.805 2.466.206.875.34 1.78.364 2.606.024.816-.059 1.602-.328 2.21a1.42 1.42 0 0 1-1.445.83c-.636-.067-1.115-.394-1.513-.773-.245-.232-.496-.526-.739-.808-.126-.148-.25-.292-.368-.423-.728-.804-1.597-1.527-3.224-1.527-1.627 0-2.496.723-3.224 1.527-.119.131-.242.275-.368.423-.243.282-.494.575-.739.808-.398.38-.877.706-1.513.773a1.42 1.42 0 0 1-1.445-.83c-.27-.608-.352-1.395-.329-2.21.024-.826.16-1.73.365-2.606.206-.875.486-1.733.805-2.466.315-.722.687-1.364 1.094-1.772a2.34 2.34 0 0 1 .433-.335.504.504 0 0 1-.028-.079zm2.036.412c-.877.185-1.469.443-1.733.708-.276.276-.587.783-.885 1.465a13.748 13.748 0 0 0-.748 2.295 12.351 12.351 0 0 0-.339 2.406c-.022.755.062 1.368.243 1.776a.42.42 0 0 0 .426.24c.327-.034.61-.199.929-.502.212-.202.4-.423.615-.674.133-.156.276-.323.44-.504C4.861 9.969 5.978 9.027 8 9.027s3.139.942 3.965 1.855c.164.181.307.348.44.504.214.251.403.472.615.674.318.303.601.468.929.503a.42.42 0 0 0 .426-.241c.18-.408.265-1.02.243-1.776a12.354 12.354 0 0 0-.339-2.406 13.753 13.753 0 0 0-.748-2.295c-.298-.682-.61-1.19-.885-1.465-.264-.265-.856-.523-1.733-.708-.85-.179-1.877-.27-2.913-.27-1.036 0-2.063.091-2.913.27z" />
                             </svg>
                             Game: {question.game_name}
                         </li>
                         <li className="inline-flex items-center gap-x-3.5 py-3 px-4 text-sm font-medium bg-white border text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg dark:bg-gray-800 dark:border-gray-700 dark:text-white">
-                            <svg className="flex-none" width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-                                <path d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1h8zm-7.978-1A.261.261 0 0 1 7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002a.274.274 0 0 1-.014.002H7.022zM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0zM6.936 9.28a5.88 5.88 0 0 0-1.23-.247A7.35 7.35 0 0 0 5 9c-4 0-5 3-5 4 0 .667.333 1 1 1h4.216A2.238 2.238 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816zM4.92 10A5.493 5.493 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275zM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0zm3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z" />
-                            </svg>
+                            <ShieldCheckIcon className="h-4 w-4" />
                             Status: {question.status}
                         </li>
                     </ul>
                 </div>
+                <AutoquestionOptionEditModal question={question}  />
                 <div>
                     <button type="button" className="py-2 px-2 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800" data-hs-overlay="#hs-basic-modal">
+                        <PlusIcon className="h-4 w-4" />
                         Add Option
                     </button>
 
@@ -104,43 +116,73 @@ export default function Show({ auth, question }) {
                         </div>
                     </div>
                 </div>
-                <div className="flex flex-col">
-                    <div className="-m-1.5 overflow-x-auto">
-                        <div className="p-1.5 min-w-full inline-block align-middle">
-                            <div className="overflow-hidden">
-                                <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">S.N</th>
-                                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Option</th>
-                                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Rate</th>
-                                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
-                                            <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase">Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
-
-                                        {
-                                            question.options.map((item, index) => {
-                                                return <tr key={index}>
-                                                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">{index+1}</td>
-                                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">{item.title}</td>
-                                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">{item.bet_rate}</td>
-                                                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">{item.status}</td>
-                                                    <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                                        <a className="text-blue-500 hover:text-blue-700" href="#">Delete</a>
-                                                    </td>
-                                                </tr>
-                                            })
-                                        }
 
 
-                                    </tbody>
-                                </table>
+                <div className="max-w-[85rem] px-2 py-1 sm:px-6 lg:px-2 mx-auto">
+                    {/* <!-- Card --> */}
+                    <div className="flex flex-col">
+                        <div className="-m-1.5 overflow-x-auto">
+                            <div className="p-1.5 min-w-full inline-block align-middle">
+                                <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden dark:bg-slate-900 dark:border-gray-700">
+
+                                    <Table>
+                                        <THead>
+                                            <TH title="S.N" />
+                                            <TH title="Option" />
+                                            <TH title="Rate" />
+                                            <TH title="Status" />
+                                            <TH title="Action" />
+                                        </THead>
+                                        <TBody>
+                                            {
+                                                question.options.map((item, index) => {
+                                                    return <tr key={index}>
+                                                        <td className="h-px w-px whitespace-nowrap">
+                                                            <div className="px-6 py-2">
+                                                                <span className="text-sm text-gray-600 dark:text-gray-400">{index + 1}</span>
+                                                            </div>
+                                                        </td>
+                                                        <td className="h-px w-px whitespace-nowrap">
+                                                            <div className="px-6 py-2">
+                                                                <span className="text-sm text-gray-600 dark:text-gray-400">{item.title}</span>
+                                                            </div>
+                                                        </td>
+
+                                                        <td className="h-px w-px whitespace-nowrap">
+                                                            <div className="px-6 py-2">
+                                                                <span className="text-sm text-gray-600 dark:text-gray-400">{item.bet_rate}</span>
+                                                            </div>
+                                                        </td>
+                                                        <td className="h-px w-px whitespace-nowrap">
+                                                            <div className="px-6 py-2">
+                                                                <span className="text-sm text-gray-600 dark:text-gray-400">{item.status}</span>
+                                                            </div>
+                                                        </td>
+                                                        <td className="h-px w-px whitespace-nowrap">
+                                                            <div className="px-6 py-1.5 flex space-x-1">
+                                                                {/* <Link href={route('autoquestion.show', item.id)}>
+                                                                <EyeIcon className="h-6 hover:bg-gray-200 hover:dark:bg-gray-50 text-gray-500 dark:text-gray-400 border border-gray-600 dark:border-gray-400 rounded-sm shadow-sm p-1" />
+                                                            </Link> */}
+                                                                <button data-hs-overlay="#hs-basic-autoquestionoptionedit">
+                                                                    <PencilIcon className="h-6 hover:bg-gray-200 hover:dark:bg-gray-50 text-gray-500 dark:text-gray-400 border border-gray-600 dark:border-gray-400 rounded-sm shadow-sm p-1" />
+                                                                </button>
+                                                                <Link href={route('autooption.destroy', item.id)} method="DELETE" as="button">
+                                                                    <TrashIcon className="h-6 hover:bg-gray-200 hover:dark:bg-gray-50 text-gray-500 dark:text-gray-400 border border-gray-600 dark:border-gray-400 rounded-sm shadow-sm p-1" />
+                                                                </Link>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                })
+                                            }
+                                        </TBody>
+                                    </Table>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    {/* <!-- End Card --> */}
                 </div>
+
             </div>
 
 

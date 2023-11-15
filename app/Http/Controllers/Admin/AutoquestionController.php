@@ -140,6 +140,7 @@ class AutoquestionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $question = AutoQuestion::firstWhere('id',$id)->delete();
+        return to_route('autoquestion.index');
     }
 }

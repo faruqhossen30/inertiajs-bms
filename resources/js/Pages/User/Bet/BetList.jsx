@@ -1,5 +1,6 @@
-import Pagination from '@/Components/Admin/Pagination';
+
 import Breadcum from '@/Components/Dashboard/Breadcum';
+import Pagination from '@/Components/Table/Pagination';
 import TBody from '@/Components/Table/TBody';
 import TH from '@/Components/Table/TH';
 import THead from '@/Components/Table/THead';
@@ -31,6 +32,7 @@ export default function BetList({bets}) {
                                         <TH title="Question" />
                                         <TH title="Answer" />
                                         <TH title="Amount" />
+                                        <TH title="Rate" />
                                         <TH title="Commission" />
                                         <TH title="Win / Loss" />
                                         <TH title="Time" />
@@ -69,6 +71,11 @@ export default function BetList({bets}) {
                                                     </td>
                                                     <td className="h-px w-px whitespace-nowrap">
                                                         <div className="px-6 py-2">
+                                                            <span className="text-sm text-gray-600 dark:text-gray-400">{item.bet_rate}</span>
+                                                        </div>
+                                                    </td>
+                                                    <td className="h-px w-px whitespace-nowrap">
+                                                        <div className="px-6 py-2">
                                                             <span className="text-sm text-gray-600 dark:text-gray-400">{item.return_amount}</span>
                                                         </div>
                                                     </td>
@@ -89,7 +96,7 @@ export default function BetList({bets}) {
                                     </TBody>
                                 </Table>
                                 <hr />
-                                <Pagination links={bets.links} />
+                                <Pagination pagination={bets} links={bets.links} />
                             </div>
                         </div>
                     </div>

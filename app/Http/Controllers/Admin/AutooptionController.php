@@ -77,6 +77,7 @@ class AutooptionController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        AutoOption::firstWhere('id', $id)->delete();
+        return to_route('autooption.index');
     }
 }

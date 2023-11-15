@@ -26,9 +26,7 @@ export default function Index({ auth, matches }) {
     }
 
     return (
-        <AuthenticatedLayout
-            user={auth.user}
-        >
+        <AuthenticatedLayout user={auth.user} >
             <Head title="Matche List" />
             <div className="flex justify-between items-center px-2">
                 <Breadcum page="Matche List" />
@@ -50,7 +48,7 @@ export default function Index({ auth, matches }) {
                                     matches.map((matche, index) => {
                                         return <div key={index} className="hs-accordion-group space-y-1 bg-white dark:bg-slate-900">
                                             <div className="hs-accordion active border border-gray-400 text-gray-600 dark:text-gray-400" id="hs-basic-no-arrow-heading-one">
-                                                <div className="hs-accordion-toggle cursor-pointer hs-accordion-active:text-blue-600 group py-3 inline-flex items-center gap-x-3 w-full font-semibold text-left text-gray-800 transition hover:text-gray-500 dark:hs-accordion-active:text-blue-500 dark:text-gray-200 dark:hover:text-gray-400" aria-controls="hs-basic-no-arrow-collapse-one p-2">
+                                                <div className="hs-accordion-toggle cursor-pointer hs-accordion-active:text-blue-600 group py-3 inline-flex items-center gap-x-3 w-full font-semibold text-left text-gray-800 transition hover:text-gray-500 dark:hs-accordion-active:text-blue-500 dark:text-gray-200 dark:hover:text-gray-400 px-2" aria-controls="hs-basic-no-arrow-collapse-one">
                                                     <div>
                                                         <Squares2X2Icon className="h-8 w-8 text-gray-600 dark:text-gray-400" />
                                                     </div>
@@ -65,7 +63,7 @@ export default function Index({ auth, matches }) {
                                                                 }
                                                             </span>
                                                         </span>
-                                                        <span className="text-sm text-gray-600 dark:text-gray-400 flex space-x-3">
+                                                        <span className="text-sm text-gray-600 dark:text-gray-400 flex space-x-3 items-center">
                                                             <CalendarIcon className="h-4 w-4" />  {moment(matche.date_time).format('LL')} <ClockIcon className="w-4 h-4" /> {moment(matche.date_time).format('LT')}
                                                         </span>
 
@@ -176,7 +174,7 @@ export default function Index({ auth, matches }) {
                                                                         </span>
                                                                     </div>
                                                                 </div>
-                                                                {question.area_hide =='0' &&
+                                                                {question.area_hide == '0' &&
                                                                     <div>
                                                                         <Table>
                                                                             <THead>
@@ -314,7 +312,9 @@ export default function Index({ auth, matches }) {
                                                                                     <td colSpan={2} className="h-px w-px whitespace-nowrap">
                                                                                         <div className="px-6 py-2">
                                                                                             <span className="text-sm text-gray-600 dark:text-gray-400">
-                                                                                                <span className="inline-flex items-center gap-1.5 py-1 px-3 text-xs font-medium bg-red-500 text-white">Restart</span>
+                                                                                                <Link href={route('admin.betrestart', question.id)} method="post" as="button">
+                                                                                                    <span className="inline-flex items-center gap-1.5 py-1 px-3 text-xs font-medium bg-red-500 text-white">Restart</span>
+                                                                                                </Link>
                                                                                             </span>
                                                                                         </div>
                                                                                     </td>

@@ -8,7 +8,7 @@ import BetModal from '../Modal/BetModal';
 export default function Betlist({ matches }) {
     return (
         <div className='col-span-12 lg:col-span-7 px-1'>
-            <div className="bg-purple-800 dark:bg-gray-700 dark:text-slate-100">
+            <div className="bg-gradient-to-b from-violet-700 to-purple-900 dark:bg-gray-700 dark:text-slate-100">
                 <h4 className="text-white dark:text-slate-100 font-bold p-1 text-center ">Live Match</h4>
             </div>
             {/* <BetNowModal isOpen={isOpen} setIsOpen={setIsOpen} /> */}

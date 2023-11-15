@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Admin\AutooptionController;
 use App\Http\Controllers\Admin\AutoquestionController;
 use App\Http\Controllers\Admin\Bet\BetlistController;
+use App\Http\Controllers\Admin\Bet\BetresetController;
 use App\Http\Controllers\Admin\Bet\BetwinController;
 use App\Http\Controllers\Admin\BetController;
 use App\Http\Controllers\Admin\ClubController;
@@ -75,6 +76,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
     Route::get('bet/betlist/option/{id}', [BetlistController::class, 'index'])->name('admin.betlist');
 
     Route::post('bet/option/win/{id}', [BetwinController::class, 'betWin'])->name('admin.betwin');
+    Route::post('bet/option/restart/{id}', [BetresetController::class, 'questionRestart'])->name('admin.betrestart');
     // Route::post('bet/option/stop/{id}', [BetwinController::class, 'betStop'])->name('admin.betstop');
     // Route::post('bet/option/start/{id}', [BetwinController::class, 'betStart'])->name('admin.betstart');
 
