@@ -4,7 +4,7 @@ import TableBody from './TBody'
 
 export default function Table(props) {
     return (
-        <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+        <table className="max-w-max lg:min-w-full divide-y divide-gray-200 dark:divide-gray-700">
             {props.children}
         </table>
     )

@@ -1,10 +1,14 @@
 <?php
 
+use App\Http\Controllers\User\BalancetransferController;
 use App\Http\Controllers\User\BetController;
+use App\Http\Controllers\User\ClubController;
 use App\Http\Controllers\User\DepositController;
+use App\Http\Controllers\User\PasswordController;
 use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\User\StatementController;
 use App\Http\Controllers\User\TransactionController;
+use App\Http\Controllers\User\WalletController;
 use App\Http\Controllers\User\WithdrawController;
 use App\Models\Game;
 use App\Models\Matche;
@@ -51,6 +55,16 @@ Route::middleware('auth')->group(function () {
 
     Route::get('profile', [ProfileController::class, 'index'])->name('profile');
     Route::get('statement', [StatementController::class, 'index'])->name('statement');
+    Route::get('wallet', [WalletController::class, 'index'])->name('wallet');
+
+    Route::get('change-password', [PasswordController::class, 'index'])->name('changepassword');
+    Route::post('change-password', [PasswordController::class, 'update'])->name('changepassword');
+
+    Route::get('change-club', [ClubController::class, 'index'])->name('changeclub');
+    Route::post('change-club', [ClubController::class, 'update'])->name('changeclub');
+
+    Route::get('balance-transfer', [BalancetransferController::class, 'index'])->name('blancetransfer');
+    Route::post('balance-transfer', [BalancetransferController::class, 'update'])->name('blancetransfer');
 });
 
 require __DIR__.'/auth.php';

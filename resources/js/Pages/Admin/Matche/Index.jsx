@@ -22,7 +22,6 @@ export default function Index({ auth, matches }) {
     function openModal(questionData) {
         setQdata(questionData);
         setIsOpen(true);
-        // console.log(question);
     }
 
     return (
@@ -121,9 +120,10 @@ export default function Index({ auth, matches }) {
                                                     matche.questions.map((question, index) => {
                                                         return <div key={index} id="hs-basic-no-arrow-collapse-one" className="hs-accordion-content w-full overflow-auto transition-[height] duration-300" aria-labelledby="hs-basic-no-arrow-heading-one">
                                                             <div className="m-2 border border-gray-100">
-                                                                <div className="flex items-center bg-gray-100 dark:bg-gray-800 p-2 space-x-1">
+                                                                <div className="bg-gray-100 dark:bg-gray-800 p-2">
                                                                     <h6>{question.title}</h6>
                                                                     <div className="space-x-1">
+                                                                        <OptionModal question={question} />
                                                                         <QuestionEditModal question={question} />
                                                                         {question.active == '1' ?
                                                                             <Link href={route('matchequestion.activetoggle', question.id)} className="py-0.5 px-2 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-purple-500 text-white hover:bg-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
@@ -154,7 +154,7 @@ export default function Index({ auth, matches }) {
 
 
 
-                                                                        <OptionModal question={question} />
+
                                                                         <Link href='#' className="py-0.5 px-2 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-purple-500 text-white hover:bg-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
                                                                             Delete
                                                                         </Link>
@@ -175,7 +175,7 @@ export default function Index({ auth, matches }) {
                                                                     </div>
                                                                 </div>
                                                                 {question.area_hide == '0' &&
-                                                                    <div>
+                                                                    <div className="overflow-x-auto">
                                                                         <Table>
                                                                             <THead>
                                                                                 <TH title="S.N" />
@@ -184,7 +184,6 @@ export default function Index({ auth, matches }) {
                                                                                 <TH title="Bet" />
                                                                                 <TH title="Amount" />
                                                                                 <TH title="Return" />
-                                                                                <TH title="Limit" />
                                                                                 <TH title="Action" />
                                                                             </THead>
                                                                             <TBody>
@@ -238,11 +237,7 @@ export default function Index({ auth, matches }) {
                                                                                                 </div>
                                                                                             </td>
 
-                                                                                            <td className="h-px w-px whitespace-nowrap">
-                                                                                                <div className="px-6 py-2">
-                                                                                                    <span className="text-sm text-gray-600 dark:text-gray-400">0</span>
-                                                                                                </div>
-                                                                                            </td>
+
 
                                                                                             <td className="space-x-1">
                                                                                                 {

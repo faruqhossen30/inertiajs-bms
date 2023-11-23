@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('password');
             $table->unsignedBigInteger('club_id')->nullable();
             $table->unsignedBigInteger('sponser_id')->nullable();
+            $table->string('sponser')->nullable();
             // other
             $table->boolean('is_admin')->default(false);
             $table->boolean('is_club')->default(false);

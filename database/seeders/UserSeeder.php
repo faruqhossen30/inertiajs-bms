@@ -33,6 +33,18 @@ class UserSeeder extends Seeder
             'name' => 'Club Holder',
             'username' => 'club',
             'email' => 'club@gmail.com',
+            'mobile' => '221545',
+            'is_admin' => false,
+            'is_user' => false,
+            'is_club' => true,
+            'club_commission' => 2,
+            'password' => Hash::make('123')
+        ]);
+
+        User::create([
+            'name' => 'Superstar Club',
+            'username' => 'superstar',
+            'email' => 'superstar@gmail.com',
             'mobile' => '453434',
             'is_admin' => false,
             'is_user' => false,

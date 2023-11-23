@@ -9,7 +9,7 @@ export default function StatementCard({title,icon}) {
             </div>
             {/* End Icon */}
             <div className="mt-3">
-                <h3 className="text-sm sm:text-base sm:text-lg font-semibold text-gray-800 dark:text-gray-400">
+                <h3 className="text-sm sm:text-base font-semibold text-gray-800 dark:text-gray-400">
                     {title}
                 </h3>
             </div>

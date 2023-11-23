@@ -21,8 +21,8 @@ class RegisteredUserController extends Controller
      */
     public function create(): Response
     {
-        $clubs = User::where('is_club',1)->get();
-        return Inertia::render('Auth/Register',['clubs'=>$clubs]);
+        $clubs = User::where('is_club', 1)->get();
+        return Inertia::render('Auth/Register', ['clubs' => $clubs]);
     }
 
     /**
@@ -34,12 +34,18 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'username' => 'required|string|max:255|unique:'.User::class,
-            'email' => 'required|string|email|max:255|unique:'.User::class,
-            'mobile' => 'required|string|max:255|unique:'.User::class,
+            'username' => 'required|string|max:255|unique:' . User::class,
+            'email' => 'required|string|email|max:255|unique:' . User::class,
+            'mobile' => 'required|string|max:255|unique:' . User::class,
             'club_id' => 'required',
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
+        $sponsor = User::where('username', $request->sponser)->first();
+        $sponsorId = null;
+
+        if ($sponsor !== null) {
+            $sponsorId = $sponsor->id;
+        }
 
         $user = User::create([
             'name' => $request->name,
@@ -47,6 +53,8 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'mobile' => $request->mobile,
             'club_id' => $request->club_id,
+            'sponser_id' => $sponsorId,
+            'sponser' => $request->sponser,
             'password' => Hash::make($request->password),
         ]);
 

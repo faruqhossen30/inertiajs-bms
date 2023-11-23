@@ -7,10 +7,10 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
 
-class StatementController extends Controller
+class WalletController extends Controller
 {
     public function index(Request $request):Response
     {
-        return Inertia::render('Statement');
+        return Inertia::render('Wallet');
     }
 }

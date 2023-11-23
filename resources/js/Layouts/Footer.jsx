@@ -1,5 +1,5 @@
 import { Menu } from '@headlessui/react'
-import { HomeModernIcon, ListBulletIcon, PowerIcon, UserCircleIcon } from '@heroicons/react/24/outline'
+import { HomeModernIcon, ListBulletIcon, PowerIcon, QueueListIcon, UserCircleIcon } from '@heroicons/react/24/outline'
 import { BanknotesIcon, ClipboardIcon, HomeIcon, UserIcon, UsersIcon, WalletIcon } from '@heroicons/react/24/solid'
 import { Link, usePage } from '@inertiajs/react'
 import React from 'react'
@@ -12,8 +12,8 @@ export default function Footer() {
                 <HomeModernIcon className="h-4 hover:bg-gray-200 hover:dark:bg-gray-50 text-white dark:text-gray-400" />
                 <span>Home</span>
             </Link>
-            <Link href='/profile' className='col-span-1 flex flex-col items-center'>
-                <UserIcon className="h-4 hover:bg-gray-200 hover:dark:bg-gray-50 text-white dark:text-gray-400" />
+            <Link href={route('wallet')} className='col-span-1 flex flex-col items-center'>
+                <WalletIcon className="h-4 hover:bg-gray-200 hover:dark:bg-gray-50 text-white dark:text-gray-400" />
                 <span>Wallate</span>
             </Link>
             <Link href='/deposit' className='col-span-1 flex flex-col items-center'>
@@ -21,7 +21,7 @@ export default function Footer() {
                 <span>Deposite</span>
             </Link>
             <Link href={route('statement')} className='col-span-1 flex flex-col items-center'>
-                <WalletIcon className="h-4 hover:bg-gray-200 hover:dark:bg-gray-50 text-white dark:text-gray-400" />
+                <QueueListIcon className="h-4 hover:bg-gray-200 hover:dark:bg-gray-50 text-white dark:text-gray-400" />
                 <span>Statement</span>
             </Link>
 

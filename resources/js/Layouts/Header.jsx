@@ -15,6 +15,7 @@ export default function Header() {
                     <>
                         <div className='hidden lg:block space-x-2'>
                             <Link href={route('profile')} className=' font-normal text-sm border rounded-sm text-purple-800 dark:text-gray-200 px-3 py-1'>Profile</Link>
+                            <Link href={route('wallet')} className=' font-normal text-sm border rounded-sm text-purple-800 dark:text-gray-200 px-3 py-1'>Wallet</Link>
                             <Link href={route('statement')} className=' font-normal text-sm border rounded-sm text-purple-800 dark:text-gray-200 px-3 py-1'>Statement</Link>
                             <Link href={route('depositform')} className=' font-normal text-sm border rounded-sm text-purple-800 dark:text-gray-200 px-3 py-1'>Deposit</Link>
                             <Link href={route('witdrawform')} className=' font-normal text-sm border rounded-sm text-purple-800 dark:text-gray-200 px-3 py-1'>Widthdray</Link>

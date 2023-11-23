@@ -12,6 +12,7 @@ export default function Register({clubs}) {
         email: '',
         mobile: '',
         club_id: '',
+        sponser: '',
         password: '',
         password_confirmation: '',
     });
@@ -89,6 +90,12 @@ export default function Register({clubs}) {
                                                 })}
                                         </select>
                                         <p className="text-xs text-red-600 mt-2">{errors.club_id}</p>
+                                    </div>
+
+                                    <div>
+                                        <InputLabel labelFor="sponser" />
+                                        <Input id="sponser" type="text" name="sponser" value={data.sponser} autoComplete="sponser" placeholder="sponser" onChange={(e) => setData('sponser', e.target.value)} />
+                                        <p className="text-xs text-red-600 mt-2">{errors.sponser}</p>
                                     </div>
 
 

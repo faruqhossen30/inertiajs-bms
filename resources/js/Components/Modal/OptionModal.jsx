@@ -38,7 +38,7 @@ export default function OptionModal({ question }) {
     return (
         <React.Fragment>
             <button onClick={() => openModal()} className="py-0.5 px-2 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-purple-500 text-white hover:bg-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
-                +
+                <span className="text-lg">+</span>
             </button>
 
             <Transition show={isOpen} as={Fragment}>
@@ -86,17 +86,6 @@ export default function OptionModal({ question }) {
                                                 <Input id="Bet Rate" type="number" name="bet_rate" value={data.bet_rate} autoComplete="bet_rate" placeholder="Enter Option" onChange={(e) => setData('bet_rate', e.target.value)} />
                                                 <p className="text-sm text-red-600 mt-2">{errors.bet_rate}</p>
                                             </div>
-
-                                            <div>
-                                                <InputLabel labelFor="status" />
-                                                <select id="status" name="status" className="py-3 px-4 pr-9 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
-                                                    onChange={(e) => setData('status', e.target.value)}>
-                                                    <option value="1">Yes</option>
-                                                    <option value="0">No</option>
-                                                </select>
-                                                <p className="text-sm text-red-600 mt-2">{errors.status}</p>
-                                            </div>
-
 
                                             <SubmitButton />
                                         </form>
