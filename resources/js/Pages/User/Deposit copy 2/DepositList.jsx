@@ -1,4 +1,3 @@
-import Pagination from '@/Components/Admin/Pagination';
 import Breadcum from '@/Components/Dashboard/Breadcum';
 import TBody from '@/Components/Table/TBody';
 import TH from '@/Components/Table/TH';

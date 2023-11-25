@@ -1,6 +1,5 @@
-import CardDashboard from '@/Components/Admin/CardDashboard';
-import Pagination from '@/Components/Admin/Pagination';
 import Breadcum from '@/Components/Dashboard/Breadcum';
+import Pagination from '@/Components/Table/Pagination';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { EyeDropperIcon, EyeIcon, HomeIcon, PencilIcon, TrashIcon } from '@heroicons/react/24/solid';
 import { Head, Link } from '@inertiajs/react';
@@ -156,7 +155,8 @@ export default function Index({ auth, questions }) {
 
                                 {/* <!-- Footer --> */}
                                 <hr />
-                                <Pagination links={questions.links} />
+                                <Pagination pagination={questions} links={questions.links} />
+
                                 {/* <!-- End Footer --> */}
                             </div>
                         </div>

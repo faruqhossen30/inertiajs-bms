@@ -1,14 +1,8 @@
-import CardDashboard from '@/Components/Admin/CardDashboard';
-import Pagination from '@/Components/Admin/Pagination';
 import Breadcum from '@/Components/Dashboard/Breadcum';
 import SubmitButton from '@/Components/Form/SubmitButton';
-import Table from '@/Components/Table/Table';
-import TBody from '@/Components/Table/TBody';
-import TH from '@/Components/Table/TH';
-import THead from '@/Components/Table/THead';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { CheckBadgeIcon, CheckIcon, EyeIcon, FunnelIcon, PencilIcon, TrashIcon, UserIcon, XCircleIcon } from '@heroicons/react/24/outline';
-import { Head, Link, useForm } from '@inertiajs/react';
+import { UserIcon } from '@heroicons/react/24/outline';
+import { Head, useForm } from '@inertiajs/react';
 import moment from 'moment';
 
 export default function Index({ auth, deposit }) {
