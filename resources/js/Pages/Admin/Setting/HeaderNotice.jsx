@@ -17,7 +17,7 @@ export default function HeaderNotice() {
     }
 
     return (
-        <div id="vertical-tab-with-border-2" className="hidden" role="tabpanel" aria-labelledby="vertical-tab-with-border-item-2">
+        <div id="vertical-tab-with-border-1" role="tabpanel" aria-labelledby="vertical-tab-with-border-item-1">
             <form onSubmit={submit}>
                 <div>
                     <label htmlFor="hs-feedback-post-comment-textarea-1" className="block mb-2 text-sm font-medium dark:text-white">Header Notice</label>

@@ -18,9 +18,9 @@ class AutoquestionController extends Controller
      */
     public function index()
     {
-        $questions = AutoQuestion::orderBy('id','desc')->paginate(50);
+        $questions = AutoQuestion::orderBy('id', 'desc')->paginate(50);
 
-        return Inertia::render('Admin/Autoquestion/Index',['questions'=>$questions]);
+        return Inertia::render('Admin/Autoquestion/Index', ['questions' => $questions]);
     }
 
     /**
@@ -31,7 +31,7 @@ class AutoquestionController extends Controller
     public function create()
     {
         $games = Game::get();
-        return Inertia::render('Admin/Autoquestion/Create',['games'=>$games]);
+        return Inertia::render('Admin/Autoquestion/Create', ['games' => $games]);
     }
 
     /**
@@ -51,16 +51,28 @@ class AutoquestionController extends Controller
 
         $game = Game::firstWhere('id', $request->game_id);
 
-       $question = AutoQuestion::create([
+        $question = AutoQuestion::create([
             'title' => $request->title,
             'game_id' => $request->game_id,
             'game_name' => $game->name,
             'status' => $request->status,
         ]);
 
+        if ($request->options) {
+            $arr = json_decode($request->options);
+            foreach ($arr as $option) {
+                AutoOption::create([
+                    'auto_question_id' => $question->id,
+                    'title'            => $option->option,
+                    'bet_rate'         => $option->rate,
+                    'status'           => 1
+                ]);
+            }
+        }
 
 
-        return to_route('dashboard');
+
+        return to_route('autoquestion.index');
     }
 
     /**
@@ -72,9 +84,9 @@ class AutoquestionController extends Controller
     public function show($id)
     {
         //
-        $question = AutoQuestion::with('options')->firstWhere('id',$id);
+        $question = AutoQuestion::with('options')->firstWhere('id', $id);
         // return $question;
-        return Inertia::render('Admin/Autoquestion/Show',['question'=>$question]);
+        return Inertia::render('Admin/Autoquestion/Show', ['question' => $question]);
     }
 
     /**
@@ -88,7 +100,7 @@ class AutoquestionController extends Controller
         $games = Game::get();
         $question = AutoQuestion::with('options')->firstWhere('id', $id);
         // return $question;
-        return view('admin.autoquestion.edit', compact('games','question'));
+        return view('admin.autoquestion.edit', compact('games', 'question'));
     }
 
     /**
@@ -109,14 +121,14 @@ class AutoquestionController extends Controller
             'option.*.bet_rate' => 'required'
         ]);
 
-       $update = AutoQuestion::firstWhere('id', $id)->update([
+        $update = AutoQuestion::firstWhere('id', $id)->update([
             'title' => $request->title,
             'game_id' => $request->game_id,
             'game_name' => 'some',
             'status' => $request->status,
         ]);
 
-        if($update){
+        if ($update) {
             AutoOption::where('auto_question_id', $id)->delete();
             foreach ($request->option as $key => $value) {
                 AutoOption::create([
@@ -140,7 +152,7 @@ class AutoquestionController extends Controller
      */
     public function destroy($id)
     {
-        $question = AutoQuestion::firstWhere('id',$id)->delete();
+        $question = AutoQuestion::firstWhere('id', $id)->delete();
         return to_route('autoquestion.index');
     }
 }

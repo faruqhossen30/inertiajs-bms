@@ -5,8 +5,6 @@ import InputLabel from '../Form/InputLabel'
 import Input from '../Form/Input'
 import { useForm } from '@inertiajs/react'
 import SubmitButton from '../Form/SubmitButton'
-import { useEffect } from 'react'
-import { PlusCircleIcon } from '@heroicons/react/24/outline'
 
 export default function OptionModal({ question }) {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -37,9 +35,12 @@ export default function OptionModal({ question }) {
     }
     return (
         <React.Fragment>
-            <button onClick={() => openModal()} className="py-0.5 px-2 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-purple-500 text-white hover:bg-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
-                <span className="text-lg">+</span>
-            </button>
+            {/* <button onClick={() => openModal()} className="py-0.5 px-2 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-purple-500 text-white hover:bg-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
+                <span className="text-sm">Option</span>
+            </button> */}
+            <button onClick={() => openModal()} type="button" className="py-1 px-3 inline-flex items-center gap-x-2 -ms-px first:rounded-s-lg first:ms-0 last:rounded-e-lg text-sm font-medium focus:z-10 border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-white dark:hover:bg-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
+        Option
+    </button>
 
             <Transition show={isOpen} as={Fragment}>
                 <Dialog as="div" className="relative z-10" onClose={closeModal}>

@@ -27,6 +27,7 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function () {
+    $header_notice = option('header_notice');
     $games = Game::get();
     $matches = Matche::with('questions')->with('questions.options')->where('is_hide',0)->orderBy('id','desc')->get();
 
@@ -35,6 +36,7 @@ Route::get('/', function () {
         'canRegister' => Route::has('register'),
         'games' => $games,
         'matches' => $matches,
+        'header_notice' => $header_notice,
     ]);
 })->name('homepage');
 

@@ -71,6 +71,7 @@ export default function Create({ games,countries }) {
                                             <InputLabel labelFor="Team One Flag" />
                                             <select id="team_one_flag" name="team_one_flag" className="py-3 px-4 pr-9 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
                                             onChange={(e) => setData('team_one_flag', e.target.value)}>
+                                                <option value="">Select Country</option>
                                                 {
                                                     countries.map((item, index) => {
                                                         return <option key={index} value={item.flag_url}>{item.name}</option>
@@ -84,6 +85,7 @@ export default function Create({ games,countries }) {
                                             <InputLabel labelFor="Team Two Flag" />
                                             <select id="team_two_flag" name="team_two_flag" className="py-3 px-4 pr-9 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
                                             onChange={(e) => setData('team_two_flag', e.target.value)}>
+                                                <option value="">Select Country</option>
                                                 {
                                                     countries.map((item, index) => {
                                                         return <option key={index} value={item.flag_url}>{item.name}</option>

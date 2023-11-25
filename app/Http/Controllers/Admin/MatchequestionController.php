@@ -58,18 +58,6 @@ class MatchequestionController extends Controller
             'status' => $request->status,
         ]);
 
-        if($request->options){
-            $arr = json_decode($request->options);
-            foreach($arr as $option){
-                QuestionOption::create([
-                    'matche_id'          => $request->matche_id,
-                    'matche_question_id' => $question->id,
-                    'title'              => $option->option,
-                    'bet_rate'           => $option->rate,
-                    // 'status'             => 1,
-                ]);
-            }
-        }
 
         return redirect()->route('matche.index');
     }
