@@ -5,6 +5,7 @@ import InputLabel from '../Form/InputLabel'
 import Input from '../Form/Input'
 import { useForm } from '@inertiajs/react'
 import SubmitButton from '../Form/SubmitButton'
+import { XCircleIcon } from '@heroicons/react/24/outline'
 
 export default function OptionModal({ question }) {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -22,13 +23,23 @@ export default function OptionModal({ question }) {
     function closeModal() {
         setIsOpen(false)
     }
+    function resetInput() {
+        setData({
+                matche_id: question.matche_id,
+                matche_question_id: question.id,
+                title: '',
+                bet_rate: '',
+                status: 1
+            });
+    }
 
     function submit(e) {
         e.preventDefault()
         console.log('data', data);
         post(route('option.store'), {
             onSuccess: () => {
-                closeModal();
+                // closeModal();
+                resetInput();
             }
         });
         console.log(errors);
@@ -38,12 +49,12 @@ export default function OptionModal({ question }) {
             {/* <button onClick={() => openModal()} className="py-0.5 px-2 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-purple-500 text-white hover:bg-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
                 <span className="text-sm">Option</span>
             </button> */}
-            <button onClick={() => openModal()} type="button" className="py-1 px-3 inline-flex items-center gap-x-2 -ms-px first:rounded-s-lg first:ms-0 last:rounded-e-lg text-sm font-medium focus:z-10 border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-white dark:hover:bg-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
-        Option
-    </button>
+            <button onClick={() => openModal()} type="button" className="py-1 px-3 inline-flex gap-x-2 -ms-px first:rounded-s-lg first:ms-0 last:rounded-e-lg text-sm font-medium focus:z-10 border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-white dark:hover:bg-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600 items-center">
+                Option
+            </button>
 
             <Transition show={isOpen} as={Fragment}>
-                <Dialog as="div" className="relative z-10" onClose={closeModal}>
+                <Dialog as="div" className="relative z-20" onClose={closeModal}>
                     <Transition.Child
                         as={Fragment}
                         enter="ease-out duration-300"
@@ -57,7 +68,7 @@ export default function OptionModal({ question }) {
                     </Transition.Child>
 
                     <div className="fixed inset-0 overflow-y-auto">
-                        <div className="flex min-h-full items-center justify-center p-4 text-center">
+                        <div className="flex justify-center p-4 text-center">
                             <Transition.Child
                                 as={Fragment}
                                 enter="ease-out duration-300"
@@ -70,9 +81,9 @@ export default function OptionModal({ question }) {
                                 <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-lg bg-white p-3 text-left align-middle shadow-xl transition-all">
                                     <Dialog.Title
                                         as="h3"
-                                        className="text-lg font-medium leading-6 text-gray-900"
+                                        className="text-lg font-medium leading-6 text-gray-900 flex items-center justify-between"
                                     >
-                                        {question.title} {question.matche_id}
+                                        {question.title} <button onClick={closeModal}><XCircleIcon className="wq-6 h-6 text-red-600" /></button>
                                     </Dialog.Title>
                                     <div className="py-2 overflow-y-auto">
                                         <form onSubmit={submit}>

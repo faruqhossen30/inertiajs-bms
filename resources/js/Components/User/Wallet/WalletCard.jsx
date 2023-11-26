@@ -12,7 +12,7 @@ export default function WalletCard({title,icon,routeName}) {
                     </div>
                     <div className="">
                         <h3 className="text-lg font-semibold text-gray-800 dark:text-white">{title}</h3>
-                        {/* <p class="mt-1 text-gray-600 dark:text-gray-400">Responsive, and mobile-first project </p> */}
+                        {/* <p className="mt-1 text-gray-600 dark:text-gray-400">Responsive, and mobile-first project </p> */}
                     </div>
                 </div>
                 <div>

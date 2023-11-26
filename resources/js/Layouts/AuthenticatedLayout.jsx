@@ -8,7 +8,7 @@ export default function Authenticated({ user, header, children }) {
     return (
         <div className="bg-gray-50 dark:bg-slate-900">
             <Sidebar />
-            <div className="w-full lg:pl-64">
+            <div className="w-full lg:pl-64 min-h-screen">
                 <Navbar />
                     {children}
             </div>

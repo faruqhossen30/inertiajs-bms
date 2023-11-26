@@ -9,7 +9,7 @@ import { CheckBadgeIcon, CheckIcon, EyeIcon, FunnelIcon, PencilIcon, TrashIcon, 
 import { Head, Link } from '@inertiajs/react';
 import moment from 'moment/moment';
 
-export default function betslist({ auth, bets }) {
+export default function OptionBetlist({ auth, bets }) {
     console.log(bets);
     return (
         <AuthenticatedLayout

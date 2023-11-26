@@ -1,3 +1,4 @@
+import OptionTableButtonGroup from '@/Components/Admin/Matche/OptionTableButtonGroup';
 import QuestionButtonGroup from '@/Components/Admin/Matche/QuestionButtonGroup';
 import Breadcum from '@/Components/Dashboard/Breadcum';
 import OptionModal from '@/Components/Modal/OptionModal';
@@ -7,7 +8,7 @@ import TH from '@/Components/Table/TH';
 import THead from '@/Components/Table/THead';
 import Table from '@/Components/Table/Table';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { CalendarIcon, ClockIcon, EllipsisVerticalIcon, PlusIcon, PlusSmallIcon, Square2StackIcon, Squares2X2Icon, SquaresPlusIcon } from '@heroicons/react/24/outline';
+import { CalendarIcon, ClockIcon, EllipsisVerticalIcon, PlusIcon, PlusSmallIcon, PuzzlePieceIcon, Square2StackIcon, Squares2X2Icon, SquaresPlusIcon } from '@heroicons/react/24/outline';
 import { EyeDropperIcon, EyeIcon, HomeIcon, PencilIcon, TrashIcon } from '@heroicons/react/24/solid';
 import { Head, Link, useForm } from '@inertiajs/react';
 import moment from 'moment';
@@ -43,7 +44,7 @@ export default function Index({ auth, matches }) {
                         matches.map((matche, index) => {
                             return <div key={index} className="hs-accordion-group space-y-1 bg-white dark:bg-slate-900">
                                 <div className="hs-accordion active border border-gray-400 text-gray-600 dark:text-gray-400" id="hs-basic-no-arrow-heading-one">
-                                    <div className="hs-accordion-toggle cursor-pointer hs-accordion-active:text-blue-600 group py-3 inline-flex items-center gap-x-3 w-full font-semibold text-left text-gray-800 transition hover:text-gray-500 dark:hs-accordion-active:text-blue-500 dark:text-gray-200 dark:hover:text-gray-400 px-2" aria-controls="hs-basic-no-arrow-collapse-one">
+                                    <div className="hs-accordion-toggle cursor-pointer hs-accordion-active:text-blue-600 group py-3 inline-flex items-center gap-x-1 w-full font-semibold text-left text-gray-800 transition hover:text-gray-500 dark:hs-accordion-active:text-blue-500 dark:text-gray-200 dark:hover:text-gray-400 px-1" aria-controls="hs-basic-no-arrow-collapse-one">
                                         <div>
                                             <Squares2X2Icon className="h-8 w-8 text-gray-600 dark:text-gray-400" />
                                         </div>
@@ -96,9 +97,6 @@ export default function Index({ auth, matches }) {
                                             Show Question
                                         </button>
 
-
-
-
                                         {
                                             matche.area_hide ?
                                                 <Link href={route('matchearehidetoggle', matche.id)} className="py-1 px-2 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-red-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
@@ -116,62 +114,14 @@ export default function Index({ auth, matches }) {
                                     </div>
                                     <hr />
                                     {matche.area_hide == '0' &&
-                                        matche.questions.map((question, index) => {
-                                            return <div key={index} id="hs-basic-no-arrow-collapse-one" className="hs-accordion-content w-full overflow-auto transition-[height] duration-300" aria-labelledby="hs-basic-no-arrow-heading-one">
-                                                <div className="border border-gray-100">
+
+                                        <div id="hs-basic-no-arrow-collapse-one" className="hs-accordion-content w-full overflow-auto transition-[height] duration-300" aria-labelledby="hs-basic-no-arrow-heading-one">
+                                            {matche.questions.map((question, index) => {
+                                                return <div className="border border-gray-100">
                                                     <div className="bg-gray-100 dark:bg-gray-800 p-2">
                                                         <h6>{question.title}</h6>
                                                         <QuestionButtonGroup question={question} />
                                                         <div className="space-x-1 space-y-1">
-                                                            {/* <OptionModal question={question} /> */}
-                                                            {/* <QuestionEditModal question={question} /> */}
-                                                            {question.active == '1' ?
-                                                                <Link href={route('matchequestion.activetoggle', question.id)} className="py-0.5 px-2 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-purple-500 text-white hover:bg-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
-                                                                    Active
-                                                                </Link> : <Link href={route('matchequestion.activetoggle', question.id)} className="py-0.5 px-2 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-red-500 text-white hover:bg-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
-                                                                    Stop
-                                                                </Link>
-
-
-                                                            }
-                                                            {question.is_hide ?
-                                                                <Link href={route('matchequestion.hidetoggle', question.id)} className="py-0.5 px-2 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-red-500 text-white hover:bg-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
-                                                                    Hide
-                                                                </Link>
-                                                                : <Link href={route('matchequestion.hidetoggle', question.id)} className="py-0.5 px-2 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-purple-500 text-white hover:bg-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
-                                                                    Show
-                                                                </Link>
-
-                                                            }
-                                                            {question.area_hide == '1' ?
-                                                                <Link href={route('matchequestion.areahidetoggle', question.id)} className="py-0.5 px-2 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-red-500 text-white hover:bg-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
-                                                                    Area Show
-                                                                </Link> :
-                                                                <Link href={route('matchequestion.areahidetoggle', question.id)} className="py-0.5 px-2 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-purple-500 text-white hover:bg-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
-                                                                    Area Hide
-                                                                </Link>
-                                                            }
-
-
-
-
-                                                            <Link href='#' className="py-0.5 px-2 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-purple-500 text-white hover:bg-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
-                                                                Delete
-                                                            </Link>
-                                                            <Link href='#' className="py-0.5 px-2 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-purple-500 text-white hover:bg-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
-                                                                Bids
-                                                            </Link>
-                                                            <span className="text-sm text-gray-600 dark:text-gray-400">
-                                                                Bet:
-                                                                {question.bets.length} ||
-                                                                <span className="px-1">TK :
-                                                                    {
-                                                                        question.bets.reduce((accumulator, object) => {
-                                                                            return accumulator + object.bet_amount;
-                                                                        }, 0)
-                                                                    }
-                                                                </span>
-                                                            </span>
                                                         </div>
                                                     </div>
                                                     {question.area_hide == '0' &&
@@ -237,50 +187,8 @@ export default function Index({ auth, matches }) {
                                                                                     </div>
                                                                                 </td>
 
-
-
-                                                                                <td className="flex space-x-1 max-w-[100px]">
-                                                                                    <div className="hs-dropdown relative inline-flex">
-                                                                                        <button id="hs-dropdown-custom-icon-trigger" type="button" className="hs-dropdown-toggle flex justify-center items-center w-9 h-9 text-sm font-semibold rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-white dark:hover:bg-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
-                                                                                            <EllipsisVerticalIcon className="h-4 w-4" />
-                                                                                        </button>
-
-                                                                                        <div className="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden min-w-[15rem] bg-white shadow-md rounded-lg p-2 mt-2 dark:bg-gray-800 dark:border dark:border-gray-700" aria-labelledby="hs-dropdown-custom-icon-trigger">
-                                                                                            <a className="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300 dark:focus:bg-gray-700" href="#">
-                                                                                                Newsletter
-                                                                                            </a>
-                                                                                            <a className="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300 dark:focus:bg-gray-700" href="#">
-                                                                                                Purchases
-                                                                                            </a>
-                                                                                            <a className="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300 dark:focus:bg-gray-700" href="#">
-                                                                                                Downloads
-                                                                                            </a>
-                                                                                            <a className="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300 dark:focus:bg-gray-700" href="#">
-                                                                                                Team Account
-                                                                                            </a>
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                    {
-                                                                                        option.is_win ?
-                                                                                            <span className="items-center py-1 px-2 rounded-full text-xs font-medium bg-green-500 text-white">Wined</span>
-                                                                                            : option.is_loss ?
-                                                                                                <span className="items-center py-1 px-2 rounded-full text-xs font-medium bg-red-500 text-white">Loss</span>
-                                                                                                :
-                                                                                                <Link href={route('admin.betwin', option.id)} method="post" as="button" className="items-center py-1 px-2 rounded-full text-xs font-medium bg-blue-500 text-white">Win</Link>
-                                                                                    }
-
-
-                                                                                    <Link href={route('admin.betlist', option.id)} className="items-center py-1 px-2 rounded-full text-xs font-medium bg-indigo-500 text-white">Bet</Link>
-                                                                                    {option.active ?
-                                                                                        <Link href={route('option.activetoggle', option.id)} className="items-center py-1 px-2 rounded-full text-xs font-medium bg-indigo-500 text-white">Active</Link>
-                                                                                        : <Link href={route('option.activetoggle', option.id)} className="items-center py-1 px-2 rounded-full text-xs font-medium bg-red-500 text-white">Stop</Link>
-                                                                                    }
-                                                                                    {option.is_hide ?
-                                                                                        <Link href={route('option.hidetoggle', option.id)} className="items-center py-1 px-2 rounded-full text-xs font-medium bg-red-500 text-white">Hide</Link>
-                                                                                        : <Link href={route('option.hidetoggle', option.id)} className="items-center py-1 px-2 rounded-full text-xs font-medium bg-indigo-500 text-white">Show</Link>
-                                                                                    }
-                                                                                    <span className="items-center py-1 px-2 rounded-full text-xs font-medium bg-indigo-500 text-white">Close</span>
+                                                                                <td className="flex space-x-1">
+                                                                                    <OptionTableButtonGroup option={option} />
                                                                                 </td>
                                                                             </tr>
                                                                         })
@@ -342,14 +250,10 @@ export default function Index({ auth, matches }) {
                                                         </div>
                                                     }
                                                 </div>
-                                            </div>
-                                        })
+                                            })}
+                                        </div>
                                     }
                                 </div>
-
-
-
-
                             </div>
                         })
                     }
@@ -359,12 +263,6 @@ export default function Index({ auth, matches }) {
 
             </div>
             {/* Card End */}
-
-
-
-
-
-
         </AuthenticatedLayout>
     );
 }
