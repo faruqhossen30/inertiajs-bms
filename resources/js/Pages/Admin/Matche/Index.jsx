@@ -117,7 +117,7 @@ export default function Index({ auth, matches }) {
 
                                         <div id="hs-basic-no-arrow-collapse-one" className="hs-accordion-content w-full overflow-auto transition-[height] duration-300" aria-labelledby="hs-basic-no-arrow-heading-one">
                                             {matche.questions.map((question, index) => {
-                                                return <div className="border border-gray-100">
+                                                return <div key={index} className="border border-gray-100">
                                                     <div className="bg-gray-100 dark:bg-gray-800 p-2">
                                                         <h6>{question.title}</h6>
                                                         <QuestionButtonGroup question={question} />

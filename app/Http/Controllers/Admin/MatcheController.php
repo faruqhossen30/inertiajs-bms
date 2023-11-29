@@ -234,8 +234,8 @@ class MatcheController extends Controller
         $update = $match->update([
             'active' => !$match->active,
         ]);
-        MatcheQuestion::where('matche_id', $id)->update(['active'=>$match->active]);
-        QuestionOption::where('matche_id', $id)->update(['active'=>$match->active]);
+        // MatcheQuestion::where('matche_id', $id)->update(['active'=>$match->active]);
+        // QuestionOption::where('matche_id', $id)->update(['active'=>$match->active]);
         return to_route('matche.index');
     }
 }

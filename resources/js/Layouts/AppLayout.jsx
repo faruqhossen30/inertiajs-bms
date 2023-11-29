@@ -9,7 +9,7 @@ export default function AppLayout({ children }) {
             <Header />
             <LogoutModal/>
             <BetLockModal/>
-            <div className="mb-12 md:mb-0">
+            <div className="mb-12 md:mb-0 dark:bg-gray-900 min-h-screen">
             {children}
             </div>
             <Footer />
