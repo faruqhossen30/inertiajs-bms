@@ -45,6 +45,10 @@ export default function Profile({auth}) {
                     </div>
                     <div className='flex items-center justify-start space-x-2 p-2'>
                         <UsersIcon className="h-4 w-4" />
+                        <span>ID: {auth.user.id}</span>
+                    </div>
+                    <div className='flex items-center justify-start space-x-2 p-2'>
+                        <UsersIcon className="h-4 w-4" />
                         <span>Username: {auth.user.username}</span>
                     </div>
                     <div className='flex items-center justify-start space-x-2 p-2'>

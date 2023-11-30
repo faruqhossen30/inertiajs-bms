@@ -29,7 +29,7 @@ export default function Login({ status, canResetPassword }) {
     };
 
     return (
-        <div className="my-auto">
+        <div className="my-auto bg-slate-100 dark:bg-slate-900 min-h-screen">
             <Head title="User Log in" />
 
             <main className="w-full max-w-lg mx-auto p-6">

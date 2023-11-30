@@ -3,8 +3,8 @@ import React from 'react'
 
 export default function Leftsidebar({games}) {
   return (
-    <div className='hidden lg:block lg:col-span-2 bg-white dark:bg-gray-900 border dark:border-gray-700'>
-            <div className="bg-gradient-to-b from-violet-700 to-purple-900 dark:bg-gray-700">
+    <div className='hidden lg:block lg:col-span-2 dark:bg-gray-900 border dark:border-gray-700'>
+            <div className="bg-gradient-to-b from-violet-700 to-purple-900 dark:from-slate-700 dark:to-slate-900 dark:bg-gray-700">
                 <h4 className="text-white font-bold p-1 text-center">Sports</h4>
             </div>
             <div className="flex flex-col space-y-1 divide-y divide-slate-200 dark:divide-gray-700">

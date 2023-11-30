@@ -8,7 +8,7 @@ import BetModal from '../Modal/BetModal';
 export default function Betlist({ matches }) {
     return (
         <div className='col-span-12 lg:col-span-7 px-1'>
-            <div className="bg-gradient-to-b from-violet-700 to-purple-900 dark:bg-gray-700 dark:text-slate-100">
+            <div className="bg-gradient-to-b from-violet-700 to-purple-900 dark:from-slate-700 dark:to-slate-900 dark:bg-gray-700 dark:text-slate-100">
                 <h4 className="text-white dark:text-slate-100 font-bold p-1 text-center ">Live Match</h4>
             </div>
             {/* <BetNowModal isOpen={isOpen} setIsOpen={setIsOpen} /> */}
@@ -53,12 +53,12 @@ export default function Betlist({ matches }) {
                                                 question.options.map((option, index) => {
                                                     return (
                                                         <React.Fragment key={index}>
-                                                            {(option.is_hide == '0' && option.active == '1') && <BetNowModal matche={match} question={question} option={option} />}
-                                                            {(option.is_hide == '0' && option.active == '0') &&
+                                                            {(option.is_hide == '0' && option.active == '1'  && match.active == '1') && <BetNowModal matche={match} question={question} option={option} />}
+                                                            {(option.is_hide == '0' && option.active == '0' || match.active == '0') &&
                                                                 <button type="button" className="col-span-2 border cursor-pointer dark:border-gray-700 flex justify-between m-1" data-hs-overlay="#hs-bet-lock-modal" >
                                                                     <span className="flex font-normal p-1 dark:text-slate-100">
-                                                                        {option.active == '0' && <LockClosedIcon className="h-4 w-4" />}
-                                                                        {option.title}
+                                                                        <LockClosedIcon className="h-4 w-4" />
+                                                                        {option.title} {match.active}
                                                                     </span>
                                                                     <span className="bg-gray-300 dark:bg-gray-700 font-bold p-1 px-4 dark:text-slate-100">{option.bet_rate}</span>
                                                                 </button>

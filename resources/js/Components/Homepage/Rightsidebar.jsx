@@ -4,7 +4,7 @@ import React from 'react'
 export default function Rightsidebar({matches}) {
   return (
     <div className='hidden lg:block lg:col-span-3'>
-            <div className="bg-gradient-to-b from-violet-700 to-purple-900">
+            <div className="bg-gradient-to-b from-violet-700 to-purple-900 dark:from-slate-700 dark:to-slate-900">
                 <h4 className="text-white font-bold p-1 text-center">Upcomming Match</h4>
             </div>
 

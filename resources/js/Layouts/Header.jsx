@@ -6,7 +6,7 @@ import React from 'react'
 export default function Header() {
     const { auth } = usePage().props
     return (
-        <header className='z-10 sticky top-0 flex items-center justify-between px-2 bg-white dark:bg-gray-700 shadow-md py-2'>
+        <header className='z-10 sticky top-0 flex items-center justify-between px-2 bg-slate-100 dark:bg-gray-700 shadow-md py-2'>
             <div>
                 <Link href={route('homepage')}><img src="/logo.png" alt="" className='h-6' /></Link>
             </div>
