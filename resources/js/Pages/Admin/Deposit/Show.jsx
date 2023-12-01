@@ -51,18 +51,33 @@ export default function Index({ auth, deposit }) {
                             <UserIcon className="h-4 w-4" />
                             Time : {moment(deposit.created_at).format('lll')}
                         </li>
-                    </ul>
-                    <form onSubmit={submit} className='text-md p-4 space-y-2'>
-                        <div className="">
-                            <label htmlFor="amount" className="block text-sm font-medium mb-2 dark:text-gray-400">Amount</label>
-                            <input
-                                value={data.amount} onChange={e => setData('amount', e.target.value)}
-                                type="number" id="amount" name="amount" className="py-2 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400" placeholder="1,000" />
-                            <p className="text-sm text-red-600 mt-2">{errors.amount}</p>
-                        </div>
+                        {
+                            deposit.status == '1' &&
+                            <li className="inline-flex items-center gap-x-3.5 py-3 px-4 text-sm font-medium bg-white border text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg dark:bg-gray-800 dark:border-gray-700 dark:text-white">
+                                <UserIcon className="h-4 w-4" />
+                                Status :  {deposit.status}
+                            </li>
 
-                        <SubmitButton title="Deposit" />
-                    </form>
+                        }
+                    </ul>
+                    {
+                        deposit.status == '0' &&
+
+                        <form onSubmit={submit} className='text-md p-4 space-y-2'>
+                            <div className="">
+                                <label htmlFor="amount" className="block text-sm font-medium mb-2 dark:text-gray-400">Amount</label>
+                                <input
+                                    value={data.amount} onChange={e => setData('amount', e.target.value)}
+                                    type="number" id="amount" name="amount" className="py-2 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400" placeholder="1,000" />
+                                <p className="text-sm text-red-600 mt-2">{errors.amount}</p>
+                            </div>
+
+                            <SubmitButton title="Deposit" />
+                        </form>
+
+
+                    }
+
 
                 </div>
             </div>

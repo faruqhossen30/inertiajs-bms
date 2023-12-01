@@ -80,6 +80,10 @@ class DepositController extends Controller
         $deposit = Deposit::firstWhere('id', $id);
 
 
+        if($deposit->status){
+            return abort(404);
+        }
+
         $update = $deposit->update([
             'amount' => $request->amount,
             'status' => true,

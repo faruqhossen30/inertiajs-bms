@@ -74,10 +74,23 @@ class BetController extends Controller
                 ]);
 
                 $club = User::firstWhere('id', $user->club_id);
+                $sponser = User::firstWhere('id', $user->sponser_id);
 
                 $clubCommission = ($club->club_commission / 100) * $request->bet_amount;
                 $addBalanceToClub = $club->increment('balance', $clubCommission);
                 $club->save();
+
+                if($sponser){
+                    $sponserCommission = (2 / 100) * $request->bet_amount;
+
+                    Transaction::create([
+                        'user_id' => $sponser->id,
+                        'debit' => 0,
+                        'credit' => $sponserCommission,
+                        'description' => "Sponser Commission",
+                        'balance' =>  $sponser->balance,
+                    ]);
+                }
 
                 // return $clubCommission;
 

@@ -20,11 +20,13 @@ export default function BetNowModal({ matche, question, option }) {
     });
 
     let [isOpen, setIsOpen] = useState(false)
+    let [submitButton, setSubmitButton] = useState(true)
     function openModal() {
         setIsOpen(true);
     }
-    function closeModal() {
+    function closeModal(){
         setIsOpen(false)
+        setSubmitButton(true);
     }
 
     function onClieAmount(val) {
@@ -36,10 +38,17 @@ export default function BetNowModal({ matche, question, option }) {
         console.log(data);
         post(route('betstore'), {
             onStart: () => {
+                setSubmitButton(false);
                 console.log('onStart');
+            },
+            onError: () => {
+                setSubmitButton(true);
+                console.log('onError');
             },
             onSuccess: () => {
                 closeModal();
+
+                console.log('onSuccess');
             }
         });
     }
@@ -48,9 +57,9 @@ export default function BetNowModal({ matche, question, option }) {
         <React.Fragment>
             <div onClick={() => openModal()} className="col-span-2 border cursor-pointer dark:border-gray-700 flex justify-between m-1" data-hs-overlay={`#hs-small-modal-${option.id}`} >
                 <span className="flex font-normal p-1 dark:text-slate-100">
-                    {option.active=='0' && <LockClosedIcon className="h-4 w-4"/>}
+                    {option.active == '0' && <LockClosedIcon className="h-4 w-4" />}
                     {option.title}
-                    </span>
+                </span>
                 <span className="bg-gray-300 dark:bg-gray-700 font-bold p-1 px-4 dark:text-slate-100">{option.bet_rate}</span>
             </div>
             <Transition show={isOpen} as={Fragment}>
@@ -143,7 +152,16 @@ export default function BetNowModal({ matche, question, option }) {
                                                     </div>
                                                     <p className="text-sm text-red-600 mt-2">{errors.bet_amount}</p>
                                                 </div>
-                                                <SubmitButton title="BET NOW !" />
+                                                {
+                                                    submitButton ?
+                                                        <SubmitButton title="BET NOW !" />
+                                                        : <button type="button" className="py-1 px-2 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
+                                                            <span className="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-white rounded-full" role="status" aria-label="loading"></span>
+                                                            Processing.
+                                                        </button>
+
+                                                }
+
                                             </form>
                                         </div>
                                     </div>
