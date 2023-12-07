@@ -129,27 +129,17 @@ export default function Index({ auth, deposits }) {
                                                     </td>
 
                                                     <td className="h-px w-px whitespace-nowrap">
-                                                        {
-                                                            item.status ?
-                                                                <div className="px-6 py-2">
-                                                                    <span className="inline-flex items-center gap-1.5 py-0.5 px-2 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">
-                                                                        <CheckBadgeIcon className="h-4 w-4" />
-                                                                        Active
-                                                                    </span>
-                                                                </div>
-                                                                :
-                                                                <div className="px-6 py-2">
-                                                                    <span className="inline-flex items-center gap-1.5 py-0.5 px-2 rounded-full text-xs font-medium bg-red-100 text-green-800 dark:bg-green-900 dark:text-red-200">
-                                                                        <XCircleIcon className="h-4 w-4" />
-                                                                        Pending
-                                                                    </span>
-                                                                </div>
-                                                        }
+                                                        <div className="px-6 py-2">
+                                                            <span className="inline-flex items-center gap-1.5 py-0.5 px-2 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">
+                                                                <CheckBadgeIcon className="h-4 w-4" />
+                                                                {item.status}
+                                                            </span>
+                                                        </div>
 
                                                     </td>
                                                     <td className="h-px w-px whitespace-nowrap">
                                                         <div className="px-6 py-2">
-                                                            <span className="text-sm text-gray-600 dark:text-gray-400">{moment(item.created_at).calendar()}</span>
+                                                            <span className="text-sm text-gray-600 dark:text-gray-400">{moment(item.created_at).format('LT- ll')}</span>
                                                         </div>
                                                     </td>
                                                     <td className="h-px w-px whitespace-nowrap">
@@ -157,8 +147,7 @@ export default function Index({ auth, deposits }) {
                                                             <Link href={route('deposit.show', item.id)}>
                                                                 <EyeIcon className="h-6 hover:bg-gray-200 hover:dark:bg-gray-50 text-gray-500 dark:text-gray-400 border border-gray-600 dark:border-gray-400 rounded-sm shadow-sm p-1" />
                                                             </Link>
-                                                            <PencilIcon className="h-6 hover:bg-gray-200 hover:dark:bg-gray-50 text-gray-500 dark:text-gray-400 border border-gray-600 dark:border-gray-400 rounded-sm shadow-sm p-1" />
-                                                            <TrashIcon className="h-6 hover:bg-gray-200 hover:dark:bg-gray-50 text-gray-500 dark:text-gray-400 border border-gray-600 dark:border-gray-400 rounded-sm shadow-sm p-1" />
+
                                                         </div>
                                                     </td>
                                                 </tr>

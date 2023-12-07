@@ -1,6 +1,7 @@
 import OptionTableButtonGroup from '@/Components/Admin/Matche/OptionTableButtonGroup';
 import QuestionButtonGroup from '@/Components/Admin/Matche/QuestionButtonGroup';
 import Breadcum from '@/Components/Dashboard/Breadcum';
+import OptionEditModal from '@/Components/Modal/OptionEditModal';
 import OptionModal from '@/Components/Modal/OptionModal';
 import QuestionEditModal from '@/Components/Modal/QuestionEditModal';
 import TBody from '@/Components/Table/TBody';
@@ -108,7 +109,7 @@ export default function Index({ auth, matches }) {
                                                 </Link>
                                         }
 
-                                        <Link href='#' className="py-1 px-2 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-red-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
+                                        <Link href={route('matche.destroy', matche.id)} method="Delete" as="button" className="py-1 px-2 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-red-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
                                             Delete
                                         </Link>
                                     </div>
@@ -152,7 +153,8 @@ export default function Index({ auth, matches }) {
                                                                                 </td>
                                                                                 <td className="">
                                                                                     <div className="px-2 py-2">
-                                                                                        <span className="text-sm text-gray-600 dark:text-gray-400">{option.bet_rate}</span>
+                                                                                        {/* <span className="text-sm text-gray-600 dark:text-gray-400">{option.bet_rate}</span> */}
+                                                                                        <OptionEditModal option={option} />
                                                                                     </div>
                                                                                 </td>
                                                                                 <td className="">

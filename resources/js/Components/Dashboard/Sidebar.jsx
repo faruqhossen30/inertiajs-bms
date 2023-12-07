@@ -1,4 +1,4 @@
-import { CurrencyBangladeshiIcon, HomeIcon, PauseCircleIcon, PuzzlePieceIcon, Squares2X2Icon, TrophyIcon, UserIcon, UsersIcon } from '@heroicons/react/24/outline';
+import { ArrowPathIcon, CurrencyBangladeshiIcon, HomeIcon, PauseCircleIcon, PuzzlePieceIcon, Squares2X2Icon, TrophyIcon, UserIcon, UsersIcon } from '@heroicons/react/24/outline';
 import { CogIcon } from '@heroicons/react/24/solid';
 import { Link } from '@inertiajs/react';
 
@@ -78,7 +78,7 @@ export default function Sidebar() {
                         </div>
                     </li>
 
-                    <li className="hs-accordion" id="account-accordion">
+                    <li className="hs-accordion" id="games-accordion">
                         <a className="hs-accordion-toggle flex items-center gap-x-3.5 py-2 px-2.5 hs-accordion-active:text-blue-600 hs-accordion-active:hover:bg-transparent text-sm text-slate-700 rounded-md hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-900 dark:text-slate-400 dark:hover:text-slate-300 dark:hs-accordion-active:text-white" >
                             <PuzzlePieceIcon className="h-4 w-4" />
                             Games & Teams
@@ -92,7 +92,7 @@ export default function Sidebar() {
                             </svg>
                         </a>
 
-                        <div id="account-accordion-sub" className="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 hidden">
+                        <div id="games-accordion-sub" className="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 hidden">
                             <ul className="pt-2 pl-2">
                                 <li>
                                     <Link href={route('game.index')} className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-md hover:bg-gray-100 dark:bg-gray-800 dark:text-slate-400 dark:hover:text-slate-300" >
@@ -108,6 +108,47 @@ export default function Sidebar() {
                                 <li>
                                     <Link href="/" className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-md hover:bg-gray-100 dark:bg-gray-800 dark:text-slate-400 dark:hover:text-slate-300" >
                                         Clubs
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link href="/" className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-md hover:bg-gray-100 dark:bg-gray-800 dark:text-slate-400 dark:hover:text-slate-300" >
+                                        Admins
+                                    </Link>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li className="hs-accordion" id="restore-accordion">
+                        <a className="hs-accordion-toggle flex items-center gap-x-3.5 py-2 px-2.5 hs-accordion-active:text-blue-600 hs-accordion-active:hover:bg-transparent text-sm text-slate-700 rounded-md hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-900 dark:text-slate-400 dark:hover:text-slate-300 dark:hs-accordion-active:text-white" >
+                            <ArrowPathIcon className="h-4 w-4" />
+                            Restore
+
+                            <svg className="hs-accordion-active:block ml-auto hidden w-3 h-3 text-gray-600 group-hover:text-gray-500 dark:text-gray-400" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M2 11L8.16086 5.31305C8.35239 5.13625 8.64761 5.13625 8.83914 5.31305L15 11" stroke="currentColor" strokeWidth="2" strokeLinecap="round"></path>
+                            </svg>
+
+                            <svg className="hs-accordion-active:hidden ml-auto block w-3 h-3 text-gray-600 group-hover:text-gray-500 dark:text-gray-400" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M2 5L8.16086 10.6869C8.35239 10.8637 8.64761 10.8637 8.83914 10.6869L15 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round"></path>
+                            </svg>
+                        </a>
+
+                        <div id="restore-accordion-sub" className="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 hidden">
+                            <ul className="pt-2 pl-2">
+                                <li>
+                                    <Link href={route('restore.matchelist')} className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-md hover:bg-gray-100 dark:bg-gray-800 dark:text-slate-400 dark:hover:text-slate-300" >
+                                        Matche Restore
+                                    </Link>
+                                </li>
+
+                                <li>
+                                    <Link href={route('restore.questionlist')} className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-md hover:bg-gray-100 dark:bg-gray-800 dark:text-slate-400 dark:hover:text-slate-300" >
+                                        Question Restore
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link href={route('restore.optionlist')} className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-md hover:bg-gray-100 dark:bg-gray-800 dark:text-slate-400 dark:hover:text-slate-300" >
+                                        Option Restore
                                     </Link>
                                 </li>
                                 <li>
@@ -154,6 +195,12 @@ export default function Sidebar() {
                         <Link href={route('transaction.index')} className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-md hover:bg-gray-100 dark:hover:bg-gray-900 dark:text-slate-400 dark:hover:text-slate-300" >
                             <CogIcon className="h-4 w-4" />
                             Transctions
+                        </Link>
+                    </li>
+                    <li>
+                        <Link href={route('admin.balancetransfer')} className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-md hover:bg-gray-100 dark:hover:bg-gray-900 dark:text-slate-400 dark:hover:text-slate-300" >
+                            <CogIcon className="h-4 w-4" />
+                            Blance Transfer
                         </Link>
                     </li>
 

@@ -190,8 +190,8 @@ class MatcheController extends Controller
     public function destroy($id)
     {
         Matche::firstWhere('id', $id)->delete();
-        MatcheQuestion::where('matche_id', $id)->delete();
-        QuestionOption::where('matche_id', $id)->delete();
+        // MatcheQuestion::where('matche_id', $id)->delete();
+        // QuestionOption::where('matche_id', $id)->delete();
         return to_route('matche.index');
     }
 

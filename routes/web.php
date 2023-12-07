@@ -6,6 +6,7 @@ use App\Http\Controllers\User\ClubController;
 use App\Http\Controllers\User\DepositController;
 use App\Http\Controllers\User\PasswordController;
 use App\Http\Controllers\User\ProfileController;
+use App\Http\Controllers\User\ReferralController;
 use App\Http\Controllers\User\StatementController;
 use App\Http\Controllers\User\TransactionController;
 use App\Http\Controllers\User\WalletController;
@@ -49,6 +50,7 @@ Route::middleware('auth')->group(function () {
     Route::get('withdraw/list', [WithdrawController::class, 'index'])->name('withdrawlist');
     Route::get('withdraw', [WithdrawController::class, 'withdrawForm'])->name('witdrawform');
     Route::post('withdraw', [WithdrawController::class, 'store'])->name('witdrawform.store');
+    Route::get('referral/list', [ReferralController::class, 'index'])->name('referrallist');
 
     Route::post('bet', [BetController::class, 'store'])->name('betstore');
     Route::get('bet/list', [BetController::class, 'index'])->name('betlist');

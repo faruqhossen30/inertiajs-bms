@@ -4,7 +4,7 @@ namespace App\Enum;
 enum BetstatusEnum:string{
     case WIN = 'win';
     case LOSS = 'loss';
-    case RETURN = 'return';
+    case REFUND = 'refund';
     case PENDING = 'pending';
     case OTHERS = 'others';
 }

@@ -1,11 +1,11 @@
 import StatementCard from '@/Components/Homepage/StatementCard'
 import AppLayout from '@/Layouts/AppLayout'
-import { BanknotesIcon, BellAlertIcon, CheckIcon, CurrencyDollarIcon, DevicePhoneMobileIcon, HomeIcon, InboxIcon, ListBulletIcon, PuzzlePieceIcon, UserCircleIcon, UserGroupIcon, UsersIcon, WalletIcon } from '@heroicons/react/24/outline'
+import { BanknotesIcon, BellAlertIcon, CheckIcon, CurrencyDollarIcon, DevicePhoneMobileIcon, HomeIcon, InboxIcon, ListBulletIcon, PuzzlePieceIcon, UserCircleIcon, UserGroupIcon, UserPlusIcon, UsersIcon, WalletIcon } from '@heroicons/react/24/outline'
 import { CheckBadgeIcon, UserIcon } from '@heroicons/react/24/solid'
 import { Head, Link } from '@inertiajs/react'
 import React from 'react'
 
-export default function Statement() {
+export default function Statement({ auth }) {
     return (
         <AppLayout>
             <Head title="Welcome" />
@@ -25,6 +25,11 @@ export default function Statement() {
                         <Link href={route('transactionlist')}>
                             <StatementCard title="Transctions" icon={<ListBulletIcon className="h-8 w-8 text-white dark:text-gray-400" />} />
                         </Link>
+                        {auth.user.is_club == '1' &&
+                            <Link href={route('referrallist')}>
+                                <StatementCard title="My Referrals" icon={<UserPlusIcon className="h-8 w-8 text-white dark:text-gray-400" />} />
+                            </Link>
+                        }
                         <StatementCard title="Notifications" icon={<BellAlertIcon className="h-8 w-8 text-white dark:text-gray-400" />} />
                     </div>
                     {/* End Grid */}

@@ -97,7 +97,6 @@ export default function TransactionList({transactions}) {
                                     </TBody>
                                 </Table>
                                 <hr />
-                                {/* <Pagination links={transactions.links} /> */}
                                 <Pagination pagination={transactions} links={transactions.links} />
                             </div>
                         </div>

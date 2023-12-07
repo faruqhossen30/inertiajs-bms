@@ -28,6 +28,7 @@ return new class extends Migration
             $table->boolean('active')->default(false);
             $table->enum('status',['live','upcoming','close'])->default('upcoming');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

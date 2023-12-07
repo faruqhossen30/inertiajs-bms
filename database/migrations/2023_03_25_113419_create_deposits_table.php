@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('from_account');
             $table->string('to_account');
             $table->string('transaction_id');
-            $table->boolean('status')->default(false);
+            $table->enum('status',['pending','complete','cancle'])->default('pending');
             $table->timestamps();
         });
     }

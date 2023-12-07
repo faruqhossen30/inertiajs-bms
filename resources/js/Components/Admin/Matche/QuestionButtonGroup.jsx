@@ -10,7 +10,7 @@ export default function QuestionButtonGroup({ question }) {
         <div className="inline-flex rounded-lg shadow-sm">
 
             <OptionModal question={question} />
-            <QuestionEditModal question={question} />
+            {/* <QuestionEditModal question={question} /> */}
 
             {question.active == '1' ?
                 <LinkComponent title="Active" routeName="matchequestion.activetoggle" id={question.id} />
@@ -20,6 +20,10 @@ export default function QuestionButtonGroup({ question }) {
                 <LinkComponent title="Hide" routeName="matchequestion.hidetoggle" id={question.id} />
                 : <LinkComponent title="Show" routeName="matchequestion.hidetoggle" id={question.id} />
             }
+            {question.area_hide == '1' ?
+                <LinkComponent title="Area Hide" routeName="matchequestion.areahidetoggle" id={question.id} />
+                : <LinkComponent title="Area Show" routeName="matchequestion.areahidetoggle" id={question.id} />
+            }
 
 
             <div className="dropdown">
@@ -27,26 +31,17 @@ export default function QuestionButtonGroup({ question }) {
                     <EllipsisVerticalIcon className="h-4 w-6" />
                 </div>
                 <ul className="dropdown-content z-[1] menu p-2 shadow bg-base-100 w-52">
-                    <li>{question.area_hide == '1' ?
-                        <Link href={route('matchequestion.areahidetoggle', question.id)} className="flex items-center gap-x-3.5 py-2 px-3 text-sm text-red-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300 dark:focus:bg-gray-700">
-                            <EyeIcon className="w-4 w-h-4" />
-                            Area Show
-                        </Link>
-                        :
-                        <Link href={route('matchequestion.areahidetoggle', question.id)} className="flex items-center gap-x-3.5 py-2 px-3 text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300 dark:focus:bg-gray-700">
-                            <EyeIcon className="w-4 w-h-4" />
-                            Area Hide
-                        </Link>
-                    }
+                    <li>
+                    <QuestionEditModal question={question} />
                     </li>
                     <li>
-                    <a className="flex items-center gap-x-3.5 py-2 px-3 text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300 dark:focus:bg-gray-700" href="#">
+                    <Link href={route('matchequestion.delete', question.id)} method='POST' as='button' className="flex items-center gap-x-3.5 py-2 px-3 text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300 dark:focus:bg-gray-700">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-trash" viewBox="0 0 16 16">
                                 <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />
                                 <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
                             </svg>
                             Delete
-                        </a>
+                        </Link>
                     </li>
                     <li>
                     <a className="flex items-center gap-x-3.5 py-2 px-3 text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300 dark:focus:bg-gray-700" href="#">
@@ -124,7 +119,7 @@ function ButtonComponent({ title }) {
 }
 
 function LinkComponent({ title, routeName, id }) {
-    return <Link href={route(routeName, id)} className={`${(title == 'Stop' || title == 'Hide') ? 'bg-red-500 dark:bg-red-500 text-white' : 'bg-white'} py-1 px-3 inline-flex items-center gap-x-2 -ms-px first:rounded-s-lg first:ms-0 last:rounded-e-lg text-sm font-medium focus:z-10 border border-gray-200  text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-white dark:hover:bg-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600`}>
+    return <Link href={route(routeName, id)} className={`${(title == 'Stop' || title == 'Hide' || title=='Area Hide') ? 'bg-red-500 dark:bg-red-500 text-white' : 'bg-white dark:bg-slate-900 '} py-1 px-3 inline-flex items-center gap-x-2 -ms-px first:rounded-s-lg first:ms-0 last:rounded-e-lg text-sm font-medium focus:z-10 border border-gray-200  text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:border-gray-700 dark:text-white dark:hover:bg-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600`}>
         {title}
     </Link>
 }

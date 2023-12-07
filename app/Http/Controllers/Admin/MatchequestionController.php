@@ -157,4 +157,10 @@ class MatchequestionController extends Controller
 
         return to_route('matche.index');
     }
+    public function matcheQuetionDelete($id)
+    {
+        MatcheQuestion::firstWhere('id', $id)->delete();
+
+        return to_route('matche.index');
+    }
 }

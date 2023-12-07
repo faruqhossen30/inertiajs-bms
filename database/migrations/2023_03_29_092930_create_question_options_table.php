@@ -25,6 +25,7 @@ return new class extends Migration
             $table->boolean('is_loss')->default(false);
             $table->boolean('status')->default(true);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

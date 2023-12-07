@@ -37,9 +37,9 @@ class QuestionoptionController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title'=>'required',
-            'bet_rate'=>'required',
-            'status'=>'required',
+            'title' => 'required',
+            'bet_rate' => 'required',
+            'status' => 'required',
         ]);
 
         QuestionOption::create([
@@ -84,13 +84,16 @@ class QuestionoptionController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'bet_rate'=>'required'
+            'title' => 'required',
+            'bet_rate' => 'required'
         ]);
 
-        QuestionOption::firstWhere('id',$id)->update(['bet_rate'=>$request->bet_rate]);
+        QuestionOption::firstWhere('id', $id)->update([
+            'title' => $request->title,
+            'bet_rate' => $request->bet_rate
+        ]);
 
-        return redirect()->route('matche.index');
-
+        // return redirect()->route('matche.index');
     }
 
     /**
@@ -101,7 +104,7 @@ class QuestionoptionController extends Controller
      */
     public function destroy($id)
     {
-        QuestionOption::firstWhere('id',$id)->delete();
+        QuestionOption::firstWhere('id', $id)->delete();
         return redirect()->back();
     }
 

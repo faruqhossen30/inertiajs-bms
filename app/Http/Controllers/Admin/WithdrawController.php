@@ -21,8 +21,9 @@ class WithdrawController extends Controller
      */
     public function index():Response
     {
+        $withdraw_system = option('withdraw_system');
         $withdraws = Withdraw::with('user')->latest()->paginate(25);
-        return Inertia::render('Admin/Withdraw/Index',['withdraws'=>$withdraws]);
+        return Inertia::render('Admin/Withdraw/Index',['withdraws'=>$withdraws, 'withdraw_system'=>$withdraw_system]);
     }
 
 
@@ -141,9 +142,16 @@ class WithdrawController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function withdrawOnOff(Request $request)
     {
-        Withdraw::firstWhere('id', $id)->delete();
-        return redirect()->route('withdraw.index');
+
+        $value = option('withdraw_system');
+        if ($value == 'off') {
+            option(['withdraw_system' => 'on']);
+            return redirect()->back();
+        } else {
+            option(['withdraw_system' => 'off']);
+            return redirect()->back();
+        }
     }
 }

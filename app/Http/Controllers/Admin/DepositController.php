@@ -19,7 +19,7 @@ class DepositController extends Controller
     public function index()
     {
         $deposits = Deposit::with('user')->latest()->paginate(25);
-        return Inertia::render('Admin/Deposit/Index',['deposits'=>$deposits]);
+        return Inertia::render('Admin/Deposit/Index', ['deposits' => $deposits]);
     }
 
     /**
@@ -52,7 +52,7 @@ class DepositController extends Controller
     public function show($id)
     {
         $deposit = Deposit::with('user')->firstWhere('id', $id);
-        return Inertia::render('Admin/Deposit/Show',['deposit'=>$deposit]);
+        return Inertia::render('Admin/Deposit/Show', ['deposit' => $deposit]);
     }
 
     /**
@@ -76,17 +76,19 @@ class DepositController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate(['amount'=>'required']);
+        $request->validate(['status' => 'required', 'amount' => 'required']);
         $deposit = Deposit::firstWhere('id', $id);
 
+        // return $request->all();
 
-        if($deposit->status){
+
+        if ($deposit->status == 'complete') {
             return abort(404);
         }
 
         $update = $deposit->update([
             'amount' => $request->amount,
-            'status' => true,
+            'status' => $request->status,
         ]);
 
 
