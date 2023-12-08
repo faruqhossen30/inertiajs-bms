@@ -14,12 +14,15 @@ use Inertia\Response;
 
 class WithdrawController extends Controller
 {
-    public function index(Request $request):Response{
+    public function index(Request $request): Response
+    {
         $withdraws = Withdraw::with('user')->where('user_id', Auth::user()->id)->latest()->paginate(25);
-        return Inertia::render('User/Withdraw/WithdrawList',['withdraws'=>$withdraws]);
+        return Inertia::render('User/Withdraw/WithdrawList', ['withdraws' => $withdraws]);
     }
-    public function withdrawForm(Request $request){
-        return Inertia::render('Withdraw');
+    public function withdrawForm(Request $request)
+    {
+        $withdraw_system = option('withdraw_system');
+        return Inertia::render('Withdraw', ['withdraw_system'=>$withdraw_system]);
     }
     public function store(Request $request)
     {
@@ -30,7 +33,7 @@ class WithdrawController extends Controller
             'type' => 'required',
             'account' => 'required',
             'amount' => "required|numeric|min:50|max:{$user->balance}",
-        ],[
+        ], [
             "amount.min" => "Minimu withdraw amount 50 TK.",
             "amount.max" => "Insufficent balance! You can use maximum {$user->balance} TK",
         ]);
@@ -56,6 +59,5 @@ class WithdrawController extends Controller
         }
 
         return to_route('profile');
-
     }
 }

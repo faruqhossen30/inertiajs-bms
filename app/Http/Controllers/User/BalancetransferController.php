@@ -16,7 +16,8 @@ class BalancetransferController extends Controller
 {
     public function index(): Response
     {
-        return Inertia::render('User/BalanceTransfer');
+        $balance_transfer = option('balance_transfer');
+        return Inertia::render('User/BalanceTransfer',['balance_transfer'=>$balance_transfer]);
     }
 
 

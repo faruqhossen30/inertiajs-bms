@@ -1,15 +1,17 @@
 import SubmitButton from '@/Components/Form/SubmitButton';
 import AppLayout from '@/Layouts/AppLayout'
+import { PowerIcon } from '@heroicons/react/24/outline';
 import { useForm } from '@inertiajs/react';
 import React from 'react'
 
-export default function Withdraw() {
+export default function Withdraw({withdraw_system}) {
     const { data, setData, processing,post, errors } = useForm({
         method: 'Bkash',
         type: 'personal',
         amount: '',
         account: ''
     })
+    console.log(withdraw_system);
 
     function submit(e) {
         e.preventDefault()
@@ -24,7 +26,8 @@ export default function Withdraw() {
                     <div className='bg-gray-200 dark:bg-slate-900 p-2'>
                         <h4>Withdraw</h4>
                     </div>
-                    <form onSubmit={submit} className='text-md p-4 space-y-2'>
+                    {withdraw_system=='on' ?
+                        <form onSubmit={submit} className='text-md p-4 space-y-2'>
                         <div className="">
                             <label htmlFor="method" className="block text-sm font-medium mb-2 dark:text-gray-400">Method</label>
                             <select
@@ -64,6 +67,24 @@ export default function Withdraw() {
 
                         <SubmitButton title="Withdraw" />
                     </form>
+                    :
+                    <div className='p-2'>
+                            <a className="group flex flex-col bg-white border shadow-sm rounded-xl hover:shadow-md transition dark:bg-slate-900 dark:border-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="#">
+                                <div className="p-4 md:p-5">
+                                    <div className="flex">
+                                        <PowerIcon className="w-6 h-6" />
+                                        <div className="grow ms-5">
+                                            <h3 className="group-hover:text-blue-600 font-semibold text-gray-800 dark:group-hover:text-gray-400 dark:text-gray-200">
+                                                Withdraw is off now !
+                                            </h3>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    }
+
                 </div>
             </div>
         </AppLayout>

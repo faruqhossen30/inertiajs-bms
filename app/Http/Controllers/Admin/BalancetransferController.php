@@ -17,15 +17,15 @@ class BalancetransferController extends Controller
         return Inertia::render('Admin/Balancetransfer/Index', ['transctions' => $transctions,'balance_transfer'=>$balance_transfer]);
     }
 
-    public function withdrawonoff(Request $request)
+    public function balanceTransferOnOff(Request $request)
     {
 
-        $value = option('withdraw_system');
+        $value = option('balance_transfer');
         if ($value == 'off') {
-            option(['withdraw_system' => 'on']);
+            option(['balance_transfer' => 'on']);
             return redirect()->back();
         } else {
-            option(['withdraw_system' => 'off']);
+            option(['balance_transfer' => 'off']);
             return redirect()->back();
         }
     }
