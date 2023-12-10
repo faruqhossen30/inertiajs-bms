@@ -6,6 +6,7 @@ use App\Enum\BetstatusEnum;
 use App\Http\Controllers\Controller;
 use App\Models\Bet;
 use App\Models\MatcheQuestion;
+use App\Models\QuestionOption;
 use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -18,7 +19,7 @@ class BetController extends Controller
     public function index(Request $request)
     {
         $bets = Bet::where('user_id', $request->user()->id)->latest()->paginate(25);
-        return Inertia::render('User/Bet/BetList',['bets'=>$bets]);
+        return Inertia::render('User/Bet/BetList', ['bets' => $bets]);
     }
 
     public function store(Request $request)
@@ -42,8 +43,9 @@ class BetController extends Controller
             'id' => $request->question_id,
             'active' => 1
         ])->first();
+        $checkOption = QuestionOption::firstWhere('id', $request->option_id);
 
-        if ($checkQuestion) {
+        if ($checkQuestion && $checkOption->status) {
             $bet = Bet::create([
                 'user_id' => $user->id,
                 'matche_id' => $request->matche_id,
@@ -80,8 +82,10 @@ class BetController extends Controller
                 $addBalanceToClub = $club->increment('balance', $clubCommission);
                 $club->save();
 
-                if($sponser){
-                    $sponserCommission = (2 / 100) * $request->bet_amount;
+                if ($sponser) {
+                    $sponser_rate = option('sponser_commission');
+                    $sponserCommission = ($sponser_rate / 100) * $request->bet_amount;
+                    $addSponserCommission = $sponser->increment('balance', $sponserCommission);
 
                     Transaction::create([
                         'user_id' => $sponser->id,
@@ -98,7 +102,7 @@ class BetController extends Controller
                     'user_id' => $club->id,
                     'debit' => 0,
                     'credit' => $clubCommission,
-                    'description' => "Commission",
+                    'description' => "Club Commission",
                     'balance' =>  $club->balance,
                 ]);
             }

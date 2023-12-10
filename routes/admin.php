@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdmintestController;
 use App\Http\Controllers\Admin\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Admin\AutooptionController;
 use App\Http\Controllers\Admin\AutoquestionController;
@@ -14,6 +15,7 @@ use App\Http\Controllers\Admin\DepositController;
 use App\Http\Controllers\Admin\GameController;
 use App\Http\Controllers\Admin\MatcheController;
 use App\Http\Controllers\Admin\MatchequestionController;
+use App\Http\Controllers\Admin\PaymentgatewayController;
 use App\Http\Controllers\Admin\QuestionoptionController;
 use App\Http\Controllers\Admin\Restore\MatcherestoreController;
 use App\Http\Controllers\Admin\Restore\OptionrestoreController;
@@ -51,6 +53,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
     Route::resource('user', UserController::class);
     Route::resource('team', TeamController::class);
     Route::resource('game', GameController::class);
+    Route::resource('paymentgateway', PaymentgatewayController::class);
     // Matche
     Route::resource('matche', MatcheController::class);
     Route::get('matche/ishide/{id}', [MatcheController::class, 'isHideToggle'])->name('matchehidetoggle');
@@ -103,4 +106,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
     // Settings
     Route::get('/settings', [SettingController::class, 'settingPage'])->name('admin.settings');
     Route::post('/setting/header-notice', [SettingController::class, 'headerNotice'])->name('admin.setting.headernotice');
+    Route::post('/setting/sponser-commission', [SettingController::class, 'sponserCommission'])->name('admin.setting.sponsercommission');
+    Route::get('/test', [AdmintestController::class, 'test'])->name('admin.test');
 });

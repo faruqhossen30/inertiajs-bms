@@ -8,14 +8,11 @@ import SubmitButton from "@/Components/Form/SubmitButton";
 
 export default function Edit({ user }) {
     const { data, setData, put, processing, errors, reset } = useForm({
-        name: user.name,
-        username: user.username,
-        email: user.email,
-        mobile: user.mobile,
-        user_owner: user.user_owner,
-        user_mobile: user.user_mobile,
-        user_commission: user.user_commission,
-        status: user.status
+        name           : user.name,
+        username       : user.username,
+        email          : user.email,
+        mobile         : user.mobile,
+        status         : user.status
     });
 
     function submit(e) {
@@ -71,27 +68,18 @@ export default function Edit({ user }) {
                                             <p className="text-sm text-red-600 mt-2">{errors.email}</p>
                                         </div>
                                         <div>
-                                            <InputLabel isRequired={true} labelFor="user_owner" />
-                                            <Input id="user_owner" type="text" name="user_owner" value={data.user_owner} autoComplete="user_owner" placeholder="user_owner" onChange={(e) => setData('user_owner', e.target.value)} />
-                                            <p className="text-sm text-red-600 mt-2">{errors.user_owner}</p>
-                                        </div>
-                                        <div>
                                             <InputLabel isRequired={true} labelFor="mobile" />
                                             <Input id="mobile" type="text" name="mobile" value={data.mobile} autoComplete="mobile" placeholder="mobile" onChange={(e) => setData('mobile', e.target.value)} />
                                             <p className="text-sm text-red-600 mt-2">{errors.mobile}</p>
                                         </div>
 
                                         <div>
-                                            <InputLabel isRequired={true} labelFor="user_mobile" />
-                                            <Input id="user_mobile" type="text" name="user_mobile" value={data.user_mobile} autoComplete="user_mobile" placeholder="user_mobile" onChange={(e) => setData('user_mobile', e.target.value)} />
-                                            <p className="text-sm text-red-600 mt-2">{errors.user_mobile}</p>
+                                            <InputLabel isRequired={true} labelFor="sponser" />
+                                            <Input id="sponser" type="text" name="sponser" value={data.sponser} autoComplete="sponser" placeholder="sponser" onChange={(e) => setData('sponser', e.target.value)} />
+                                            <p className="text-sm text-red-600 mt-2">{errors.sponser}</p>
                                         </div>
 
-                                        <div>
-                                            <InputLabel isRequired={true} labelFor="user_commission" />
-                                            <Input id="user_commission" type="number" isStep={true} name="user_commission" value={data.user_commission} autoComplete="user_commission" placeholder="user_commission" onChange={(e) => setData('user_commission', e.target.value)} />
-                                            <p className="text-sm text-red-600 mt-2">{errors.user_commission}</p>
-                                        </div>
+
                                         <div>
                                             <InputLabel isRequired={true} labelFor="password" />
                                             <Input id="password" type="text" name="password" value={data.password} autoComplete="password" placeholder="password" onChange={(e) => setData('password', e.target.value)} />

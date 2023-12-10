@@ -26,6 +26,7 @@ class UserSeeder extends Seeder
             'is_admin' => false,
             'is_user' => true,
             'club_id' => 3,
+            'balance' => 1000,
             'password' => Hash::make('123')
         ]);
 

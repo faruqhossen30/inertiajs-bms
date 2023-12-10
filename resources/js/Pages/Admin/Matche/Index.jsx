@@ -235,7 +235,7 @@ export default function Index({ auth, matches }) {
                                                                             </div>
                                                                         </td>
 
-                                                                        <td colSpan={2} className="">
+                                                                        {question.status == 'complete' && <td colSpan={2} className="">
                                                                             <div className="px-2 py-2">
                                                                                 <span className="text-sm text-gray-600 dark:text-gray-400">
                                                                                     <Link href={route('admin.betrestart', question.id)} method="post" as="button">
@@ -243,7 +243,7 @@ export default function Index({ auth, matches }) {
                                                                                     </Link>
                                                                                 </span>
                                                                             </div>
-                                                                        </td>
+                                                                        </td>}
 
 
                                                                     </tr>

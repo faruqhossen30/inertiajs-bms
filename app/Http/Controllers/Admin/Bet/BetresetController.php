@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Bet;
 
+use App\Enum\QuestionstatusEnum;
 use App\Http\Controllers\Controller;
 use App\Models\MatcheQuestion;
 use Illuminate\Http\Request;
@@ -13,8 +14,11 @@ class BetresetController extends Controller
     public function questionRestart(Request $request, $id)
     {
         // $question = Question::find($id);
-        $question = MatcheQuestion::firstWhere('id', $id);;
+        $question = MatcheQuestion::firstWhere('id', $id);
+
         $options = $question->options;
+
+        // return $options;
 
         if (!empty($options) && $options->count()) {
             foreach ($options as $key => $option) {
@@ -54,7 +58,9 @@ class BetresetController extends Controller
                 }
             }
         }
+        $question->update(['status'=> QuestionstatusEnum::ACTIVE]);
 
-        return response()->json($question);
+        // return response()->json($question);
+        return to_route('matche.index');
     }
 }

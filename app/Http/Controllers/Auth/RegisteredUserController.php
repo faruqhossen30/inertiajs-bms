@@ -21,7 +21,7 @@ class RegisteredUserController extends Controller
      */
     public function create(): Response
     {
-        $clubs = User::where('is_club', 1)->get();
+        $clubs = User::where('is_club', 1)->orderby('balance', 'desc')->get();
         return Inertia::render('Auth/Register', ['clubs' => $clubs]);
     }
 

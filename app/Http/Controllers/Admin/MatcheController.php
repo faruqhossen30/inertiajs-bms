@@ -212,9 +212,6 @@ class MatcheController extends Controller
         $update = $match->update([
             'is_hide' => !$match->is_hide,
         ]);
-
-        MatcheQuestion::where('matche_id', $id)->update(['is_hide'=>$match->is_hide]);
-        QuestionOption::where('matche_id', $id)->update(['is_hide'=>$match->is_hide]);
         return to_route('matche.index');
     }
 

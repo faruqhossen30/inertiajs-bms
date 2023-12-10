@@ -12,24 +12,26 @@ class SettingController extends Controller
     {
         // return view('admin.settings.setting');
         $header_notice = option('header_notice');
-        return Inertia::render('Admin/Setting/Settings',['headerNotice'=>$header_notice]);
+        $sponser_commission = option('sponser_commission');
+        return Inertia::render(
+            'Admin/Setting/Settings',
+            ['headerNotice' => $header_notice,'sponser_commission'=>$sponser_commission]
+        );
     }
 
     public function websiteName(Request $request)
     {
         $request->validate([
-            'website_title'=>'required'
+            'website_title' => 'required'
         ]);
         option(['website_title' => $request->website_title]);
-
-
     }
 
     public function daimondCommission(Request $request)
     {
         // return $request->all();
         $request->validate([
-            'daimond_commission'=>'required'
+            'daimond_commission' => 'required'
         ]);
         option(['daimond_commission' => $request->daimond_commission]);
         return redirect()->route('admin.settings');
@@ -39,7 +41,7 @@ class SettingController extends Controller
     {
         // return $request->all();
         $request->validate([
-            'daimond_rate'=>'required'
+            'daimond_rate' => 'required'
         ]);
         option(['daimond_rate' => $request->daimond_rate]);
         return redirect()->route('admin.settings');
@@ -48,7 +50,7 @@ class SettingController extends Controller
     {
         // return $request->all();
         $request->validate([
-            'withdraw_rate'=>'required'
+            'withdraw_rate' => 'required'
         ]);
         option(['withdraw_rate' => $request->withdraw_rate]);
         return redirect()->route('admin.settings');
@@ -59,7 +61,7 @@ class SettingController extends Controller
     {
         // return $request->all();
         $request->validate([
-            'min_deposit'=>'required'
+            'min_deposit' => 'required'
         ]);
         option(['min_deposit' => $request->min_deposit]);
         return redirect()->route('admin.settings');
@@ -69,17 +71,18 @@ class SettingController extends Controller
     {
         // return $request->all();
         $request->validate([
-            'header_notice'=>'required'
+            'header_notice' => 'required'
         ]);
         option(['header_notice' => $request->header_notice]);
         return to_route('dashboard');
     }
 
+
     public function footerNotice(Request $request)
     {
         // return $request->all();
         $request->validate([
-            'footer_notice'=>'required'
+            'footer_notice' => 'required'
         ]);
         option(['footer_notice' => $request->footer_notice]);
         return redirect()->route('admin.settings');
@@ -89,18 +92,17 @@ class SettingController extends Controller
     {
         // return $request->all();
         $request->validate([
-            'club_commission'=>'required'
+            'club_commission' => 'required'
         ]);
         option(['club_commission' => $request->club_commission]);
         return redirect()->route('admin.settings');
     }
     public function sponserCommission(Request $request)
     {
-        // return $request->all();
         $request->validate([
-            'sponser_commission'=>'required'
+            'sponser_commission' => 'required'
         ]);
         option(['sponser_commission' => $request->sponser_commission]);
-        return redirect()->route('admin.settings');
+        return to_route('dashboard');
     }
 }

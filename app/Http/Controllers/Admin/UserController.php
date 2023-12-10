@@ -75,7 +75,24 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name'=>'required',
+            'username'=>'required',
+            'email'=>'required',
+            'mobile'=>'required'
+        ]);
+
+        $data = [
+            'name'=>$request->name,
+            'username'=>$request->username,
+            'email'=>$request->email,
+            'mobile'=>$request->name
+        ];
+
+        User::firstWhere('id', $id)->update($data);
+
+        return to_route('user.index');
+
     }
 
     /**

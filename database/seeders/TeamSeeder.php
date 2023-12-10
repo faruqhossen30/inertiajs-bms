@@ -484,6 +484,12 @@ class TeamSeeder extends Seeder
                 "flag" => "https://flagcdn.com/w320/sv.png",
             ],
             [
+                "id" => 251,
+                "name" => "England",
+                "timezone" => "UTC+02:00",
+                "flag" => "https://flagpedia.net/data/flags/w580/gb-eng.webp",
+            ],
+            [
                 "id" => 70,
                 "name" => "Equatorial Guinea",
                 "timezone" => "UTC+01:00",
@@ -1569,6 +1575,7 @@ class TeamSeeder extends Seeder
                 "timezone" => "UTC+02:00",
                 "flag" => "https://flagcdn.com/w320/zw.png",
             ]
+
         ];
 
 

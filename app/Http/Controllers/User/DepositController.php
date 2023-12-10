@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\Deposit;
+use App\Models\PaymentGateway;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -18,8 +19,9 @@ class DepositController extends Controller
     public function index(Request $request)
     {
         // $diposits = Deposit::where('user_id', $request->user()->id)->get();
+        $gateways = PaymentGateway::get();
 
-        return Inertia::render('Deposit');
+        return Inertia::render('Deposit', ['gateways'=>$gateways]);
     }
 
     /**

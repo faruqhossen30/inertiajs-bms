@@ -3,7 +3,7 @@ import AppLayout from '@/Layouts/AppLayout'
 import { useForm } from '@inertiajs/react';
 import React from 'react'
 
-export default function Deposit() {
+export default function Deposit({gateways}) {
     const { data, setData, processing,post, errors } = useForm({
         method: 'Bkash',
         to_account: '',
@@ -11,6 +11,7 @@ export default function Deposit() {
         from_account: '',
         transaction_id: ''
     })
+    console.log(gateways);
 
     function submit(e) {
         e.preventDefault()
@@ -44,8 +45,11 @@ export default function Deposit() {
                                 value={data.to_account} onChange={e => setData('to_account', e.target.value)}
                                 id="to_account" name="to_account" className="py-2 px-4 pr-9 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400">
                                 <option >Select</option>
-                                <option value="01777777">01777777</option>
-                                <option value="018888888">018888888</option>
+                                    {
+                                        gateways.map((item, index)=>{
+                                            return <option value={item.number} key={index}>{item.number} -{item.bank}</option>
+                                        })
+                                    }
                             </select>
                             <p className="text-sm text-red-600 mt-2">{errors.to_account}</p>
                         </div>

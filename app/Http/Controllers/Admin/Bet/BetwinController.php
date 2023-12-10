@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Bet;
 
 use App\Enum\BetstatusEnum;
+use App\Enum\QuestionstatusEnum;
 use App\Http\Controllers\Controller;
 use App\Models\QuestionOption;
 use App\Models\Transaction;
@@ -13,7 +14,7 @@ class BetwinController extends Controller
     public function betWin($id)
     {
         $option = QuestionOption::firstWhere('id', $id);
-        $option->update(['is_win' => 1]);
+        $option->update(['is_win' => 1,'status'=>0]);
         $question = $option->question;
 
         // return $option->bets;
@@ -33,9 +34,9 @@ class BetwinController extends Controller
         if (!empty($question->options) &&  $question->options->count()) {
             foreach ($question->options as $key => $option) {
                 if ($option->is_win == '1') {
-                    $option->update(['is_loss' => '0']);
+                    $option->update(['is_loss' => '0','status'=>0]);
                 } else {
-                    $option->update(['is_loss' => '1']);
+                    $option->update(['is_loss' => '1','status'=>0]);
                 }
             }
         }
@@ -48,10 +49,9 @@ class BetwinController extends Controller
                 }
             }
         }
-
-
-
+        $question->update(['status'=> QuestionstatusEnum::COMPLETE]);
         return to_route('matche.index');
+
     }
 
     public function betStop($id)

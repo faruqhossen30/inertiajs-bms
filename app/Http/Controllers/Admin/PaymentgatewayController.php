@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\PaymentGateway;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
+use Inertia\Response;
 
 class PaymentgatewayController extends Controller
 {
@@ -14,11 +16,10 @@ class PaymentgatewayController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index():Response
     {
-        $list = PaymentGateway::get();
-        // return $list;
-        return view('admin.paymentgateway.index', compact('list'));
+        $list = PaymentGateway::paginate();
+        return Inertia::render('Admin/Paymentgateway/Index',['list'=>$list]);
     }
 
     /**
@@ -28,7 +29,7 @@ class PaymentgatewayController extends Controller
      */
     public function create()
     {
-        return view('admin.paymentgateway.create');
+        return Inertia::render('Admin/Paymentgateway/Create');
     }
 
     /**

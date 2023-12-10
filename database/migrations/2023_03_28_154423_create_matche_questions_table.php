@@ -20,7 +20,7 @@ return new class extends Migration
             $table->boolean('is_hide')->nullable()->default(0);
             $table->boolean('area_hide')->nullable()->default(0);
             $table->boolean('active')->default(true);
-            $table->boolean('status')->default(true);
+            $table->enum('status',['active','deactive','complete'])->default('active');
             $table->timestamps();
             $table->softDeletes();
         });
