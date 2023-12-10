@@ -17,15 +17,15 @@ export default function Betlist({ matches }) {
                     return match.status == 'live' && <Disclosure as='div' className='shadow-sm dark:shadow-black my-1 border border-purple-300 dark:border-gray-700 text-sm rounded-lg' defaultOpen key={index}>
                         <Disclosure.Button as='div' className="cursor-pointer p-2">
                             <div className='flex items-center justify-between space-x-2 w-full text-black dark:text-slate-200'>
-                                <div className='flex items-center space-x-1 bg-green-200'>
+                                <div className='flex items-center space-x-1'>
                                     {match.team_one_flag && <img src={match.team_one_flag} className='h-8 w-8 object-contain' alt="" />}
 
                                     <span>{match.team_one}</span>
                                 </div>
-                                <div className='flex items-center justify-center bg-red-300'>
+                                <div className='flex items-center justify-center'>
                                     <img src="/uploads/games/cricket-logo.png" className='h-10 w-10 rounded-full ring-purple-800 ring-1' alt="" />
                                 </div>
-                                <div className='flex items-center space-x-1 bg-yellow-300'>
+                                <div className='flex items-center space-x-1'>
                                     {match.team_two_flag && <img src={match.team_two_flag} className='h-8 w-8 object-contain' alt="" />}
                                     <span>{match.team_two}</span>
                                 </div>
