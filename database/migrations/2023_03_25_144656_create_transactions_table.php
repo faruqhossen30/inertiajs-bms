@@ -20,6 +20,8 @@ return new class extends Migration
             $table->integer('credit')->default(0);
             $table->string('description')->nullable();
             $table->integer('balance')->nullable(0);
+            $table->string('type')->nullable();
+            $table->unsignedBigInteger('author_id');
             $table->timestamps();
         });
     }

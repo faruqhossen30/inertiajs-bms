@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Enum\BetstatusEnum;
+use App\Enum\TransactionTypeEnum;
 use App\Http\Controllers\Controller;
 use App\Models\Bet;
 use App\Models\MatcheQuestion;
@@ -73,6 +74,8 @@ class BetController extends Controller
                     'credit' => 0,
                     'description' => "Bet placed {$request->bet_amount} taka.",
                     'balance' =>  $user->balance,
+                    'type' =>  TransactionTypeEnum::BET,
+                    'author_id' =>  Auth::user()->id
                 ]);
 
                 $club = User::firstWhere('id', $user->club_id);
@@ -93,6 +96,8 @@ class BetController extends Controller
                         'credit' => $sponserCommission,
                         'description' => "Sponser Commission",
                         'balance' =>  $sponser->balance,
+                        'type' =>  TransactionTypeEnum::BET,
+                        'author_id' =>  Auth::user()->id
                     ]);
                 }
 
@@ -104,6 +109,8 @@ class BetController extends Controller
                     'credit' => $clubCommission,
                     'description' => "Club Commission",
                     'balance' =>  $club->balance,
+                    'type' =>  TransactionTypeEnum::BET,
+                    'author_id' =>  Auth::user()->id
                 ]);
             }
             return to_route('homepage');

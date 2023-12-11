@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enum\TransactionTypeEnum;
 use App\Http\Controllers\Controller;
 use App\Models\Deposit;
 use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class DepositController extends Controller
@@ -101,6 +103,8 @@ class DepositController extends Controller
                 'credit' => $deposit->amount,
                 'description' => "Deposit {$deposit->amount} taka comfirmed !",
                 'balance' =>  $user->balance,
+                'type' =>  TransactionTypeEnum::DEPOSIT,
+                'author_id' =>  Auth::user()->id
             ]);
         }
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Enum\TransactionTypeEnum;
 use App\Http\Controllers\Controller;
 use App\Models\BalanceTransfer;
 use App\Models\Transaction;
@@ -17,7 +18,7 @@ class BalancetransferController extends Controller
     public function index(): Response
     {
         $balance_transfer = option('balance_transfer');
-        return Inertia::render('User/BalanceTransfer',['balance_transfer'=>$balance_transfer]);
+        return Inertia::render('User/BalanceTransfer', ['balance_transfer' => $balance_transfer]);
     }
 
 
@@ -38,9 +39,9 @@ class BalancetransferController extends Controller
         $user->decrement('balance', $request->amount);
 
         $blance_transfer = BalanceTransfer::create([
-            'user_id'=> $user->id,
-            'to_username'=> $request->to_username,
-            'amount'=> $request->amount,
+            'user_id' => $user->id,
+            'to_username' => $request->to_username,
+            'amount' => $request->amount,
         ]);
 
         Transaction::create([
@@ -49,6 +50,8 @@ class BalancetransferController extends Controller
             'credit' => 0,
             'description' => "Balance Transfer",
             'balance' =>  $user->balance,
+            'type' =>  TransactionTypeEnum::BALANCETRANSFER,
+            'author_id' =>  Auth::user()->id
         ]);
 
         return to_route('profile');

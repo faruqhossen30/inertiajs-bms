@@ -30,7 +30,7 @@ use Inertia\Inertia;
 Route::get('/', function () {
     $header_notice = option('header_notice');
     $games = Game::get();
-    $matches = Matche::with('questions')->with('questions.options')->where('is_hide',0)->orderBy('id','desc')->get();
+    $matches = Matche::with(['questions','game','questions.options'])->where('is_hide',0)->orderBy('id','desc')->get();
 
     return Inertia::render('HomePage', [
         'canLogin' => Route::has('login'),

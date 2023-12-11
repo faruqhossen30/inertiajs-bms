@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enum\TransactionTypeEnum;
 use App\Enum\WithdrawEnum;
 use App\Http\Controllers\Controller;
 use App\Models\Transaction;
 use App\Models\User;
 use App\Models\Withdraw;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -19,11 +21,11 @@ class WithdrawController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index():Response
+    public function index(): Response
     {
         $withdraw_system = option('withdraw_system');
         $withdraws = Withdraw::with('user')->latest()->paginate(25);
-        return Inertia::render('Admin/Withdraw/Index',['withdraws'=>$withdraws, 'withdraw_system'=>$withdraw_system]);
+        return Inertia::render('Admin/Withdraw/Index', ['withdraws' => $withdraws, 'withdraw_system' => $withdraw_system]);
     }
 
 
@@ -87,11 +89,6 @@ class WithdrawController extends Controller
             'code' => 200,
             'message' => "Your withdraw is pending."
         ]);
-
-
-
-
-
     }
 
     /**
@@ -102,8 +99,8 @@ class WithdrawController extends Controller
      */
     public function show($id)
     {
-        $withdraw = Withdraw::with('user')->firstWhere('id',$id);
-        return Inertia::render('Admin/Withdraw/Show',['withdraw'=>$withdraw]);
+        $withdraw = Withdraw::with('user')->firstWhere('id', $id);
+        return Inertia::render('Admin/Withdraw/Show', ['withdraw' => $withdraw]);
     }
 
     /**
@@ -127,13 +124,37 @@ class WithdrawController extends Controller
     public function update(Request $request, $id)
     {
         // return $request->all();
+
         $withdraw = Withdraw::firstWhere('id', $id);
-        $update = $withdraw->update([
-            'status' => $request->status,
-        ]);
+        if ($request->status == 'complete') {
+            $update = $withdraw->update([
+                'status' => $request->status,
+            ]);
 
-        return redirect()->route('withdraw.index');;
+            Transaction::create([
+                'user_id' => $withdraw->user_id,
+                'description' => "Withdraw {$withdraw->amount} taka complete !",
+                'balance' =>  $withdraw->user->balance,
+                'type' =>  TransactionTypeEnum::WITHDRAW,
+                'author_id' =>  Auth::user()->id
+            ]);
+            return redirect()->route('withdraw.index');;
+        }
+        if ($request->status == 'cancle') {
+            $update = $withdraw->update([
+                'status' => $request->status,
+            ]);
+            $userdecriment = User::firstWhere('id', $withdraw->user_id)->increment('balance', $withdraw->amount);
 
+            Transaction::create([
+                'user_id' => $withdraw->user_id,
+                'description' => "Withdraw {$withdraw->amount} taka complete !",
+                'balance' =>  $withdraw->user->balance,
+                'type' =>  TransactionTypeEnum::WITHDRAW,
+                'author_id' =>  Auth::user()->id
+            ]);
+            return redirect()->route('withdraw.index');
+        }
     }
 
     /**

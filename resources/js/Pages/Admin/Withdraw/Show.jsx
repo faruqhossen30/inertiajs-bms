@@ -67,9 +67,9 @@ export default function Index({ auth, withdraw }) {
                             <select
                                 value={data.status} onChange={e => setData('status', e.target.value)}
                                 id="status" name="status" className="py-2 px-4 pr-9 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400">
-                                <option value="pending" selected={withdraw.status == 'pending'}>pending</option>
-                                <option value="complete" selected={withdraw.status == 'complete'}>complete</option>
-                                <option value="cancle" selected={withdraw.status == 'cancle'}>cancle</option>
+                                <option value="pending" defaultValue={withdraw.status == 'pending'}>pending</option>
+                                <option value="complete" defaultValue={withdraw.status == 'complete'}>complete</option>
+                                <option value="cancle" defaultValue={withdraw.status == 'cancle'}>cancle</option>
                             </select>
                             <p className="text-sm text-red-600 mt-2">{errors.status}</p>
                         </div>

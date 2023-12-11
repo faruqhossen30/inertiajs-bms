@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Admin\Bet;
 
 use App\Enum\BetstatusEnum;
 use App\Enum\QuestionstatusEnum;
+use App\Enum\TransactionTypeEnum;
 use App\Http\Controllers\Controller;
 use App\Models\QuestionOption;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BetwinController extends Controller
 {
@@ -28,6 +30,8 @@ class BetwinController extends Controller
                 'credit' => $bet->return_amount,
                 'description' => "Bet win !",
                 'balance' =>  $user->balance,
+                'type' =>  TransactionTypeEnum::BET,
+                'author_id' =>  Auth::user()->id
             ]);
         }
 

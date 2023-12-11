@@ -3,18 +3,21 @@
 namespace App\Http\Controllers\Admin\Bet;
 
 use App\Enum\BetstatusEnum;
+use App\Enum\TransactionTypeEnum;
 use App\Http\Controllers\Controller;
 use App\Models\Bet;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BetrefundController extends Controller
 {
-    public function betRefund(Request $request){
+    public function betRefund(Request $request)
+    {
         $request->validate([
             'betids' => 'required',
             'percentage' => 'required'
-        ],[
+        ], [
             'betids.required' => "No bet item selected."
         ]);
 
@@ -31,8 +34,8 @@ class BetrefundController extends Controller
 
                 $user = $betting->user_id;
 
-                 // Add Balance
-                 $addBalance = $betting->user->increment('balance', $amount);
+                // Add Balance
+                $addBalance = $betting->user->increment('balance', $amount);
 
                 // Add Transaction
                 $transaction = Transaction::create([
@@ -41,7 +44,9 @@ class BetrefundController extends Controller
                     'credit' => $amount,
                     'description' => 'Refund',
                     'balance' => $betting->user->balance,
-                        ]);
+                    'type' =>  TransactionTypeEnum::BALANCETRANSFER,
+                    'author_id' =>  Auth::user()->id
+                ]);
 
                 // Add Alart
                 // $alart = new Alart([
@@ -57,6 +62,5 @@ class BetrefundController extends Controller
                 return redirect()->back();
             }
         }
-
     }
 }

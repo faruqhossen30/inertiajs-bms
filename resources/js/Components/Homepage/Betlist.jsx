@@ -6,6 +6,7 @@ import BetNowModal from '../Modal/BetNowModal';
 import BetModal from '../Modal/BetModal';
 
 export default function Betlist({ matches }) {
+    console.log(matches);
     return (
         <div className='col-span-12 lg:col-span-7 px-1'>
             <div className="bg-gradient-to-b from-violet-700 to-purple-900 dark:from-slate-700 dark:to-slate-900 dark:bg-gray-700 dark:text-slate-100">
@@ -23,7 +24,7 @@ export default function Betlist({ matches }) {
                                     <span>{match.team_one}</span>
                                 </div>
                                 <div className='flex items-center justify-center'>
-                                    <img src="/uploads/games/cricket-logo.png" className='h-10 w-10 rounded-full ring-purple-800 ring-1' alt="" />
+                                    <img src={window.location.protocol+'//'+ window.location.host +'/'+match.game.image} className='h-10 w-10 rounded-full' alt="" />
                                 </div>
                                 <div className='flex items-center space-x-1'>
                                     {match.team_two_flag && <img src={match.team_two_flag} className='h-8 w-8 object-contain' alt="" />}

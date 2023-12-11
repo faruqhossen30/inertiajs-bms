@@ -37,11 +37,17 @@ class User extends Authenticatable
      * @var array<string, string>
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
-        'otp_verified_at' => 'datetime',
-        'name_updated_at' => 'datetime'
+        'email_verified_at' => 'datetime'
     ];
 
+    public function bets()
+    {
+        return $this->hasMany(Bet::class);
+    }
+    public function wins()
+    {
+        return $this->hasMany(Bet::class);
+    }
     public function club()
     {
         return $this->belongsTo(User::class, 'club_id');

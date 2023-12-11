@@ -26,6 +26,10 @@ class Matche extends Model
         return $this->hasMany(Bet::class,'matche_id', 'id');
     }
 
+    public function game()
+    {
+        return $this->belongsTo(Game::class,'game_id');
+    }
 
 
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Enum\TransactionTypeEnum;
 use App\Enum\WithdrawEnum;
 use App\Http\Controllers\Controller;
 use App\Models\Transaction;
@@ -22,7 +23,7 @@ class WithdrawController extends Controller
     public function withdrawForm(Request $request)
     {
         $withdraw_system = option('withdraw_system');
-        return Inertia::render('Withdraw', ['withdraw_system'=>$withdraw_system]);
+        return Inertia::render('Withdraw', ['withdraw_system' => $withdraw_system]);
     }
     public function store(Request $request)
     {
@@ -55,6 +56,8 @@ class WithdrawController extends Controller
                 'credit' => 0,
                 'description' => "Withdraw {$request->amount} taka.",
                 'balance' =>  $user->balance,
+                'type' =>  TransactionTypeEnum::WITHDRAW,
+                'author_id' =>  Auth::user()->id
             ]);
         }
 
