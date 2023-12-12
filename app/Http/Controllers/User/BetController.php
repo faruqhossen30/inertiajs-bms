@@ -72,7 +72,7 @@ class BetController extends Controller
                     'user_id' => $user->id,
                     'debit' => $request->bet_amount,
                     'credit' => 0,
-                    'description' => "Bet placed {$request->bet_amount} taka.",
+                    'description' => "Bet {$request->bet_amount} TK.",
                     'balance' =>  $user->balance,
                     'type' =>  TransactionTypeEnum::BET,
                     'author_id' =>  Auth::user()->id

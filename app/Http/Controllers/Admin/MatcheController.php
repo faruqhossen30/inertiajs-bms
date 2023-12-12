@@ -69,6 +69,7 @@ class MatcheController extends Controller
             'date_time' => $request->date_time,
             'game_id' => $request->game_id,
             'note' => $request->note,
+            'is_hide' => true,
             'status' => $request->status
         ];
         $matche = Matche::create($data);
@@ -227,9 +228,11 @@ class MatcheController extends Controller
     public function activeToggle($id)
     {
         $match = Matche::firstWhere('id', $id);
+        $is_hide = $match->active;
 
         $update = $match->update([
             'active' => !$match->active,
+            'is_hide' => $is_hide,
         ]);
         // MatcheQuestion::where('matche_id', $id)->update(['active'=>$match->active]);
         // QuestionOption::where('matche_id', $id)->update(['active'=>$match->active]);

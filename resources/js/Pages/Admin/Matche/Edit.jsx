@@ -20,6 +20,8 @@ export default function Edit({ games,countries,matche }) {
         note: matche.note,
         status: matche.status
     });
+    console.log(matche.date_time);
+    let defaultDateTime = '2023-01-01T12:00';
 
     function submit(e) {
         e.preventDefault()
@@ -58,7 +60,7 @@ export default function Edit({ games,countries,matche }) {
                                     <form onSubmit={submit}>
                                         <div>
                                             <InputLabel labelFor="Team One" isRequired={true} />
-                                            <Input id="team_one" type="text" name="team_one" value={data.team_one} autoComplete="Team One" placeholder="Team One" onChange={(e) => setData('team_one', e.target.value)} />
+                                            <Input id="team_one" type="text" name="team_one" value={defaultDateTime} autoComplete="Team One" placeholder="Team One" onChange={(e) => setData('team_one', e.target.value)} />
                                             <p className="text-sm text-red-600 mt-2">{errors.team_one}</p>
                                         </div>
 

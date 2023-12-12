@@ -79,7 +79,7 @@ class WithdrawController extends Controller
                 'user_id' => $user->id,
                 'debit' => $request->amount,
                 'credit' => 0,
-                'description' => "Withdraw {$request->amount} taka.",
+                'description' => "Withdraw {$request->amount} TK.",
                 'balance' =>  $user->balance,
             ]);
         }
@@ -133,7 +133,7 @@ class WithdrawController extends Controller
 
             Transaction::create([
                 'user_id' => $withdraw->user_id,
-                'description' => "Withdraw {$withdraw->amount} taka complete !",
+                'description' => "Withdraw complete !",
                 'balance' =>  $withdraw->user->balance,
                 'type' =>  TransactionTypeEnum::WITHDRAW,
                 'author_id' =>  Auth::user()->id
@@ -148,7 +148,7 @@ class WithdrawController extends Controller
 
             Transaction::create([
                 'user_id' => $withdraw->user_id,
-                'description' => "Withdraw {$withdraw->amount} taka complete !",
+                'description' => "Withdraw cancle !",
                 'balance' =>  $withdraw->user->balance,
                 'type' =>  TransactionTypeEnum::WITHDRAW,
                 'author_id' =>  Auth::user()->id

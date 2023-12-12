@@ -6,7 +6,7 @@ import Rightsidebar from '@/Components/Homepage/Rightsidebar';
 import Marquee from '@/Layouts/Marquee';
 
 export default function Homepage({ auth,games,matches,header_notice }) {
-    console.log(matches);
+    // console.log(matches);
     return (
         <AppLayout>
             <Head title="Welcome" />

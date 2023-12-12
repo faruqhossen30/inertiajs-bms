@@ -12,9 +12,9 @@ class QuestionOption extends Model
     protected $fillable = ['matche_id', 'matche_question_id', 'title', 'bet_rate', 'is_hide', 'active', 'is_win', 'is_loss', 'status'];
 
 
-    protected $casts = [
-        'bet_rate' => 'float'
-    ];
+    // protected $casts = [
+    //     'bet_rate' => 'float'
+    // ];
 
     public function matche()
     {

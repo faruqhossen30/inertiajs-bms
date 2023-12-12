@@ -32,6 +32,7 @@ Route::get('/', function () {
     $games = Game::get();
     $matches = Matche::with(['questions','game','questions.options'])->where('is_hide',0)->orderBy('id','desc')->get();
 
+    // return $matches;
     return Inertia::render('HomePage', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),

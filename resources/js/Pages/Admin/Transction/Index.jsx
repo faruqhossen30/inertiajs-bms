@@ -34,45 +34,30 @@ export default function Index({ auth, transctions }) {
                             {
                                 transctions.data.map((item, index) => {
                                     return <tr key={index}>
-                                        <td className="h-px w-px whitespace-nowrap">
-                                            <div className="px-6 py-2">
-                                                <span className="text-sm text-gray-600 dark:text-gray-400">{index + 1}</span>
-                                            </div>
+                                        <td className="whitespace-nowrap py-2">
+                                                <span className="text-sm text-gray-600 dark:text-gray-400 px-1">{index + 1}</span>
+
                                         </td>
-                                        <td className="h-px w-px whitespace-nowrap">
-                                            <div className="px-6 py-2">
-                                                <span className="text-sm text-gray-600 dark:text-gray-400">{item.user.username}</span>
-                                            </div>
+                                        <td className="whitespace-nowrap py-2">
+                                                <span className="text-sm text-gray-600 dark:text-gray-400 px-1">{item.user.username}</span>
                                         </td>
-                                        <td className="h-px w-px whitespace-nowrap">
-                                            <div className="px-6 py-2">
-                                                <span className="text-sm text-gray-600 dark:text-gray-400">{item.debit}</span>
-                                            </div>
+                                        <td className="whitespace-nowrap py-2">
+                                                <span className="text-sm text-gray-600 dark:text-gray-400 px-1">{item.debit}</span>
                                         </td>
-                                        <td className="h-px w-px whitespace-nowrap">
-                                            <div className="px-6 py-2">
-                                                <span className="text-sm text-gray-600 dark:text-gray-400">{item.credit}</span>
-                                            </div>
+                                        <td className="whitespace-nowrap py-2">
+                                                <span className="text-sm text-gray-600 dark:text-gray-400 px-1">{item.credit}</span>
                                         </td>
-                                        <td className="h-px w-px whitespace-nowrap">
-                                            <div className="px-6 py-2">
-                                                <div className="flex items-center gap-x-2">
-                                                    <span className="text-sm text-gray-600 dark:text-gray-400">{item.description}</span>
-                                                </div>
-                                            </div>
+                                        <td className="whitespace-nowrap py-2">
+                                                    <span className="text-sm text-gray-600 dark:text-gray-40 px-1">{item.description}</span>
                                         </td>
 
-                                        <td className="h-px w-px whitespace-nowrap">
-                                            <div className="px-6 py-2">
-                                                <span className="text-sm text-gray-600 dark:text-gray-400">{item.balance}</span>
-                                            </div>
+                                        <td className="whitespace-nowrap py-2">
+                                                <span className="text-sm text-gray-600 dark:text-gray-400 px-1">{item.balance}</span>
                                         </td>
 
 
-                                        <td className="h-px w-px whitespace-nowrap">
-                                            <div className="px-6 py-2">
-                                                <span className="text-sm text-gray-600 dark:text-gray-400">{moment(item.created_at).format('LT- ll')}</span>
-                                            </div>
+                                        <td className="whitespace-nowrap py-2">
+                                                <span className="text-sm text-gray-600 dark:text-gray-400 px-1">{moment(item.created_at).format('LT- ll')}</span>
                                         </td>
                                     </tr>
                                 })

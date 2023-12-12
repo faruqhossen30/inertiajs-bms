@@ -60,7 +60,7 @@ export default function BetNowModal({ matche, question, option }) {
                     {option.active == '0' && <LockClosedIcon className="h-4 w-4" />}
                     {option.title}
                 </span>
-                <span className="bg-gray-300 dark:bg-gray-700 font-bold p-1 px-4 dark:text-slate-100">{option.bet_rate}</span>
+                <span className="bg-gray-300 dark:bg-gray-700 font-bold p-1 px-4 dark:text-slate-100">{Number(option.bet_rate).toFixed(2)}</span>
             </div>
             <Transition show={isOpen} as={Fragment}>
                 <Dialog as="div" className="relative z-10" onClose={closeModal}>
@@ -117,13 +117,13 @@ export default function BetNowModal({ matche, question, option }) {
                                             <li className="inline-flex items-center gap-x-2 py-3 px-4 text-sm border text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg dark:border-gray-700 dark:text-gray-200">
                                                 <div className="flex items-center justify-between w-full">
                                                     <span> {option.title}</span>
-                                                    <span>Rate : {option.bet_rate}</span>
+                                                    <span>Rate : {Number(option.bet_rate).toFixed(2)}</span>
                                                 </div>
                                             </li>
                                             <li className="inline-flex items-center gap-x-2 py-3 px-4 text-sm font-semibold bg-gray-50 border text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg dark:bg-slate-800 dark:border-gray-700 dark:text-gray-200">
                                                 <div className="flex items-center justify-between w-full">
                                                     <span>Possible To Win</span>
-                                                    <span>${data.bet_rate * data.bet_amount}</span>
+                                                    <span>${parseInt(data.bet_rate * data.bet_amount)}</span>
                                                 </div>
                                             </li>
                                         </ul>

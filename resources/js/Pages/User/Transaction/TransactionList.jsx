@@ -30,7 +30,6 @@ export default function TransactionList({transactions}) {
                                         <TH title="Credit" />
                                         <TH title="Debit" />
                                         <TH title="Description" />
-                                        <TH title="Status" />
                                         <TH title="Balance" />
                                         <TH title="Time" />
                                     </THead>
@@ -39,46 +38,46 @@ export default function TransactionList({transactions}) {
                                             transactions.data.map((item, index) => {
                                                 return <tr key={index}>
                                                     <td className="h-px w-px whitespace-nowrap">
-                                                        <div className="px-6 py-2">
+                                                        <div className="px-1 py-2">
                                                             <span className="text-sm text-gray-600 dark:text-gray-400">{index + 1}</span>
                                                         </div>
                                                     </td>
                                                     <td className="h-px w-px whitespace-nowrap">
-                                                        <div className="px-6 py-2">
+                                                        <div className="px-1 py-2">
                                                             <span className="text-sm text-gray-600 dark:text-gray-400">{item.credit}</span>
                                                         </div>
                                                     </td>
                                                     <td className="h-px w-px whitespace-nowrap">
-                                                        <div className="px-6 py-2">
+                                                        <div className="px-1 py-2">
                                                             <span className="text-sm text-gray-600 dark:text-gray-400">{item.debit}</span>
                                                         </div>
                                                     </td>
                                                     <td className="h-px w-px whitespace-nowrap">
-                                                        <div className="px-6 py-2">
+                                                        <div className="px-1 py-2">
                                                             <span className="text-sm text-gray-600 dark:text-gray-400">{item.description}</span>
                                                         </div>
                                                     </td>
-                                                    <td className="h-px w-px whitespace-nowrap">
+                                                    {/* <td className="h-px w-px whitespace-nowrap">
                                                         {
                                                             item.status ?
-                                                                <div className="px-6 py-2">
-                                                                    <span className="inline-flex items-center gap-1.5 py-0.5 px-2 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">
+                                                                <div className="px-1 py-2">
+                                                                    <span className="inline-flex items-center py-0.5 px-1 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">
                                                                         <CheckBadgeIcon className="h-4 w-4" />
                                                                         Active
                                                                     </span>
                                                                 </div>
                                                                 :
-                                                                <div className="px-6 py-2">
-                                                                    <span className="inline-flex items-center gap-1.5 py-0.5 px-2 rounded-full text-xs font-medium bg-red-100 text-green-800 dark:bg-green-900 dark:text-red-200">
+                                                                <div className="px-1 py-2">
+                                                                    <span className="inline-flex items-center py-0.5 px-1 rounded-full text-xs font-medium bg-red-100 text-green-800 dark:bg-green-900 dark:text-red-200">
                                                                         <XCircleIcon className="h-4 w-4" />
                                                                         Pending
                                                                     </span>
                                                                 </div>
                                                         }
 
-                                                    </td>
+                                                    </td> */}
                                                     <td className="h-px w-px whitespace-nowrap">
-                                                        <div className="px-6 py-2">
+                                                        <div className="px-1 py-2">
                                                             <div className="flex items-center gap-x-2">
                                                                 <span className="text-sm text-gray-600 dark:text-gray-400">{item.balance}</span>
                                                             </div>
@@ -86,7 +85,7 @@ export default function TransactionList({transactions}) {
                                                     </td>
 
                                                     <td className="h-px w-px whitespace-nowrap">
-                                                        <div className="px-6 py-2">
+                                                        <div className="px-1 py-2">
                                                             <span className="text-sm text-gray-600 dark:text-gray-400">{moment(item.created_at).calendar()}</span>
                                                         </div>
                                                     </td>
