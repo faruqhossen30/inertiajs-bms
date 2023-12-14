@@ -2,15 +2,18 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enum\MatchetypeEnum;
 use App\Http\Controllers\Controller;
 use App\Models\AutoOption;
 use App\Models\AutoQuestion;
 use App\Models\Game;
+use App\Models\HidePanel;
 use App\Models\Matche;
 use App\Models\MatcheQuestion;
 use App\Models\QuestionOption;
 use App\Models\Team;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class MatcheController extends Controller
@@ -22,12 +25,30 @@ class MatcheController extends Controller
      */
     public function index()
     {
-        $matches = Matche::with(['questions', 'bets'])
-            ->with(['questions.options', 'questions.bets'])
-            ->with(['questions.options.bets'])
-            ->orderBy('created_at', 'desc')
+        $hides = HidePanel::where('user_id', Auth::user()->id)
+            ->get()->pluck('matche_id')
+            ->toArray();
+
+        $matches = Matche::with(['questions', 'bets', 'questions.options', 'questions.bets', 'questions.options.bets'])
+            ->whereNotIn('id', $hides)
+            ->orderBy('status', 'asc')
             ->get();
-        return Inertia::render('Admin/Matche/Index',['matches'=>$matches]);
+
+        // $matches = Matche::with(['questions', 'bets'])
+        //     ->with(['questions.options', 'questions.bets'])
+        //     ->with(['questions.options.bets'])
+        //     ->orderBy('status', 'asc')
+        //     ->get();
+
+
+
+        // $matches = Matche::
+        // whereNotIn('id',$hides)
+        // ->orderBy('status', 'asc')
+        // ->get();
+
+        // return $matches;
+        return Inertia::render('Admin/Matche/Index', ['matches' => $matches]);
     }
 
     /**
@@ -39,7 +60,7 @@ class MatcheController extends Controller
     {
         $countries = Team::get();
         $games = Game::get();
-        return Inertia::render('Admin/Matche/Create',['countries'=>$countries,'games'=>$games]);
+        return Inertia::render('Admin/Matche/Create', ['countries' => $countries, 'games' => $games]);
     }
 
     /**
@@ -146,7 +167,7 @@ class MatcheController extends Controller
 
         $matche = Matche::firstWhere('id', $id);
         // return view('admin.matche.edit', compact('match', 'countries', 'games'));
-        return Inertia::render('Admin/Matche/Edit',['countries'=>$countries,'games'=>$games,'matche'=>$matche]);
+        return Inertia::render('Admin/Matche/Edit', ['countries' => $countries, 'games' => $games, 'matche' => $matche]);
     }
 
     /**
@@ -178,7 +199,7 @@ class MatcheController extends Controller
             'note' => $request->note,
             'status' => $request->status,
         ];
-        Matche::firstWhere('id',$id)->update($data);
+        Matche::firstWhere('id', $id)->update($data);
         return to_route('matche.index');
     }
 
@@ -236,6 +257,16 @@ class MatcheController extends Controller
         ]);
         // MatcheQuestion::where('matche_id', $id)->update(['active'=>$match->active]);
         // QuestionOption::where('matche_id', $id)->update(['active'=>$match->active]);
+        return to_route('matche.index');
+    }
+
+    public function matcheToLive($id)
+    {
+        $match = Matche::firstWhere('id', $id);
+
+        $update = $match->update([
+            'status' => MatchetypeEnum::LIVE,
+        ]);
         return to_route('matche.index');
     }
 }

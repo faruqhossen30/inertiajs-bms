@@ -147,7 +147,7 @@ export default function Create({ games }) {
                                                         {/* onClick={addItem} */}
                                                         {/* <div> */}
 
-                                                        <button type="button" onClick={addItem} class="py-2 px-2 my-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-gray-600 text-white hover:bg-gray-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
+                                                        <button type="button" onClick={addItem} className="py-2 px-2 my-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-gray-600 text-white hover:bg-gray-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
                                                             <PlusSmallIcon className="h-4 w-4" />
                                                             Add Item
                                                         </button>

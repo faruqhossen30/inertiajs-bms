@@ -31,6 +31,11 @@ class Matche extends Model
         return $this->belongsTo(Game::class,'game_id');
     }
 
+    public function hides()
+    {
+        return $this->hasMany(HidePanel::class);
+    }
+
 
 
 

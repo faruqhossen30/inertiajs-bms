@@ -12,7 +12,7 @@ export default function Rightsidebar({matches}) {
             </div>
             {
                 matches.map((match, index) => {
-                    return match.status == 'upcoming' && <Disclosure as='div' className='shadow-sm dark:shadow-black my-1 border border-purple-300 dark:border-gray-700 text-sm rounded-lg' defaultOpen key={index}>
+                    return match.status == 'upcoming' && <Disclosure as='div' className='shadow-sm dark:shadow-black my-1 border border-purple-300 dark:border-gray-700 text-sm rounded-lg' key={index}>
                         <Disclosure.Button as='div' className="cursor-pointer p-2">
                             <div className='grid grid-cols-3 items-center w-full text-black dark:text-slate-200'>
                                 <div className='col-span-1 flex items-center space-x-1'>

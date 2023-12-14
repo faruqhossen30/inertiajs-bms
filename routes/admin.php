@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\BetController;
 use App\Http\Controllers\Admin\ClubController;
 use App\Http\Controllers\Admin\DepositController;
 use App\Http\Controllers\Admin\GameController;
+use App\Http\Controllers\Admin\Matche\MatchehidepanelController;
 use App\Http\Controllers\Admin\MatcheController;
 use App\Http\Controllers\Admin\MatchequestionController;
 use App\Http\Controllers\Admin\PaymentgatewayController;
@@ -60,6 +61,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
     Route::get('matche/areahide/{id}', [MatcheController::class, 'areHideToggle'])->name('matchearehidetoggle');
     Route::get('matche/activetoggle/{id}', [MatcheController::class, 'activeToggle'])->name('matcheactivetoggle');
 
+    Route::post('matche/tolive/{id}', [MatcheController::class, 'matcheToLive'])->name('matchetolive');
+    Route::post('matchehidepanel/{id}', [MatchehidepanelController::class, 'matcheHidePanel'])->name('matchehidepanel');
+    Route::post('matche/topannel/{id}', [MatchehidepanelController::class, 'matcheToPanel'])->name('matchetopanel');
+    Route::get('hiddenmatch', [MatchehidepanelController::class, 'hiddenMatcheList'])->name('hiddenmatchelist');
+
     // Matche Question
     Route::get('matche/{id}/matchequestion/create', [MatchequestionController::class, 'create'])->name('matchequestion.create');
     Route::post('matche/{id}/matchequestion/create', [MatchequestionController::class, 'store'])->name('matchequestion.store');
@@ -69,6 +75,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
     Route::get('/matchequestion/activetoggle/{id}', [MatchequestionController::class, 'activeToggle'])->name('matchequestion.activetoggle');
     Route::get('/matchequestion/areahidetoggle/{id}', [MatchequestionController::class, 'areaHideToggle'])->name('matchequestion.areahidetoggle');
     Route::post('matchequestiondelete/{id}', [MatchequestionController::class, 'matcheQuetionDelete'])->name('matchequestion.delete');
+
+
 
     // Matche Option
     Route::resource('option', QuestionoptionController::class);
