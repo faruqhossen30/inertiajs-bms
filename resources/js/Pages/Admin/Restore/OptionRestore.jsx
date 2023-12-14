@@ -7,7 +7,7 @@ import THead from '@/Components/Table/THead';
 import TH from '@/Components/Table/TH';
 import TBody from '@/Components/Table/TBody';
 import Pagination from '@/Components/Table/Pagination';
-import moment from 'moment';
+import moment from 'moment-timezone';
 import { CheckBadgeIcon } from '@heroicons/react/24/outline';
 
 export default function OptionRestore({ options }) {
@@ -64,7 +64,7 @@ export default function OptionRestore({ options }) {
                                         </td>
                                         <td className="h-px w-px whitespace-nowrap">
                                             <div className="px-2 py-2">
-                                                <span className="text-sm text-gray-600 dark:text-gray-400">{moment(item.created_at).format('LT- ll')}</span>
+                                                <span className="text-sm text-gray-600 dark:text-gray-400">{moment(item.created_at).tz("Asia/Dhaka").format('LT- ll')}</span>
                                             </div>
                                         </td>
 

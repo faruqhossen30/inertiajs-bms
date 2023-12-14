@@ -8,7 +8,7 @@ import Table from '@/Components/Table/Table';
 import AppLayout from '@/Layouts/AppLayout'
 import { CheckBadgeIcon, EyeIcon, FunnelIcon, PencilSquareIcon, TrashIcon, XCircleIcon } from '@heroicons/react/24/outline';
 import { Head, Link } from '@inertiajs/react'
-import moment from 'moment';
+import moment from 'moment-timezone';
 import React from 'react'
 
 export default function DepositList({deposits}) {

@@ -5,7 +5,7 @@ import EditButton from '@/Components/button/EditButton';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { CalendarDaysIcon, CheckBadgeIcon, CheckCircleIcon, CheckIcon, ClockIcon, CurrencyBangladeshiIcon, DevicePhoneMobileIcon, EnvelopeIcon, EyeIcon, FunnelIcon, HashtagIcon, PencilIcon, TrashIcon, UserIcon, UsersIcon, XCircleIcon } from '@heroicons/react/24/outline';
 import { Head, Link, useForm } from '@inertiajs/react';
-import moment from 'moment';
+import moment from 'moment-timezone';
 
 export default function Index({ user }) {
     console.log(user);
@@ -66,7 +66,7 @@ export default function Index({ user }) {
                         </li>
                         <li className="inline-flex items-center gap-x-3.5 py-3 px-4 text-sm font-medium bg-white border text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg dark:bg-gray-800 dark:border-gray-700 dark:text-white">
                             <CalendarDaysIcon className="h-4 w-4" />
-                            Join Date : {moment(user.created_at).format('lll')}
+                            Join Date : {moment(user.created_at).tz("Asia/Dhaka").format('lll')}
                         </li>
                     </ul>
                 </div>

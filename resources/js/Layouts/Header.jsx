@@ -1,32 +1,31 @@
 import Switcher from '@/Components/Common/Switcher'
 import LogoutModal from '@/Components/Modal/LogoutModal'
 import { Link, usePage } from '@inertiajs/react'
-import moment from 'moment'
+import moment from 'moment-timezone'
 import React from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
 
 export default function Header() {
     const { auth } = usePage().props;
-    let [clocktime, setClocktime] = useState(moment().format('LTS'))
+    let [clocktime, setClocktime] = useState(moment().tz("Asia/Dhaka").format('LTS'))
 
     useEffect(() => {
         console.log('log');
         setInterval(()=>{
-            setClocktime(moment().format('LTS'))
+            setClocktime(moment().tz("Asia/Dhaka").format('LTS'))
         },1000)
     }, []);
 
 
 
     return (
-        <header className='z-10 sticky top-0 flex items-center justify-between px-2 bg-slate-100 dark:bg-gray-700 shadow-md py-2'>
+        <header className='z-10 sticky top-0 flex items-center justify-between px-1 md:px-2 bg-slate-100 dark:bg-gray-700 shadow-md py-2'>
             <div>
                 <Link href={route('homepage')}><img src="/logo.png" alt="" className='h-6' /></Link>
             </div>
             <div>
-                {/* <span className="font-normal text-sm rounded-sm text-purple-800 dark:text-gray-200 px-3 py-1">{moment().format('LTS')}</span> */}
-                <span className="font-bold text-sm rounded-sm text-purple-800 dark:text-gray-200 px-3 py-1">{clocktime}</span>
+                <span className="font-bold text-sm rounded-sm text-purple-800 dark:text-gray-200 px-1 md:px-3 py-1">{clocktime}</span>
             </div>
             <div className=' space-x-1'>
                 {auth.user && (auth.user.is_user || auth.user.is_club) ?

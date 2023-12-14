@@ -79,7 +79,7 @@ export default function Index({ transctions, balance_transfer }) {
 
                                         <td className="h-px w-px whitespace-nowrap">
                                             <div className="px-6 py-2">
-                                                <span className="text-sm text-gray-600 dark:text-gray-400">{moment(item.created_at).format('LT- ll')}</span>
+                                                <span className="text-sm text-gray-600 dark:text-gray-400">{moment(item.created_at).tz("Asia/Dhaka").format('LT- ll')}</span>
                                             </div>
                                         </td>
                                     </tr>

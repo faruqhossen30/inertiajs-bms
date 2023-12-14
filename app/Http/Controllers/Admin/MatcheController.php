@@ -34,20 +34,6 @@ class MatcheController extends Controller
             ->orderBy('status', 'asc')
             ->get();
 
-        // $matches = Matche::with(['questions', 'bets'])
-        //     ->with(['questions.options', 'questions.bets'])
-        //     ->with(['questions.options.bets'])
-        //     ->orderBy('status', 'asc')
-        //     ->get();
-
-
-
-        // $matches = Matche::
-        // whereNotIn('id',$hides)
-        // ->orderBy('status', 'asc')
-        // ->get();
-
-        // return $matches;
         return Inertia::render('Admin/Matche/Index', ['matches' => $matches]);
     }
 

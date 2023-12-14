@@ -1,7 +1,7 @@
 import { Dialog, Transition } from '@headlessui/react'
 import { CalendarIcon, ClockIcon, LockClosedIcon, XCircleIcon } from '@heroicons/react/24/outline';
 import { useForm } from '@inertiajs/react';
-import moment from 'moment';
+import moment from 'moment-timezone';
 import React, { Fragment, useState } from 'react'
 import SubmitButton from '../Form/SubmitButton';
 import InputLabel from '../Form/InputLabel';
@@ -110,7 +110,7 @@ export default function BetNowModal({ matche, question, option }) {
                                                     <span>Time</span>
                                                     <div className='text-center py-1 flex justify-center font-normal dark:text-slate-200'>
                                                         <span className='px-1'>{matche.title}</span>
-                                                        <span className='flex items-center text-sm space-x-1'> <CalendarIcon className="h-4 w-4" /> <span> {moment(matche.date_time).format('LL')}</span> <ClockIcon className="w-4 h-4" /> {moment(matche.date_time).format('LT')}</span>
+                                                        <span className='flex items-center text-sm space-x-1'> <CalendarIcon className="h-4 w-4" /> <span> {moment(matche.date_time).tz("Asia/Dhaka").format('LL')}</span> <ClockIcon className="w-4 h-4" /> {moment(matche.date_time).tz("Asia/Dhaka").format('LT')}</span>
                                                     </div>
                                                 </div>
                                             </li>

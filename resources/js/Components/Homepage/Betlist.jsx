@@ -1,6 +1,6 @@
 import { Disclosure } from '@headlessui/react';
 import { CalculatorIcon, CalendarIcon, ClockIcon, CloudArrowDownIcon, LockClosedIcon } from '@heroicons/react/24/outline';
-import moment from 'moment';
+import moment from 'moment-timezone';
 import React, { useState } from 'react'
 import BetNowModal from '../Modal/BetNowModal';
 import BetModal from '../Modal/BetModal';
@@ -34,7 +34,7 @@ export default function Betlist({ matches }) {
                                 <span className='px-1 font-bold'>{match.statement}</span>
                             </div>
                             <div className='text-center py-1 flex justify-center font-normal text-purple-800 dark:text-slate-200'>
-                                <span className='flex items-center text-sm space-x-1'> <CalendarIcon className="h-4 w-4" /> <span> {moment(match.date_time).format('LL')}</span> <ClockIcon className="w-4 h-4" /> {moment(match.date_time).format('LT')}</span>
+                                <span className='flex items-center text-sm space-x-1'> <CalendarIcon className="h-4 w-4" /> <span> {moment(match.date_time).tz("Asia/Dhaka").format('LL')}</span> <ClockIcon className="w-4 h-4" /> {moment(match.date_time).tz("Asia/Dhaka").format('LT')}</span>
                             </div>
                             {
                                 match.note &&

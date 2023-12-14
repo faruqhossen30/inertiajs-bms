@@ -13,7 +13,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { CalendarIcon, ClockIcon, EllipsisVerticalIcon, EyeSlashIcon, PlusIcon, PlusSmallIcon, PuzzlePieceIcon, Square2StackIcon, Squares2X2Icon, SquaresPlusIcon } from '@heroicons/react/24/outline';
 import { EyeDropperIcon, EyeIcon, HomeIcon, PencilIcon, TrashIcon } from '@heroicons/react/24/solid';
 import { Head, Link, useForm } from '@inertiajs/react';
-import moment from 'moment';
+import moment from 'moment-timezone';
 import { useState } from 'react';
 
 export default function Index({ auth, matches }) {
@@ -74,7 +74,7 @@ export default function Index({ auth, matches }) {
                                                 </span>
                                             </span>
                                             <span className="text-sm text-gray-600 dark:text-gray-400 flex space-x-3 items-center">
-                                                <CalendarIcon className="h-4 w-4" />  {moment(matche.date_time).format('LL')} <ClockIcon className="w-4 h-4" /> {moment(matche.date_time).format('LT')}
+                                                <CalendarIcon className="h-4 w-4" />  {moment(matche.date_time).tz("Asia/Dhaka").format('LL')} <ClockIcon className="w-4 h-4" /> {moment(matche.date_time).tz("Asia/Dhaka").format('LT')}
                                             </span>
 
                                         </div>
@@ -305,7 +305,7 @@ export default function Index({ auth, matches }) {
                                                 </span>
                                             </span>
                                             <span className="text-sm text-gray-600 dark:text-gray-400 flex space-x-3 items-center">
-                                                <CalendarIcon className="h-4 w-4" />  {moment(matche.date_time).format('LL')} <ClockIcon className="w-4 h-4" /> {moment(matche.date_time).format('LT')}
+                                                <CalendarIcon className="h-4 w-4" />  {moment(matche.date_time).tz("Asia/Dhaka").format('LL')} <ClockIcon className="w-4 h-4" /> {moment(matche.date_time).tz("Asia/Dhaka").format('LT')}
                                             </span>
 
                                         </div>
@@ -355,6 +355,10 @@ export default function Index({ auth, matches }) {
 
                                         <Link href={route('matche.destroy', matche.id)} method="Delete" as="button" className="py-1 px-2 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-red-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
                                             Delete
+                                        </Link>
+
+                                        <Link href={route('matchehidepanel', matche.id)} method="POST" as="button" className="py-1 px-2 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-yellow-600 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
+                                            Hide From Panel
                                         </Link>
 
                                         <Link href={route('matchetolive', matche.id)} method="POST" as="button" className="py-1 px-2 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-green-700 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">

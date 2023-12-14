@@ -7,7 +7,7 @@ import Table from '@/Components/Table/Table';
 import AppLayout from '@/Layouts/AppLayout'
 import { CheckBadgeIcon, EyeIcon, FunnelIcon, PencilSquareIcon, TrashIcon, XCircleIcon } from '@heroicons/react/24/outline';
 import { Head, Link } from '@inertiajs/react'
-import moment from 'moment';
+import moment from 'moment-timezone';
 import React from 'react'
 
 export default function ReferralList({users}) {
@@ -59,7 +59,7 @@ export default function ReferralList({users}) {
 
                                                     <td className="h-px w-px whitespace-nowrap">
                                                         <div className="px-2 py-2">
-                                                            <span className="text-sm text-gray-600 dark:text-gray-400">{moment(item.created_at).format('LT - ll')}</span>
+                                                            <span className="text-sm text-gray-600 dark:text-gray-400">{moment(item.created_at).tz("Asia/Dhaka").format('LT - ll')}</span>
                                                         </div>
                                                     </td>
 

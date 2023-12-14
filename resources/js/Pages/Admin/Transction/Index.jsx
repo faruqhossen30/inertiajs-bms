@@ -57,7 +57,7 @@ export default function Index({ auth, transctions }) {
 
 
                                         <td className="whitespace-nowrap py-2">
-                                                <span className="text-sm text-gray-600 dark:text-gray-400 px-1">{moment(item.created_at).format('LT- ll')}</span>
+                                                <span className="text-sm text-gray-600 dark:text-gray-400 px-1">{moment(item.created_at).tz("Asia/Dhaka").format('LT- ll')}</span>
                                         </td>
                                     </tr>
                                 })

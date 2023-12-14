@@ -106,7 +106,7 @@ export default function Index({ withdraws,withdraw_system }) {
                                         </td>
                                         <td className="whitespace-nowrap">
                                             <div className="px-1 py-2">
-                                                <span className="text-sm text-gray-600 dark:text-gray-400">{moment(item.created_at).format('LT- ll')}</span>
+                                                <span className="text-sm text-gray-600 dark:text-gray-400">{moment(item.created_at).tz("Asia/Dhaka").format('LT- ll')}</span>
                                             </div>
                                         </td>
                                         <td className="whitespace-nowrap">
