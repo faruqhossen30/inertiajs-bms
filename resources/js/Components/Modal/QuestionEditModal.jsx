@@ -5,7 +5,6 @@ import InputLabel from '../Form/InputLabel'
 import Input from '../Form/Input'
 import { useForm } from '@inertiajs/react'
 import SubmitButton from '../Form/SubmitButton'
-import { useEffect } from 'react'
 
 export default function QuestionEditModal({question}) {
     const { data, setData, put, processing, errors, reset } = useForm({

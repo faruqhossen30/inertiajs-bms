@@ -1,6 +1,5 @@
-import { Menu } from '@headlessui/react'
-import { HomeModernIcon, ListBulletIcon, PowerIcon, QueueListIcon, UserCircleIcon } from '@heroicons/react/24/outline'
-import { BanknotesIcon, ClipboardIcon, HomeIcon, UserIcon, UsersIcon, WalletIcon } from '@heroicons/react/24/solid'
+import { HomeModernIcon, PowerIcon, QueueListIcon, UserCircleIcon } from '@heroicons/react/24/outline'
+import { BanknotesIcon, UserIcon, WalletIcon } from '@heroicons/react/24/solid'
 import { Link, usePage } from '@inertiajs/react'
 import React from 'react'
 
