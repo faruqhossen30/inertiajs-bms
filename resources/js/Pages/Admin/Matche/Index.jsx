@@ -284,7 +284,7 @@ export default function Index({ auth, matches }) {
                                 <div className="hs-accordion active border border-gray-400 dark:border-gray-200 text-gray-600 dark:text-gray-400" id="hs-basic-no-arrow-heading-one">
                                     <div className="hs-accordion-toggle cursor-pointer hs-accordion-active:text-blue-600 group py-3 inline-flex items-center gap-x-1 w-full font-semibold text-left text-gray-800 transition hover:text-gray-500 dark:hs-accordion-active:text-blue-500 dark:text-gray-200 dark:hover:text-gray-400 px-1" aria-controls="hs-basic-no-arrow-collapse-one">
                                         <div>
-                                            <img className="w-8 h-8" src={window.location.protocol+'//'+ window.location.host +'/'+game.image} alt="" />
+                                            <img className="w-8 h-8" src={window.location.protocol+'//'+ window.location.host +'/'+matche.game.image} alt="" />
                                         </div>
                                         <div className="flex flex-col">
                                             <span className="text-sm text-gray-600 dark:text-gray-400">{matche.team_one} Vs {matche.team_two} ||  {matche.statement} || Bet:
