@@ -3,6 +3,7 @@ import { Dialog, Transition } from '@headlessui/react'
 import { Fragment } from 'react'
 import { ArrowPathIcon, EyeSlashIcon } from '@heroicons/react/24/outline'
 import Axios from 'axios'
+import { useEffect } from 'react'
 
 export default function HiddenMatcheModal() {
     let [isOpen, setIsOpen] = useState(false)
