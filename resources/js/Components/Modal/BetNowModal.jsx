@@ -4,8 +4,6 @@ import { useForm } from '@inertiajs/react';
 import moment from 'moment-timezone';
 import React, { Fragment, useState } from 'react'
 import SubmitButton from '../Form/SubmitButton';
-import InputLabel from '../Form/InputLabel';
-import Input from '../Form/Input';
 
 export default function BetNowModal({ matche, question, option }) {
     const { data, setData, post, processing, errors, reset } = useForm({

@@ -29,9 +29,9 @@ class MatcheController extends Controller
             ->get()->pluck('matche_id')
             ->toArray();
 
-        $matches = Matche::with(['questions', 'bets', 'questions.options', 'questions.bets', 'questions.options.bets'])
+        $matches = Matche::with(['game','questions', 'bets', 'questions.options', 'questions.bets', 'questions.options.bets'])
             ->whereNotIn('id', $hides)
-            ->orderBy('status', 'asc')
+            ->orderBy('date_time','asc')
             ->get();
 
         return Inertia::render('Admin/Matche/Index', ['matches' => $matches]);

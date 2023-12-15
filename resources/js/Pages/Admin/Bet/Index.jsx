@@ -10,7 +10,7 @@ import THead from '@/Components/Table/THead';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { ArrowPathIcon, CheckBadgeIcon, CheckIcon, EyeIcon, FunnelIcon, PencilIcon, TrashIcon, XCircleIcon } from '@heroicons/react/24/outline';
 import { Head, Link, useForm } from '@inertiajs/react';
-import moment from 'moment/moment';
+import moment from 'moment-timezone';
 import { useState } from 'react';
 
 export default function Index({ auth, bets }) {

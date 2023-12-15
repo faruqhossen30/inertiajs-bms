@@ -7,10 +7,9 @@ import THead from '@/Components/Table/THead';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { CheckBadgeIcon, CheckCircleIcon, CheckIcon, EyeIcon, FunnelIcon, PencilIcon, TrashIcon, XCircleIcon } from '@heroicons/react/24/outline';
 import { Head, Link } from '@inertiajs/react';
-import moment from 'moment/moment';
+import moment from 'moment-timezone';
 
 export default function Index({ auth, deposits }) {
-    console.log(deposits);
     return (
         <AuthenticatedLayout
             user={auth.user}

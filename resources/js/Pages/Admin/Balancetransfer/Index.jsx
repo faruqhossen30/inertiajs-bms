@@ -8,7 +8,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Switch } from '@headlessui/react';
 import { CheckBadgeIcon, CheckIcon, EyeIcon, FunnelIcon, PencilIcon, PowerIcon, TrashIcon, XCircleIcon } from '@heroicons/react/24/outline';
 import { Head, Link } from '@inertiajs/react';
-import moment from 'moment/moment';
+import moment from 'moment-timezone';
 import { useState } from 'react';
 
 export default function Index({ transctions, balance_transfer }) {

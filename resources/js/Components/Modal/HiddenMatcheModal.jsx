@@ -1,18 +1,12 @@
 import React, { useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { Fragment } from 'react'
-import InputLabel from '../Form/InputLabel'
-import Input from '../Form/Input'
-import { Link, useForm } from '@inertiajs/react'
-import SubmitButton from '../Form/SubmitButton'
+import { useForm } from '@inertiajs/react'
 import { useEffect } from 'react'
 import { ArrowPathIcon, EyeSlashIcon } from '@heroicons/react/24/outline'
-import { router } from '@inertiajs/react'
 import Axios from 'axios'
 
 export default function HiddenMatcheModal() {
-    const { data, setData, put, processing, errors, reset, get } = useForm();
-
     let [isOpen, setIsOpen] = useState(false)
     let [allmatche, setAllMatche] = useState([])
     function openModal() {
@@ -22,9 +16,6 @@ export default function HiddenMatcheModal() {
         setIsOpen(false)
     }
 
-    function submit(e) {
-        e.preventDefault()
-    }
     function loadData() {
         Axios.get(route('hiddenmatchelist'))
             .then((data) => {
@@ -32,8 +23,6 @@ export default function HiddenMatcheModal() {
                 console.log(data.data);
             })
     }
-
-
 
     useEffect(() => {
         loadData();
@@ -97,11 +86,6 @@ export default function HiddenMatcheModal() {
                                                                             <td className="px-1 py-3 whitespace-nowrap text-sm font-medium text-center text-gray-800 dark:text-gray-200">{index + 1}</td>
                                                                             <td className="px-1 py-3 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">{item.team_one} VS {item.team_two}</td>
                                                                             <td className="px-1 py-3 whitespace-nowrap text-end text-sm font-medium">
-                                                                                {/* <button onClick={() => addToPannel(item.id)} as="button" className="inline-flex flex-shrink-0 py-1 px-2 justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm  dark:focus:ring-offset-gray-800">
-                                                                                    <ArrowPathIcon className="w-4 h-4" />
-                                                                                    <span>To Live</span>
-                                                                                </button> */}
-
                                                                                 <AddToPannelButton matcheId={item.id} loadData={loadData} />
                                                                             </td>
                                                                         </tr>
