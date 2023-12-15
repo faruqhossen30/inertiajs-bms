@@ -8,7 +8,7 @@ import THead from '@/Components/Table/THead';
 import Table from '@/Components/Table/Table';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { PlusIcon, QuestionMarkCircleIcon, ShieldCheckIcon } from '@heroicons/react/24/outline';
-import { EyeDropperIcon, EyeIcon, HomeIcon, PencilIcon, TrashIcon } from '@heroicons/react/24/solid';
+import { PencilIcon, TrashIcon } from '@heroicons/react/24/solid';
 import { Head, Link, useForm } from '@inertiajs/react';
 import AutoquestionOptionEditModal from './AutoquestionOptionEditModal';
 

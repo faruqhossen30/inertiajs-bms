@@ -1,7 +1,6 @@
 import StatementCard from '@/Components/Homepage/StatementCard'
 import AppLayout from '@/Layouts/AppLayout'
-import { BanknotesIcon, BellAlertIcon, CheckIcon, CurrencyDollarIcon, DevicePhoneMobileIcon, HomeIcon, InboxIcon, ListBulletIcon, PuzzlePieceIcon, UserCircleIcon, UserGroupIcon, UserPlusIcon, UsersIcon, WalletIcon } from '@heroicons/react/24/outline'
-import { CheckBadgeIcon, UserIcon } from '@heroicons/react/24/solid'
+import { BanknotesIcon, BellAlertIcon, CurrencyDollarIcon,  HomeIcon, ListBulletIcon, UserPlusIcon } from '@heroicons/react/24/outline'
 import { Head, Link } from '@inertiajs/react'
 import React from 'react'
 

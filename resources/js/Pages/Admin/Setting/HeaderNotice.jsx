@@ -8,8 +8,6 @@ export default function HeaderNotice() {
         header_notice: headerNotice ?? '',
     })
 
-    console.log(headerNotice);
-
     function submit(e) {
         e.preventDefault()
         console.log(data);

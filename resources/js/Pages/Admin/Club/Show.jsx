@@ -3,8 +3,8 @@ import SubmitButton from '@/Components/Form/SubmitButton';
 import DeleteButton from '@/Components/button/DeleteButton';
 import EditButton from '@/Components/button/EditButton';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { CalendarDaysIcon, CheckBadgeIcon, CheckCircleIcon, CheckIcon, CurrencyBangladeshiIcon, DevicePhoneMobileIcon, EnvelopeIcon, EyeIcon, FunnelIcon, PencilIcon, TrashIcon, UserIcon, UsersIcon, XCircleIcon } from '@heroicons/react/24/outline';
-import { Head, Link, useForm } from '@inertiajs/react';
+import { CalendarDaysIcon, CheckCircleIcon, CurrencyBangladeshiIcon, DevicePhoneMobileIcon, EnvelopeIcon, EyeIcon, FunnelIcon, PencilIcon, TrashIcon, UserIcon, UsersIcon, XCircleIcon } from '@heroicons/react/24/outline';
+import { Head, useForm } from '@inertiajs/react';
 import moment from 'moment-timezone';
 
 export default function Index({club }) {

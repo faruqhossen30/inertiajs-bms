@@ -1,6 +1,5 @@
 import AppLayout from '@/Layouts/AppLayout'
-import { CheckIcon, CurrencyBangladeshiIcon, DevicePhoneMobileIcon, HomeIcon, InboxIcon, PuzzlePieceIcon, UserCircleIcon, UserGroupIcon, UsersIcon, WalletIcon } from '@heroicons/react/24/outline'
-import { CheckBadgeIcon, UserIcon } from '@heroicons/react/24/solid'
+import { CurrencyBangladeshiIcon, DevicePhoneMobileIcon, InboxIcon, UserCircleIcon, UserGroupIcon, UsersIcon } from '@heroicons/react/24/outline'
 import { Head } from '@inertiajs/react'
 import React from 'react'
 

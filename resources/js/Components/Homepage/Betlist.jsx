@@ -1,9 +1,7 @@
 import { Disclosure } from '@headlessui/react';
-import { CalculatorIcon, CalendarIcon, ClockIcon, CloudArrowDownIcon, LockClosedIcon } from '@heroicons/react/24/outline';
+import { CalendarIcon, ClockIcon, LockClosedIcon } from '@heroicons/react/24/outline';
 import moment from 'moment-timezone';
-import React, { useState } from 'react'
 import BetNowModal from '../Modal/BetNowModal';
-import BetModal from '../Modal/BetModal';
 
 export default function Betlist({ matches }) {
     return (

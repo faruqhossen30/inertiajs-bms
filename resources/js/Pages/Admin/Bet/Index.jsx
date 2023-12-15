@@ -1,17 +1,14 @@
 import Breadcum from '@/Components/Dashboard/Breadcum';
 import Input from '@/Components/Form/Input';
-import InputLabel from '@/Components/Form/InputLabel';
-import SubmitButton from '@/Components/Form/SubmitButton';
 import Pagination from '@/Components/Table/Pagination';
 import Table from '@/Components/Table/Table';
 import TBody from '@/Components/Table/TBody';
 import TH from '@/Components/Table/TH';
 import THead from '@/Components/Table/THead';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { ArrowPathIcon, CheckBadgeIcon, CheckIcon, EyeIcon, FunnelIcon, PencilIcon, TrashIcon, XCircleIcon } from '@heroicons/react/24/outline';
-import { Head, Link, useForm } from '@inertiajs/react';
+import { ArrowPathIcon} from '@heroicons/react/24/outline';
+import { Head, useForm } from '@inertiajs/react';
 import moment from 'moment-timezone';
-import { useState } from 'react';
 
 export default function Index({ auth, bets }) {
     const { data, setData, post, processing, errors, reset } = useForm({

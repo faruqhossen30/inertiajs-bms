@@ -1,4 +1,4 @@
-import { CheckCircleIcon, CheckIcon, EyeIcon, PuzzlePieceIcon, StopIcon, XCircleIcon } from '@heroicons/react/24/outline'
+import { CheckCircleIcon, EyeIcon, PuzzlePieceIcon, StopIcon, XCircleIcon } from '@heroicons/react/24/outline'
 import { EyeSlashIcon } from '@heroicons/react/24/solid'
 import { Link } from '@inertiajs/react'
 import React from 'react'

@@ -1,8 +1,7 @@
 
 import { Link, usePage } from '@inertiajs/react';
 import Switcher from '../Common/Switcher'
-import { useRef } from 'react';
-import { ArrowPathIcon, BanknotesIcon, BellIcon, CurrencyBangladeshiIcon, ListBulletIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline';
+import { ArrowPathIcon, CurrencyBangladeshiIcon, ListBulletIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 
 export default function Navbar() {
     const { auth } = usePage().props

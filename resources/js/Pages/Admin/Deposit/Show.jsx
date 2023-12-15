@@ -1,8 +1,8 @@
 import Breadcum from '@/Components/Dashboard/Breadcum';
 import SubmitButton from '@/Components/Form/SubmitButton';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { CheckBadgeIcon, CheckIcon, EyeIcon, FunnelIcon, PencilIcon, TrashIcon, UserIcon, XCircleIcon } from '@heroicons/react/24/outline';
-import { Head, Link, useForm } from '@inertiajs/react';
+import { UserIcon } from '@heroicons/react/24/outline';
+import { Head, useForm } from '@inertiajs/react';
 import moment from 'moment-timezone';
 
 export default function Index({ auth, deposit }) {

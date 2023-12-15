@@ -1,4 +1,4 @@
-import { ArrowPathIcon, CurrencyBangladeshiIcon, HomeIcon, PauseCircleIcon, PuzzlePieceIcon, Squares2X2Icon, TrophyIcon, UserIcon, UsersIcon } from '@heroicons/react/24/outline';
+import { ArrowPathIcon, CurrencyBangladeshiIcon, PuzzlePieceIcon, Squares2X2Icon, TrophyIcon, UsersIcon } from '@heroicons/react/24/outline';
 import { CogIcon } from '@heroicons/react/24/solid';
 import { Link } from '@inertiajs/react';
 
