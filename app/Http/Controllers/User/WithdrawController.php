@@ -29,14 +29,20 @@ class WithdrawController extends Controller
     {
         $user = User::firstWhere('id', $request->user()->id);
 
+        $last_withdraw = Withdraw::orderBy('id', 'desc')
+        ->where(['user_id'=> Auth::user()->id,'status'=>'pending'])
+        ->first();
+
         $request->validate([
             'method' => 'required',
             'type' => 'required',
             'account' => 'required',
             'amount' => "required|numeric|min:50|max:{$user->balance}",
+            'pending'=> $last_withdraw ? 'required' : 'nullable',
         ], [
             "amount.min" => "Minimu withdraw amount 50 TK.",
             "amount.max" => "Insufficent balance! You can use maximum {$user->balance} TK",
+            'pending.required'=> 'You already have a withdraw request!'
         ]);
 
         $withdraw = Withdraw::create([

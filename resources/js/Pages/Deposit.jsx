@@ -27,6 +27,7 @@ export default function Deposit({gateways}) {
                         <h4>Deposit</h4>
                     </div>
                     <form onSubmit={submit} className='text-md p-4 space-y-2'>
+                    <p className="text-sm text-red-600 mt-2">{errors.pending}</p>
                         <div className="">
                             <label htmlFor="method" className="block text-sm font-medium mb-2 dark:text-gray-400">Method</label>
                             <select

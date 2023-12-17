@@ -70,7 +70,7 @@ export default function Profile({ auth, user }) {
                     </div>
                     <div className='flex items-center justify-start space-x-2 p-2'>
                         <UserGroupIcon className="h-4 w-4" />
-                        <span>CLub: {user.club.username}</span>
+                        <span>CLub: {user.club && user.club.username}</span>
                     </div>
                     <div className='flex items-center justify-start space-x-2 p-2'>
                         <UserGroupIcon className="h-4 w-4" />

@@ -43,13 +43,21 @@ class DepositController extends Controller
     public function store(Request $request)
     {
         // return $request->all();
-        $request->validate([
+        $last_deposit = Deposit::orderBy('id', 'desc')
+        ->where(['user_id'=> Auth::user()->id,'status'=>'pending'])
+        ->first();
+
+        $validation = $request->validate([
             'method'=> 'required',
             'amount'=> 'required',
             'from_account'=> 'required',
             'to_account'=> 'required',
-            // 'transaction_id'=> 'required',
+            'pending'=> $last_deposit ? 'required' : 'nullable',
+        ],[
+            'pending.required'=> 'You already have a deposit request!'
         ]);
+
+
 
         $data = [
             'user_id'=> $request->user()->id,

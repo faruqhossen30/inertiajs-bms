@@ -24,7 +24,7 @@ export default function Index({ auth, transctions }) {
                         <THead>
                             <TH title="S.N" />
                             <TH title="Username" />
-                            <TH title="Depit" />
+                            <TH title="Debit" />
                             <TH title="Credit" />
                             <TH title="Description" />
                             <TH title="Balance" />

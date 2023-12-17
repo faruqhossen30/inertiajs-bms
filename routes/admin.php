@@ -37,10 +37,12 @@ Route::get('admin/login', [AuthenticatedSessionController::class, 'create'])->na
 Route::post('admin/login', [AuthenticatedSessionController::class, 'store']);
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function () {
+
     Route::get('/dashboard', function () {
         $bets = Bet::whereDate('created_at', Carbon::today())->get();
         return Inertia::render('Admin/Dashboard', ['bets'=>$bets]);
     })->name('dashboard');
+
     // Admin
     Route::resource('deposit', DepositController::class);
     Route::resource('withdraw', WithdrawController::class);
@@ -76,13 +78,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
     Route::get('/matchequestion/areahidetoggle/{id}', [MatchequestionController::class, 'areaHideToggle'])->name('matchequestion.areahidetoggle');
     Route::post('matchequestiondelete/{id}', [MatchequestionController::class, 'matcheQuetionDelete'])->name('matchequestion.delete');
 
-
-
     // Matche Option
     Route::resource('option', QuestionoptionController::class);
     Route::get('option/activetoggle/{id}', [QuestionoptionController::class, 'activeToggle'])->name('option.activetoggle');
     Route::get('option/hidetoggle/{id}', [QuestionoptionController::class, 'hideToggle'])->name('option.hidetoggle');
-
 
 
     Route::resource('bet', BetController::class);

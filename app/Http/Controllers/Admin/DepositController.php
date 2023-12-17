@@ -94,14 +94,25 @@ class DepositController extends Controller
         ]);
 
 
-        if ($update) {
+        if ($update && $request->status == 'complete') {
             User::where('id', $deposit->user_id)->increment('balance', $deposit->amount);
             $user = User::firstWhere('id', $deposit->user_id);
 
             Transaction::create([
                 'user_id' => $deposit->user_id,
                 'credit' => $deposit->amount,
-                'description' => "Deposit {$deposit->amount} taka comfirmed !",
+                'description' => "Deposit {$deposit->amount} tk complete !",
+                'balance' =>  $user->balance,
+                'type' =>  TransactionTypeEnum::DEPOSIT,
+                'author_id' =>  Auth::user()->id
+            ]);
+        } elseif ($update && $request->status == 'cancle') {
+            // User::where('id', $deposit->user_id)->decrement('balance', $deposit->amount);
+            $user = User::firstWhere('id', $deposit->user_id);
+
+            Transaction::create([
+                'user_id' => $deposit->user_id,
+                'description' => "Deposit {$deposit->amount} tk cancle !",
                 'balance' =>  $user->balance,
                 'type' =>  TransactionTypeEnum::DEPOSIT,
                 'author_id' =>  Auth::user()->id
