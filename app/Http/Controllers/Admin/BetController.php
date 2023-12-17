@@ -16,7 +16,7 @@ class BetController extends Controller
      */
     public function index()
     {
-       $bets = Bet::with('user')->paginate();
+       $bets = Bet::with('user')->latest()->paginate();
        return Inertia::render('Admin/Bet/Index',['bets'=>$bets]);
     }
 
