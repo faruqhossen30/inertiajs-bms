@@ -13,6 +13,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
+use Illuminate\Validation\ValidationException;
 
 class BetController extends Controller
 {
@@ -38,13 +39,19 @@ class BetController extends Controller
             "bet_amount.max" => "Insufficent balance! You can use maximum {$user->balance} TK",
         ]);
 
+        $checkOption = QuestionOption::firstWhere('id', $request->option_id);
+        if($checkOption->bet_rate != $request->bet_rate){
+            return throw ValidationException::withMessages([
+                'rate_matching' => 'Opps ! Bet rate maybe changed ! Try Again.',
+            ],422);
+        }
 
 
         $checkQuestion = MatcheQuestion::where([
             'id' => $request->question_id,
             'active' => 1
         ])->first();
-        $checkOption = QuestionOption::firstWhere('id', $request->option_id);
+
 
         if ($checkQuestion && $checkOption->status) {
             $bet = Bet::create([

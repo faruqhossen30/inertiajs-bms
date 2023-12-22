@@ -4,6 +4,7 @@ import { useForm } from '@inertiajs/react';
 import moment from 'moment-timezone';
 import React, { Fragment, useState } from 'react'
 import SubmitButton from '../Form/SubmitButton';
+import BetmatchingError from '../Homepage/BetmatchingError';
 
 export default function BetNowModal({ matche, question, option }) {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -22,7 +23,7 @@ export default function BetNowModal({ matche, question, option }) {
     function openModal() {
         setIsOpen(true);
     }
-    function closeModal(){
+    function closeModal() {
         setIsOpen(false)
         setSubmitButton(true);
     }
@@ -95,74 +96,83 @@ export default function BetNowModal({ matche, question, option }) {
                                             <XCircleIcon className="h-4 w-4" />
                                         </button>
                                     </div>
-                                    <div className="p-3">
-                                        <ul className="mt-3 flex flex-col">
-                                            <li className="inline-flex items-center gap-x-2 py-3 px-4 text-sm border text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg dark:border-gray-700 dark:text-gray-200">
-                                                <div className="flex items-center justify-between w-full">
-                                                    <span>Question</span>
-                                                    <span>{question.title}</span>
-                                                </div>
-                                            </li>
-                                            <li className="inline-flex items-center gap-x-2 py-3 px-4 text-sm border text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg dark:border-gray-700 dark:text-gray-200">
-                                                <div className="flex items-center justify-between w-full">
-                                                    <span>Time</span>
-                                                    <div className='text-center py-1 flex justify-center font-normal dark:text-slate-200'>
-                                                        <span className='px-1'>{matche.title}</span>
-                                                        <span className='flex items-center text-sm space-x-1'> <CalendarIcon className="h-4 w-4" /> <span> {moment(matche.date_time).tz("Asia/Dhaka").format('LL')}</span> <ClockIcon className="w-4 h-4" /> {moment(matche.date_time).tz("Asia/Dhaka").format('LT')}</span>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li className="inline-flex items-center gap-x-2 py-3 px-4 text-sm border text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg dark:border-gray-700 dark:text-gray-200">
-                                                <div className="flex items-center justify-between w-full">
-                                                    <span> {option.title}</span>
-                                                    <span>Rate : {Number(option.bet_rate).toFixed(2)}</span>
-                                                </div>
-                                            </li>
-                                            <li className="inline-flex items-center gap-x-2 py-3 px-4 text-sm font-semibold bg-gray-50 border text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg dark:bg-slate-800 dark:border-gray-700 dark:text-gray-200">
-                                                <div className="flex items-center justify-between w-full">
-                                                    <span>Possible To Win</span>
-                                                    <span>${parseInt(data.bet_rate * data.bet_amount)}</span>
-                                                </div>
-                                            </li>
-                                        </ul>
-
-                                        <div className="py-2 overflow-y-auto">
-                                            <div className=" p-4 flex justify-center items-center flex-wrap space-x-1">
-                                                <span className="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-purple-100 bg-purple-600 rounded-full drop-shadow-md cursor-pointer" onClick={() => onClieAmount(100)}  >100</span>
-                                                <span className="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-purple-100 bg-purple-600 rounded-full drop-shadow-md cursor-pointer" onClick={() => onClieAmount(500)} >500</span>
-                                                <span className="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-purple-100 bg-purple-600 rounded-full drop-shadow-md cursor-pointer" onClick={() => onClieAmount(1000)} >1000</span>
-                                                <span className="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-purple-100 bg-purple-600 rounded-full drop-shadow-md cursor-pointer" onClick={() => onClieAmount(3000)} >3000</span>
-                                                <span className="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-purple-100 bg-purple-600 rounded-full drop-shadow-md cursor-pointer" onClick={() => onClieAmount(5000)} >5000</span>
+                                    {errors.rate_matching ?
+                                        <BetmatchingError />
+                                        :
+                                        <div className="p-3">
+                                            <div>
+                                                <p className="font-semibold text-red-500">{errors.rate_matching}</p>
                                             </div>
-                                            <form onSubmit={submit}>
-                                                <div>
-                                                    <div className="relative">
-                                                        <input
-                                                            name="bet_amount"
-                                                            value={data.bet_amount} onChange={e => setData('bet_amount', e.target.value)}
-                                                            type="number" id="hs-input-with-leading-and-trailing-icon" className="py-2 px-4 pl-9 pr-16 block w-full border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400" placeholder="0.00" />
-                                                        <div className="absolute inset-y-0 left-0 flex items-center pointer-events-none z-20 pl-4">
-                                                            <span className="text-gray-500 text-2xl">৳</span>
-                                                        </div>
-                                                        <div className="absolute inset-y-0 right-0 flex items-center pointer-events-none z-20 pr-4">
-                                                            <span className="text-gray-500">BDT</span>
+                                            <ul className="mt-3 flex flex-col">
+                                                <li className="inline-flex items-center gap-x-2 py-3 px-4 text-sm border text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg dark:border-gray-700 dark:text-gray-200">
+                                                    <div className="flex items-center justify-between w-full">
+                                                        <span>Question</span>
+                                                        <span>{question.title}</span>
+                                                    </div>
+                                                </li>
+                                                <li className="inline-flex items-center gap-x-2 py-3 px-4 text-sm border text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg dark:border-gray-700 dark:text-gray-200">
+                                                    <div className="flex items-center justify-between w-full">
+                                                        <span>Time</span>
+                                                        <div className='text-center py-1 flex justify-center font-normal dark:text-slate-200'>
+                                                            <span className='px-1'>{matche.title}</span>
+                                                            <span className='flex items-center text-sm space-x-1'> <CalendarIcon className="h-4 w-4" /> <span> {moment(matche.date_time).tz("Asia/Dhaka").format('LL')}</span> <ClockIcon className="w-4 h-4" /> {moment(matche.date_time).tz("Asia/Dhaka").format('LT')}</span>
                                                         </div>
                                                     </div>
-                                                    <p className="text-sm text-red-600 mt-2">{errors.bet_amount}</p>
+                                                </li>
+                                                <li className="inline-flex items-center gap-x-2 py-3 px-4 text-sm border text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg dark:border-gray-700 dark:text-gray-200">
+                                                    <div className="flex items-center justify-between w-full">
+                                                        <span> {option.title}</span>
+                                                        <span>Rate : {Number(option.bet_rate).toFixed(2)}</span>
+                                                    </div>
+                                                </li>
+                                                <li className="inline-flex items-center gap-x-2 py-3 px-4 text-sm font-semibold bg-gray-50 border text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg dark:bg-slate-800 dark:border-gray-700 dark:text-gray-200">
+                                                    <div className="flex items-center justify-between w-full">
+                                                        <span>Possible To Win</span>
+                                                        <span>${parseInt(data.bet_rate * data.bet_amount)}</span>
+                                                    </div>
+                                                </li>
+                                            </ul>
+
+                                            <div className="py-2 overflow-y-auto">
+                                                <div className=" p-4 flex justify-center items-center flex-wrap space-x-1">
+                                                    <span className="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-purple-100 bg-purple-600 rounded-full drop-shadow-md cursor-pointer" onClick={() => onClieAmount(100)}  >100</span>
+                                                    <span className="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-purple-100 bg-purple-600 rounded-full drop-shadow-md cursor-pointer" onClick={() => onClieAmount(500)} >500</span>
+                                                    <span className="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-purple-100 bg-purple-600 rounded-full drop-shadow-md cursor-pointer" onClick={() => onClieAmount(1000)} >1000</span>
+                                                    <span className="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-purple-100 bg-purple-600 rounded-full drop-shadow-md cursor-pointer" onClick={() => onClieAmount(3000)} >3000</span>
+                                                    <span className="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-purple-100 bg-purple-600 rounded-full drop-shadow-md cursor-pointer" onClick={() => onClieAmount(5000)} >5000</span>
                                                 </div>
-                                                {
-                                                    submitButton ?
-                                                        <SubmitButton title="BET NOW !" />
-                                                        : <button type="button" className="py-1 px-2 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
-                                                            <span className="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-white rounded-full" role="status" aria-label="loading"></span>
-                                                            Processing.
-                                                        </button>
+                                                <form onSubmit={submit}>
+                                                    <div>
+                                                        <div className="relative">
+                                                            <input
+                                                                name="bet_amount"
+                                                                value={data.bet_amount} onChange={e => setData('bet_amount', e.target.value)}
+                                                                type="number" id="hs-input-with-leading-and-trailing-icon" className="py-2 px-4 pl-9 pr-16 block w-full border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400" placeholder="0.00" />
+                                                            <div className="absolute inset-y-0 left-0 flex items-center pointer-events-none z-20 pl-4">
+                                                                <span className="text-gray-500 text-2xl">৳</span>
+                                                            </div>
+                                                            <div className="absolute inset-y-0 right-0 flex items-center pointer-events-none z-20 pr-4">
+                                                                <span className="text-gray-500">BDT</span>
+                                                            </div>
+                                                        </div>
+                                                        <p className="text-sm text-red-600 mt-2">{errors.bet_amount}</p>
+                                                    </div>
+                                                    {
+                                                        submitButton ?
+                                                            <SubmitButton title="BET NOW !" />
+                                                            : <button type="button" className="py-1 px-2 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
+                                                                <span className="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-white rounded-full" role="status" aria-label="loading"></span>
+                                                                Processing.
+                                                            </button>
 
-                                                }
+                                                    }
 
-                                            </form>
+                                                </form>
+                                            </div>
                                         </div>
-                                    </div>
+
+                                    }
+
                                 </Dialog.Panel>
                             </Transition.Child>
                         </div>

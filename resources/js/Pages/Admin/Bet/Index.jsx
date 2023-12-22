@@ -59,12 +59,13 @@ export default function Index({ auth, bets }) {
                 <div className="overflow-x-auto">
                     <Table>
                         <THead>
-                            <TH title="S.N" />
+                            <TH title="#" />
                             <TH title="S.N" />
                             <TH title="Username" />
                             <TH title="Matche" />
                             <TH title="Question" />
                             <TH title="Option" />
+                            <TH title="Rate" />
                             <TH title="Amount" />
                             <TH title="Status" />
                             <TH title="Time" />
@@ -74,7 +75,7 @@ export default function Index({ auth, bets }) {
                                 bets.data.map((item, index) => {
                                     return <tr key={index}>
                                         <td className="h-px w-px whitespace-nowrap">
-                                            <div className="ps-6 py-3">
+                                            <div className="ps-1 py-3">
                                                 <label htmlFor="hs-at-with-checkboxes-1" className="flex">
                                                     <input onChange={(e) => checkboxHandaller(e)} name='betid' value={item.id} type="checkbox" className="shrink-0 border-gray-300 rounded text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-600 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" id="hs-at-with-checkboxes-1" />
                                                     <span className="sr-only">Checkbox</span>
@@ -82,27 +83,27 @@ export default function Index({ auth, bets }) {
                                             </div>
                                         </td>
                                         <td className="h-px w-px whitespace-nowrap">
-                                            <div className="px-6 py-2">
+                                            <div className="py-2">
                                                 <span className="text-sm text-gray-600 dark:text-gray-400">{index + 1}</span>
                                             </div>
                                         </td>
                                         <td className="h-px w-px whitespace-nowrap">
-                                            <div className="px-6 py-2">
+                                            <div className="py-2">
                                                 <span className="text-sm text-gray-600 dark:text-gray-400">{item.user.username}</span>
                                             </div>
                                         </td>
                                         <td className="h-px w-px whitespace-nowrap">
-                                            <div className="px-6 py-2">
+                                            <div className="py-2">
                                                 <span className="text-sm text-gray-600 dark:text-gray-400">{item.match_title}</span>
                                             </div>
                                         </td>
                                         <td className="h-px w-px whitespace-nowrap">
-                                            <div className="px-6 py-2">
+                                            <div className="py-2">
                                                 <span className="text-sm text-gray-600 dark:text-gray-400">{item.question_title}</span>
                                             </div>
                                         </td>
                                         <td className="h-px w-px whitespace-nowrap">
-                                            <div className="px-6 py-2">
+                                            <div className="py-2">
                                                 <div className="flex items-center gap-x-2">
                                                     <span className="text-sm text-gray-600 dark:text-gray-400">{item.option_title}</span>
                                                 </div>
@@ -110,19 +111,24 @@ export default function Index({ auth, bets }) {
                                         </td>
 
                                         <td className="h-px w-px whitespace-nowrap">
-                                            <div className="px-6 py-2">
-                                                <span className="text-sm text-gray-600 dark:text-gray-400">{item.bet_amount}</span>
+                                            <div className="ps-1 py-2">
+                                                <span className="text-sm text-gray-600 dark:text-gray-400">{item.bet_rate}</span>
                                             </div>
                                         </td>
                                         <td className="h-px w-px whitespace-nowrap">
-                                            <div className="px-6 py-2">
+                                            <div className="py-2">
+                                                <span className="text-sm text-gray-600 dark:text-gray-400 ">{item.bet_amount}</span>
+                                            </div>
+                                        </td>
+                                        <td className="h-px w-px whitespace-nowrap">
+                                            <div className="py-2">
                                                 <span className="text-sm text-gray-600 dark:text-gray-400">{item.status}</span>
                                             </div>
                                         </td>
 
 
                                         <td className="h-px w-px whitespace-nowrap">
-                                            <div className="px-6 py-2">
+                                            <div className="py-2">
                                                 <span className="text-sm text-gray-600 dark:text-gray-400">{moment(item.created_at).tz("Asia/Dhaka").format('LT- ll')}</span>
                                             </div>
                                         </td>

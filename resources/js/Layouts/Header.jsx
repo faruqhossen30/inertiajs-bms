@@ -25,19 +25,19 @@ export default function Header() {
                 <Link href={route('homepage')}><img src="/logo.png" alt="" className='h-6' /></Link>
             </div>
             <div>
-                <span className="font-bold text-sm rounded-sm text-purple-800 dark:text-gray-200 px-1 md:px-3 py-1">{clocktime}</span>
+                <span className="font-bold text-sm rounded-md text-purple-800 dark:text-gray-200 px-1 md:px-3 py-1">{clocktime}</span>
             </div>
             <div className=' space-x-1'>
                 {auth.user && (auth.user.is_user || auth.user.is_club) ?
                     <>
                         <div className='hidden lg:block space-x-2'>
-                            <Link href={route('profile')} className=' font-normal text-sm border rounded-sm text-purple-800 dark:text-gray-200 px-3 py-1'>Profile</Link>
-                            <Link href={route('wallet')} className=' font-normal text-sm border rounded-sm text-purple-800 dark:text-gray-200 px-3 py-1'>Wallet</Link>
-                            <Link href={route('statement')} className=' font-normal text-sm border rounded-sm text-purple-800 dark:text-gray-200 px-3 py-1'>Statement</Link>
-                            <Link href={route('depositform')} className=' font-normal text-sm border rounded-sm text-purple-800 dark:text-gray-200 px-3 py-1'>Deposit</Link>
-                            <Link href={route('witdrawform')} className=' font-normal text-sm border rounded-sm text-purple-800 dark:text-gray-200 px-3 py-1'>Widthdray</Link>
+                            <Link href={route('profile')} className=' font-normal text-sm border rounded-md text-purple-800 dark:text-gray-200 px-3 py-1'>Profile</Link>
+                            <Link href={route('wallet')} className=' font-normal text-sm border rounded-md text-purple-800 dark:text-gray-200 px-3 py-1'>Wallet</Link>
+                            <Link href={route('statement')} className=' font-normal text-sm border rounded-md text-purple-800 dark:text-gray-200 px-3 py-1'>Statement</Link>
+                            <Link href={route('depositform')} className=' font-normal text-sm border rounded-md text-purple-800 dark:text-gray-200 px-3 py-1'>Deposit</Link>
+                            <Link href={route('witdrawform')} className=' font-normal text-sm border rounded-md text-purple-800 dark:text-gray-200 px-3 py-1'>Widthdray</Link>
                             {/* <Link href={route('logout')} method="post" as="button" className=' font-normal text-sm border rounded-md text-purple-800 px-3 py-1' >Logout</Link> */}
-                            <button type="button" className=' font-normal text-sm border rounded-md text-purple-800 px-3 py-1' data-hs-overlay="#hs-sign-out-alert">Logout</button>
+                            <button type="button" className=' font-normal dark:text-gray-50 text-sm border rounded-md text-purple-800 px-3 py-1' data-hs-overlay="#hs-sign-out-alert">Logout</button>
 
                             <span><Switcher /></span>
                             <span className='text-purple-800 dark:text-gray-200 font-bold'>৳{auth.user.balance}</span>
@@ -48,12 +48,12 @@ export default function Header() {
                     : auth.user && auth.user.is_admin
                         ?
                         <>
-                            <Link href={route('dashboard')} className=' font-normal text-sm border rounded-sm text-purple-800 dark:text-gray-200 px-3 py-1'>Admin Dashboard</Link>
+                            <Link href={route('dashboard')} className=' font-normal text-sm border rounded-md text-purple-800 dark:text-gray-200 px-3 py-1'>Admin Dashboard</Link>
                         </>
                         :
                         <>
                             <span><Switcher /></span>
-                            <Link href={route('register')} className='border font-normal text-sm bg-purple-800 dark:bg-gray-700 rounded-sm text-white px-3 py-1 '>Register</Link>
+                            <Link href={route('register')} className='border font-normal text-sm bg-purple-800 dark:bg-gray-700 rounded-md text-white px-3 py-1 '>Register</Link>
                             <Link href='/login' className='border font-normal text-sm bg-purple-800 dark:bg-gray-700 rounded-md text-white px-3 py-1'>Login</Link>
                         </>
 

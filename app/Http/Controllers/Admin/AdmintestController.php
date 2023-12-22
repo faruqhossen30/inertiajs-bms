@@ -13,9 +13,12 @@ class AdmintestController extends Controller
     public function test()
     {
         $curentdatetime = Carbon::now()->addMinutes(5);
-        $matchs =
-            Matche::where('date_time', '<=', $curentdatetime)
-            ->get();
+        $curent = Carbon::now();
+
+
+        $matchs = Matche::
+        whereDate('date_time', date('Y-m-d'))
+        ->where('date_time', date('H:i' , strtotime('+5 minutes')))->get();
 
         return $matchs;
     }

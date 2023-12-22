@@ -42,22 +42,22 @@ export default function BetList({bets}) {
                                             bets.data.map((item, index) => {
                                                 return <tr key={index}>
                                                     <td className="h-px w-px whitespace-nowrap">
-                                                        <div className="px-6 py-2">
+                                                        <div className="px-1 py-2">
                                                             <span className="text-sm text-gray-600 dark:text-gray-400">{index + 1}</span>
                                                         </div>
                                                     </td>
                                                     <td className="h-px w-px whitespace-nowrap">
-                                                        <div className="px-6 py-2">
+                                                        <div className="py-2">
                                                             <span className="text-sm text-gray-600 dark:text-gray-400">{item.match_title}</span>
                                                         </div>
                                                     </td>
                                                     <td className="h-px w-px whitespace-nowrap">
-                                                        <div className="px-6 py-2">
+                                                        <div className="py-2">
                                                             <span className="text-sm text-gray-600 dark:text-gray-400">{item.question_title}</span>
                                                         </div>
                                                     </td>
                                                     <td className="h-px w-px whitespace-nowrap">
-                                                        <div className="px-6 py-2">
+                                                        <div className="py-2">
                                                             <div className="flex items-center gap-x-2">
                                                                 <span className="text-sm text-gray-600 dark:text-gray-400">{item.option_title}</span>
                                                             </div>
@@ -65,27 +65,27 @@ export default function BetList({bets}) {
                                                     </td>
 
                                                     <td className="h-px w-px whitespace-nowrap">
-                                                        <div className="px-6 py-2">
+                                                        <div className="py-2">
                                                             <span className="text-sm text-gray-600 dark:text-gray-400">{item.bet_amount}</span>
                                                         </div>
                                                     </td>
                                                     <td className="h-px w-px whitespace-nowrap">
-                                                        <div className="px-6 py-2">
+                                                        <div className="py-2">
                                                             <span className="text-sm text-gray-600 dark:text-gray-400">{item.bet_rate}</span>
                                                         </div>
                                                     </td>
                                                     <td className="h-px w-px whitespace-nowrap">
-                                                        <div className="px-6 py-2">
+                                                        <div className="py-2">
                                                             <span className="text-sm text-gray-600 dark:text-gray-400">{item.return_amount}</span>
                                                         </div>
                                                     </td>
                                                     <td className="h-px w-px whitespace-nowrap">
-                                                        <div className="px-6 py-2">
+                                                        <div className="py-2">
                                                             <span className="text-sm text-gray-600 dark:text-gray-400">{item.status}</span>
                                                         </div>
                                                     </td>
                                                     <td className="h-px w-px whitespace-nowrap">
-                                                        <div className="px-6 py-2">
+                                                        <div className="py-2">
                                                             <span className="text-sm text-gray-600 dark:text-gray-400">{moment(item.created_at).calendar()}</span>
                                                         </div>
                                                     </td>
