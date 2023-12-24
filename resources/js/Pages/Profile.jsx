@@ -8,7 +8,7 @@ export default function Profile({ auth, user }) {
     return (
         <AppLayout>
             <Head title="Welcome" />
-            <div className='p-4 text-center max-w-xl mx-auto text-gray-800 dark:text-gray-300'>
+            <div className='p-4 text-center max-w-xl mx-auto text-gray-800 dark:text-gray-400'>
                 <div className='flex justify-between border rounded-md dark:bg-slate-900 dark:border-gray-700 dark:shadow-gray-800 p-2 my-2 items-center shadow '>
                     <div className='flex flex-col font-semibold'>
                         <span>৳{auth.user.balance}</span>
@@ -49,27 +49,27 @@ export default function Profile({ auth, user }) {
                 {/* Stat Profile */}
 
                 <ul className="flex flex-col">
-                    <li className="inline-flex items-center gap-x-3.5 py-3 px-4 text-sm font-medium  border border-gray-200 text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg dark:bg-slate-900 dark:border-gray-700 dark:text-white">
+                    <li className="inline-flex items-center gap-x-3.5 py-3 px-4 text-sm font-medium  border border-gray-200 text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400">
                         <UserCircleIcon className="h-4 w-4" />
                         <span>Name: {auth.user.name}</span>
                     </li>
-                    <li className="inline-flex items-center gap-x-3.5 py-3 px-4 text-sm font-medium  border border-gray-200 text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg dark:bg-slate-900 dark:border-gray-700 dark:text-white">
+                    <li className="inline-flex items-center gap-x-3.5 py-3 px-4 text-sm font-medium  border border-gray-200 text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400">
                         <UsersIcon className="h-4 w-4" />
                         <span>Username: {auth.user.username}</span>
                     </li>
-                    <li className="inline-flex items-center gap-x-3.5 py-3 px-4 text-sm font-medium  border border-gray-200 text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg dark:bg-slate-900 dark:border-gray-700 dark:text-white">
+                    <li className="inline-flex items-center gap-x-3.5 py-3 px-4 text-sm font-medium  border border-gray-200 text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400">
                         <InboxIcon className="h-4 w-4" />
                         <span>Email: {auth.user.email}</span>
                     </li>
-                    <li className="inline-flex items-center gap-x-3.5 py-3 px-4 text-sm font-medium  border border-gray-200 text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg dark:bg-slate-900 dark:border-gray-700 dark:text-white">
+                    <li className="inline-flex items-center gap-x-3.5 py-3 px-4 text-sm font-medium  border border-gray-200 text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400">
                         <DevicePhoneMobileIcon className="h-4 w-4" />
                         <span>Mobile: {auth.user.mobile}</span>
                     </li>
-                    <li className="inline-flex items-center gap-x-3.5 py-3 px-4 text-sm font-medium  border border-gray-200 text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg dark:bg-slate-900 dark:border-gray-700 dark:text-white">
+                    <li className="inline-flex items-center gap-x-3.5 py-3 px-4 text-sm font-medium  border border-gray-200 text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400">
                         <UserGroupIcon className="h-4 w-4" />
-                        <span>CLub: {user.club && user.club.username}</span>
+                        <span>CLub: {user.club && user.club.name}</span>
                     </li>
-                    <li className="inline-flex items-center gap-x-3.5 py-3 px-4 text-sm font-medium  border border-gray-200 text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg dark:bg-slate-900 dark:border-gray-700 dark:text-white">
+                    <li className="inline-flex items-center gap-x-3.5 py-3 px-4 text-sm font-medium  border border-gray-200 text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400">
                         <UserGroupIcon className="h-4 w-4" />
                         <span>Sponser: {user.sponser}</span>
                     </li>

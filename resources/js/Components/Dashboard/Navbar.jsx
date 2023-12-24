@@ -2,9 +2,11 @@
 import { Link, usePage } from '@inertiajs/react';
 import Switcher from '../Common/Switcher'
 import { ArrowPathIcon, CurrencyBangladeshiIcon, ListBulletIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline';
+import { useEffect } from 'react';
 
 export default function Navbar() {
-    const { auth } = usePage().props
+    const { auth } = usePage().props;
+
     return (
         <div className="sticky top-0 inset-x-0 z-20 bg-white border-y px-2 sm:px-6 md:px-8 dark:bg-gray-800 dark:border-gray-700">
             <div className="flex items-center py-2">

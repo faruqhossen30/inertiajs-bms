@@ -18,8 +18,8 @@ export default function ChangePassword() {
     return (
         <AppLayout>
             <div className='p-4 max-w-xl mx-auto text-purple-800 dark:text-gray-300'>
-                <div className=' shadow-lg border dark:border-slate-900'>
-                    <div className='bg-gray-200 dark:bg-slate-900 p-2'>
+                <div className=' shadow-lg border dark:border-gray-800 rounded-lg'>
+                    <div className='bg-gray-200 dark:bg-slate-900 p-2 border-b dark:border-b-gray-800'>
                         <h4>Change Password</h4>
                     </div>
                     <form onSubmit={submit} className='text-md p-4 space-y-2'>

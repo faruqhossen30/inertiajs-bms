@@ -34,22 +34,24 @@ export default function BetNowModal({ matche, question, option }) {
 
     function submit(e) {
         e.preventDefault()
-        console.log(data);
-        post(route('betstore'), {
-            onStart: () => {
-                setSubmitButton(false);
-                console.log('onStart');
-            },
-            onError: () => {
-                setSubmitButton(true);
-                console.log('onError');
-            },
-            onSuccess: () => {
-                closeModal();
+        setSubmitButton(false);
+        setTimeout(() => {
+            post(route('betstore'), {
+                onStart: () => {
+                    console.log('onStart');
+                },
+                onError: () => {
+                    setSubmitButton(true);
+                    console.log('onError');
+                },
+                onSuccess: () => {
+                    closeModal();
 
-                console.log('onSuccess');
-            }
-        });
+                    console.log('onSuccess');
+                }
+            });
+        }, 2000)
+
     }
 
     return (
@@ -162,7 +164,7 @@ export default function BetNowModal({ matche, question, option }) {
                                                             <SubmitButton title="BET NOW !" />
                                                             : <button type="button" className="py-1 px-2 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
                                                                 <span className="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-white rounded-full" role="status" aria-label="loading"></span>
-                                                                Processing.
+                                                                Bet Processing.
                                                             </button>
 
                                                     }

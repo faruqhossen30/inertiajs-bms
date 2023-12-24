@@ -22,7 +22,7 @@ export default function Deposit({gateways}) {
     return (
         <AppLayout>
             <div className='p-4 max-w-xl mx-auto text-purple-800 dark:text-gray-300'>
-                <div className=' shadow-lg border dark:border-slate-900'>
+                <div className=' shadow-lg border dark:border-gray-800 rounded-lg'>
                     <div className='bg-gray-200 dark:bg-slate-900 p-2'>
                         <h4>Deposit</h4>
                     </div>

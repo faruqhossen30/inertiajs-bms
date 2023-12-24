@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdmintestController;
+use App\Http\Controllers\Admin\Api\ApiController;
 use App\Http\Controllers\Admin\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Admin\AutooptionController;
 use App\Http\Controllers\Admin\AutoquestionController;
@@ -27,6 +28,7 @@ use App\Http\Controllers\Admin\TransactionController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\WithdrawController;
 use App\Models\Bet;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -40,7 +42,14 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
 
     Route::get('/dashboard', function () {
         $bets = Bet::whereDate('created_at', Carbon::today())->get();
-        return Inertia::render('Admin/Dashboard', ['bets'=>$bets]);
+        $user_blance = User::where('is_user', true)->sum('balance');
+        $club_blance = User::where('is_club', true)->sum('balance');
+        // return $user_blance;
+        return Inertia::render('Admin/Dashboard', [
+            'bets' => $bets,
+            'user_blance' => $user_blance,
+            'club_blance' => $club_blance,
+        ]);
     })->name('dashboard');
 
     // Admin
@@ -56,7 +65,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
     Route::resource('user', UserController::class);
     Route::resource('team', TeamController::class);
     Route::resource('game', GameController::class);
-    Route::resource('paymentgateway', PaymentgatewayController::class);
+
     // Matche
     Route::resource('matche', MatcheController::class);
     Route::get('matche/ishide/{id}', [MatcheController::class, 'isHideToggle'])->name('matchehidetoggle');
@@ -90,13 +99,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
     // On/Off
     Route::post('balancetransferonoff', [BalancetransferController::class, 'balanceTransferOnOff'])->name('balancetransferonoff');
     Route::post('withdrawonoff', [WithdrawController::class, 'withdrawOnOff'])->name('withdrawonoff');
-    // Route::resource('withdraw', WithdrawController::class);
 
     Route::post('bet/option/win/{id}', [BetwinController::class, 'betWin'])->name('admin.betwin');
     Route::post('bet/option/restart/{id}', [BetresetController::class, 'questionRestart'])->name('admin.betrestart');
     Route::post('betrefund', [BetrefundController::class, 'betRefund'])->name('admin.betRefund');
-    // Route::post('bet/option/stop/{id}', [BetwinController::class, 'betStop'])->name('admin.betstop');
-    // Route::post('bet/option/start/{id}', [BetwinController::class, 'betStart'])->name('admin.betstart');
 
     // Restore
     Route::get('restore/matche', [MatcherestoreController::class, 'deletedMatche'])->name('restore.matchelist');
@@ -108,11 +114,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
     Route::get('restore/option', [OptionrestoreController::class, 'deletedOption'])->name('restore.optionlist');
     Route::post('restore/option/{id}', [OptionrestoreController::class, 'restoredOption'])->name('restore.option');
 
-
-
     // Settings
     Route::get('/settings', [SettingController::class, 'settingPage'])->name('admin.settings');
     Route::post('/setting/header-notice', [SettingController::class, 'headerNotice'])->name('admin.setting.headernotice');
     Route::post('/setting/sponser-commission', [SettingController::class, 'sponserCommission'])->name('admin.setting.sponsercommission');
     Route::get('/test', [AdmintestController::class, 'test'])->name('admin.test');
+    Route::resource('paymentgateway', PaymentgatewayController::class);
 });

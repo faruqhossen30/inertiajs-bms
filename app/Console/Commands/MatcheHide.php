@@ -27,8 +27,9 @@ class MatcheHide extends Command
      */
     public function handle()
     {
-        $curentdatetime = Carbon::now()->addMinutes(5);
-        $matchs = Matche::where('date_time', '<=', $curentdatetime)->get();
+
+        $matchs = Matche::whereDate('date_time', date('Y-m-d'))
+            ->where('date_time', date('H:i', strtotime('+5 minutes')))->get();
 
         foreach ($matchs as $match) {
             $match->update([
@@ -37,7 +38,8 @@ class MatcheHide extends Command
             ]);
         }
 
-
+        // $curentdatetime = Carbon::now()->addMinutes(5);
+        // $matchs = Matche::where('date_time', '<=', $curentdatetime)->get();
         // $matchs = Matche::whereDate('date', date('Y-m-d'))->where('time', date('H:i' , strtotime('+5 minutes')))->get();
         // foreach ($matchs as $match ){
         //     $match->update(['is_hide' => '1', 'is_active' => '0']);

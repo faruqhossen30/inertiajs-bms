@@ -12,11 +12,11 @@ export default function Statement() {
                 <div className="max-w-[85rem] p-4 mx-auto">
                     {/* Grid */}
                     <div className=" space-y-2">
-                        <WalletCard title="Withdraw" routeName="witdrawform" icon={<CurrencyBangladeshiIcon className="flex-shrink-0 w-6 h-6 text-blue-600 dark:text-blue-500" />} />
-                        <WalletCard title="Deposit" routeName="depositform" icon={<BanknotesIcon className="flex-shrink-0 w-6 h-6 text-blue-600 dark:text-blue-500" />} />
-                        <WalletCard title="Balance Transfer" routeName="blancetransfer" icon={<CurrencyBangladeshiIcon className="flex-shrink-0 w-6 h-6 text-blue-600 dark:text-blue-500" />} />
-                        <WalletCard title="Change Club" routeName="changeclub" icon={<UserGroupIcon className="flex-shrink-0 w-6 h-6 text-blue-600 dark:text-blue-500" />} />
-                        <WalletCard title="Change Password" routeName="changepassword" icon={<LockClosedIcon className="flex-shrink-0 w-6 h-6 text-blue-600 dark:text-blue-500" />} />
+                        <WalletCard title="Withdraw" routeName="witdrawform" icon={<CurrencyBangladeshiIcon className="flex-shrink-0 w-6 h-6 text-gray-800 dark:text-gray-400" />} />
+                        <WalletCard title="Deposit" routeName="depositform" icon={<BanknotesIcon className="flex-shrink-0 w-6 h-6 text-gray-800 dark:text-gray-400" />} />
+                        <WalletCard title="Balance Transfer" routeName="blancetransfer" icon={<CurrencyBangladeshiIcon className="flex-shrink-0 w-6 h-6 text-gray-800 dark:text-gray-400" />} />
+                        <WalletCard title="Change Club" routeName="changeclub" icon={<UserGroupIcon className="flex-shrink-0 w-6 h-6 text-gray-800 dark:text-gray-400" />} />
+                        <WalletCard title="Change Password" routeName="changepassword" icon={<LockClosedIcon className="flex-shrink-0 w-6 h-6 text-gray-800 dark:text-gray-400" />} />
                     </div>
                     {/* End Grid */}
                 </div>
