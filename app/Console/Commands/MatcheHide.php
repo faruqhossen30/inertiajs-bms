@@ -38,6 +38,7 @@ class MatcheHide extends Command
                 'is_hide' => true
             ]);
         }
+        option(['jobrun' => Carbon::now()->toDayDateTimeString()]);
 
         // $curentdatetime = Carbon::now()->addMinutes(5);
         // $matchs = Matche::where('date_time', '<=', $curentdatetime)->get();
