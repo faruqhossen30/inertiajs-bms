@@ -10,7 +10,7 @@ class Matche extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = ['team_one', 'team_two', 'team_one_flag', 'team_two_flag', 'statement', 'game_id', 'date_time', 'note','is_hide','area_hide','active','status'];
+    protected $fillable = ['team_one', 'team_two', 'team_one_flag', 'team_two_flag', 'statement', 'game_id', 'date_time', 'note','is_hide','area_hide','active','job','status'];
 
     protected $casts = [
         'date_time' => 'datetime'

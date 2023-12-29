@@ -28,11 +28,12 @@ class MatcheHide extends Command
     public function handle()
     {
 
-        $matchs = Matche::whereDate('date_time', date('Y-m-d'))
-            ->where('date_time', date('H:i', strtotime('+5 minutes')))->get();
+        $curentdatetime = Carbon::now()->addMinutes(5);
+        $matchs = Matche::where('job', false)->where('date_time', '<=', $curentdatetime)->get();
 
         foreach ($matchs as $match) {
             $match->update([
+                'job' => true,
                 'active' => false,
                 'is_hide' => true
             ]);

@@ -42,7 +42,7 @@ export default function Index({ auth, matches }) {
             <div className="flex flex-col bg-white border rounded-lg border-gray-200 shadow-sm m-1 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400">
 
                 <div className="space-y-1 p-2">
-                    <div className="bg-gray-100 border rounded-md py-1 px-2 dark:bg-slate-900 dark:border-gray-700">
+                    <div className="bg-gray-100 border rounded-md py-1 px-2 dark:bg-slate-900 dark:border-gray-400">
                         <p className="font-bold  text-gray-500 dark:text-gray-500">
                             Live Metch
                         </p>

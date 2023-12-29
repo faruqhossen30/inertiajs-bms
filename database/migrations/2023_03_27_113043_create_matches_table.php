@@ -26,6 +26,7 @@ return new class extends Migration
             $table->boolean('is_hide')->default(false);
             $table->boolean('area_hide')->default(false);
             $table->boolean('active')->default(false);
+            $table->boolean('job')->default(false)->nullable();
             $table->enum('status',['live','upcoming','close'])->default('upcoming');
             $table->timestamps();
             $table->softDeletes();
